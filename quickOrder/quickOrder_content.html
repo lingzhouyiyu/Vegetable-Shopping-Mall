@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="quickOrder_content/css/main.css">
+	</head>
+
+	<body class="bc-bg ub um-vp" ontouchstart>
+		<div class="ub ub-f1">
+			<div id="lefttemp" class="ub ub-ver left_nav uhide lefttemp">
+				<div id="Ffcatname" class="ub  ub-ac ub-pc nav_item item">
+
+				</div>
+			</div>
+			<div id="leftlist" class="ub ub-ver left_nav leftlist">
+
+			</div>
+			<div id="righttemp" class="right_list righttemp uhide">
+				<div class="ub ub-ver list_item">
+					<div class="ub ub-ac item_title ">
+						<div id="" class="ub ub-ac dbtitle Fchildname redcolor">
+
+						</div>
+						<div class="ub ub-ac title_img" rel="up" Fcatid="">
+							<img class="ub-img" src="../css/images/icon-back-down.png" />
+						</div>
+					</div>
+					<div id="childgoods" class="ub cate_list selfgoods ub-ver">
+						<div class="listItem ">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="goodschidtemp uhide">
+				<div id="" href="" class="ub ufl ub-ac item_item Fgoodsname" rel="uncheck">
+
+				</div>
+			</div>
+			<div class="ub-f1 right_box ub ub-ver">
+				<div id="" class="right_list right_cate ub-f1 ub ub-ver">
+          
+				</div>
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script src="../js/yfkj.js"></script>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+	</body>
+	<script>
+		var cargoodsids = null;
+		var user = Fsuper.getuserinfo();
+		appcan.ready(function() {
+			getGoodsCategory();
+		})
+		$(".left_nav .nav_item").click(function() {
+
+			$(".left_nav .nav_item").removeClass("nav_active");
+			$(this).addClass("nav_active");
+		});
+		var Firstid = "";
+		var seleid = "";
+		//左侧一级分类
+		function getGoodsCategory() {
+			var furl = "/app/getGoodsCategory";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				dataType: "jsonp",
+				async: false,
+				jsonp: 'callback',
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								if(i == 0) {
+									Firstid = row.Ffullid;
+									seleid = row.Fid;
+
+								}
+								additem(row);
+							});
+							if(Firstid != "") {
+								detailgoodss(seleid, Firstid);
+							}
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+		//左侧一级分类dom
+		function additem(row) {
+			var list = $(".leftlist");
+			var clonedom = $("#lefttemp").clone();
+			var itemdom = clonedom.find(".item");
+			itemdom.attr("id", row.Fid);
+			itemdom.attr("Ffullid", row.Ffullid);
+			itemdom.text(row.Fname);
+			itemdom.attr("onclick", "detailgoods('" + row.Ffullid + "',this)");
+			list.append(itemdom);
+
+		}
+		//左侧分类点击事件
+		function detailgoods(id, dom) {
+		    var furl = "/app/getCarGoodsidasc";
+            $.ajax({
+                url: Serverurl + furl,
+                type: "POST",
+                async: false,
+                jsonp: 'callback',
+                dataType: "jsonp",
+                data: {
+                    Fuserid: Fsuper.getuserid()
+                },
+                success: function(result) {
+                    var rows = result.data;
+                    var code = result.code;
+                    var msg = result.msg;
+                    var debug = result.debug;
+                    if(code < 10000) {
+                        if(code == 0) { //返回成功
+                            cargoodsids = rows;
+                            $(".left_nav div").removeClass("nav_active");
+                            $(dom).addClass("nav_active");
+                            var list = $(".right_cate");
+                            list.empty();
+                            getChildrenCategory(id);
+                        }
+                    } else {
+                        if(Fsuperdbg) {
+                            alert(result.code);
+                            alert(result.msg);
+                            alert(result.debug);
+                        }
+                    }
+                }
+            });
+		}
+
+		function detailgoodss(seleid, id) {
+		    var furl = "/app/getCarGoodsidasc";
+            $.ajax({
+                url: Serverurl + furl,
+                type: "POST",
+                async: false,
+                jsonp: 'callback',
+                dataType: "jsonp",
+                data: {
+                    Fuserid: Fsuper.getuserid()
+                },
+                success: function(result) {
+                    var rows = result.data;
+                    var code = result.code;
+                    var msg = result.msg;
+                    var debug = result.debug;
+                    if(code < 10000) {
+                        if(code == 0) { //返回成功
+                            cargoodsids = rows;
+                            $(".left_nav div").removeClass("nav_active");
+                            $("#" + seleid).addClass("nav_active");
+                            var list = $(".right_cate");
+                            list.empty();
+                            getChildrenCategory(Firstid);
+                        }
+                    } else {
+                        if(Fsuperdbg) {
+                            alert(result.code);
+                            alert(result.msg);
+                            alert(result.debug);
+                        }
+                    }
+                }
+            });
+		}
+		//右侧一级分类
+		function getChildrenCategory(catid) {
+			$.ajax({
+				url: Serverurl + '/App/getChildrenCategory',
+				type: "POST",
+				async: false,
+				dataType: "jsonp",
+				jsonp: 'callback',
+				data: {
+					_parentId: catid,
+				},
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					var length = rows.length;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							for(var i = 0; i < length; i++) {
+								Childrenadditem(rows[i]);
+							}
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+		//右侧一级分类dom
+		function Childrenadditem(row) {
+			var list = $(".right_cate");
+			var clonedom = $("#righttemp").clone();
+			var itemdom = clonedom.find(".list_item");
+			itemdom.attr("id", row.Fid);
+			itemdom.addClass("list"+row.Fid);
+			itemdom.find(".title_img").attr("Fcatid", row.Fid);
+			itemdom.find(".title_img").attr("onclick", "upanddown(this)");
+			itemdom.find(".Fchildname").text(row.Fname);
+		    getGoodsByCatid(list, itemdom, row.Fid); //加载蔬菜
+			list.append(itemdom);
+		}
+
+		function upanddown(dom) {
+			var flag = $(dom).attr("rel");
+			var seledom = $(dom).parent().parent();
+			if(flag == "up") {
+				$(dom).siblings(".dbtitle").removeClass("redcolor");
+				$(dom).find(".title_img img").attr("src", "../css/images/icon-back-down.png");
+				$(dom).attr("rel", "dowm");
+				$(seledom).find("#childgoods").addClass("uhide");
+
+			} else {
+				$(seledom).find("#childgoods").removeClass("uhide");
+				$(dom).siblings(".dbtitle").addClass("redcolor");
+				$(dom).find(".title_img img").attr("src", "../css/images/icon-back-up.png");
+				$(dom).attr("rel", "up");
+			}
+		}
+		//加载蔬菜
+		function getGoodsByCatid(list, itemdom, catid) {
+			var furl = "/app/getGoodsByCatid";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				async: false,
+				jsonp: 'callback',
+				dataType: "jsonp",
+				data: {
+					_parentId: catid,
+					Fbmid: user.FBmid,
+				},
+				success: function(result) {
+					var rows = result.data.rows;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								additems(list, itemdom, row,catid);
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		//加载蔬菜dom
+		function additems(list, itemdom, row,catid) {
+			//var goodslist = itemdom.find(".listItem");
+			var goodslist=$(".list"+catid).find(".listItem");
+			var clonedom = $(".goodschidtemp").clone();
+			var goodsdom = clonedom.find(".Fgoodsname");
+			var Fid = row.Fgoodsid;
+			$(cargoodsids).each(function(i, dom) {
+				var cargoodsid = dom.Fgoodsid;
+				if(cargoodsid == Fid) {
+					$(goodsdom).addClass("right_active");
+					$(goodsdom).attr("rel", "checked");
+				}
+			});
+			goodsdom.attr("onclick", "selectgoods(this)");
+			goodsdom.text(row.Fgoodsname);
+			goodsdom.attr("id", row.Fgoodsid);
+			goodsdom.attr("href", row.Fgoodsprice);
+			goodslist.append(goodsdom);
+			//list.append(itemdom);
+		}
+		//查询购物车商品id		
+		function getCarGoodsid() {
+			var furl = "/app/getCarGoodsidasc";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				async: false,
+				jsonp: 'callback',
+				dataType: "jsonp",
+				data: {
+					Fuserid: Fsuper.getuserid()
+				},
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							cargoodsids = rows;
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+		//点击蔬菜加入购物车
+		function selectgoods(dom) {
+			var mark = $(dom).attr("rel");
+			if(mark == "uncheck") {
+				addCarsplitquick($(dom).attr("id")); //加入购物车
+				$(dom).addClass("right_active");
+				$(dom).attr("rel", "checked");
+			} else {
+				deletecars($(dom).attr("id")); //购物车取消
+				$(dom).removeClass("right_active");
+				$(dom).attr("rel", "uncheck");
+			}
+		}
+		//获取所有的商品
+		function getgoodsids() {
+			var goodsid = $(".Fgoodsname");
+			var goods = [];
+			$(goodsid).each(function(i, dom) {
+				if($(dom).hasClass("right_active")) {
+					var obj = {};
+					obj.Fgoodsid = $(dom).attr("id");
+					obj.Fgoodsprice = $(dom).attr("href");
+					obj.FgoodsCount = 1;
+					goods.push(obj);
+				}
+			});
+		}
+		//加入购物车 修改
+		function addCarsplitquick(Fid) {
+			var furl = '/app/addCarsplitquick';
+			var datas = {
+				Fuserid: Fsuper.getuserid(),
+				Fbmid: user.FBmid,
+				Fgoodsid: Fid
+			}
+			Fsuper.getresult(furl, datas, addcarcounts);
+		}
+
+		function addcarcounts(row, code) {
+			if(code == 0) {
+				appcan.window.publish('quickgoods', row);
+			}
+		}
+		//从购物车取消
+		function deletecars(ids) {
+			var furl = "/app/deletecar";
+			var parm = {
+				Fgoodsid: ids,
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getdelete(furl, parm, deletecalls);
+		}
+
+		function deletecalls(data) {
+			appcan.window.publish('quickgoods', data);
+		}
+		//回调
+		function getcheckgoods() {
+			//getCarGoodsid();
+		}
+	</script>
+
+</html>

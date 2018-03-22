@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="orders_content/css/main.css" />
+    </head>
+    <body class="um-vp bc-bg obody" ontouchstart>
+        <!--<div class="ub main_title">
+            <div class="ub ub-ac ub-pc ub-f1 ub-fv " >
+                全部
+            </div>
+            <div class="ub ub-ac ub-pc ub-f1 ub-fv " >
+                待付款
+            </div>
+            <div class="ub ub-ac ub-pc ub-f1 ub-fv title_active" >
+                待发货
+            </div>
+            <div class="ub ub-ac ub-pc ub-f1 ub-fv" >
+                待收货
+            </div>
+        </div>-->
+        <!-- 全部账单-->
+        <div class="all_order" id="allOrderid">
+            <div class="order_item">
+                <div class="ub order_num">
+                    <div class="ub ub-ac ub-f1">
+                        订单号：<span>201607201222369865</span>
+                    </div>
+                    <div class="ub ub-ac order_state">
+                      已付款
+                    </div>
+                </div>
+                <div class="ub order_content">
+                    <div class="ub ub-f1 ordder_main">
+                        
+                        <div class="ub ub-ver order_detial ub-f1">
+                            <div class="ub umar-b order_dtitle">
+                                <div class="ub-img dimg umar-r dimg">
+									<img src="../css/images/order3.png" />
+								</div>
+								<div class="ub ub-ac">
+									富源酸汤猪脚火锅
+								</div>
+                            </div>
+                            <div class="ub umar-b ">
+                                商品总重量：<span>6</span> kg
+                            </div>
+                            <div class="ub ">
+                                下单时间：<span>2016-7-20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ub ub-ver ub-pc ">
+                        <div class="ub umar-b bcolor">
+                            x<span>5</span>
+                        </div>
+                        <div class="ub dcolor">
+                            ￥<span>368.5</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 查看更多-->
+                <div class="ub ub-ac ub-pc order_more">
+                    <div class="ub">查看更多</div>
+                    <img src="../css/images/more.png" />
+                </div>
+                <div class="ub ub-ver more_count uhide">
+                    <div class="ub ub-ac ub-f1 more_item">
+                        <div class="ub ub-f1 ">
+                            辣子鸡
+                        </div>
+                        <div class="ub ub-ac ub-pc ub-f1">
+                            x2
+                        </div>
+                        <div class="ub ub-f1 ub-pe dcolor">
+                            ￥<span>20</span>
+                        </div>
+                    </div>
+                    <div class="ub ub-ac ub-f1 more_item">
+                        <div class="ub ub-f1 ">
+                            辣子鸡
+                        </div>
+                        <div class="ub ub-ac ub-pc ub-f1">
+                            x2
+                        </div>
+                        <div class="ub ub-f1 ub-pe dcolor">
+                            ￥<span>20</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="ub ub-ac ub-pc  order_up uhide">
+					<div class="ub">收起</div>
+					<img src="../css/images/more_up.png" />
+				</div>
+            </div>
+        </div>
+   
+
+        <div class="ub ub-ac  order_count">
+            <div class="ub ub-f1">
+                共<span>8</span>件商品 合计：¥ <span>369.00</span>
+            </div>
+            <div class="ub ksxd">
+                等待发货
+            </div>
+        </div>
+         <div class="ub ub-ac ub-pc foot_warm">
+            已加载完所有历史订单
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+        });
+       
+		$(".order_more").click(function() {
+			$(this).addClass("uhide");
+			$(this).siblings(".more_count").removeClass("uhide");
+			$(this).siblings(".order_up").removeClass("uhide");
+		});
+		
+		$(".order_up").click(function() {
+			$(this).addClass("uhide");
+			$(this).siblings(".more_count").addClass("uhide");
+			$(this).siblings(".order_more").removeClass("uhide");
+		});
+    </script>
+</html>

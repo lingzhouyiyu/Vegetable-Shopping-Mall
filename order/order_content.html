@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="order_content/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg obody" ontouchstart>
+
+			<div class="ub ub-ver" style="height: 2em; background: #000000;">
+				<div class="ub  ub-ac ub-pc ub-ae" style="height: 4em; background: red;">1111</div>
+				<div class="ub " style="height: 2em; background: gray;"></div>
+			</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {});
+		$(".main_title div").click(function() {
+			$(".main_title div").removeClass("title_active");
+			$(".all_order").addClass("uhide");
+			$(this).addClass("title_active");
+			var id = $(this).attr("id");
+			id = id + "id";
+			$("#" + id).removeClass("uhide");
+		});
+
+		$(".order_more").click(function() {
+			$(this).addClass("uhide");
+			$(this).siblings(".more_count").removeClass("uhide");
+		});
+	</script>
+
+</html>

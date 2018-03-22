@@ -1,0 +1,70 @@
+.mine{
+	height: 9em;
+	width: 100%;
+	background:url(myImg/background.png) no-repeat;
+	background-size: 100%;
+	margin-bottom: 0em;
+}
+.tou-bac{
+	height: 3em;
+	width: 3em;
+	border-radius: 2em;
+	background-color: #ffffff;
+}
+.tou-pic{
+	height: 2em;
+	width: 2em;
+}
+.edit{
+	color: #5d5d5d;
+	margin-top: 0.5em;
+}
+.column{
+	background-color: #ffffff;
+	width: 100%;
+	margin-top: 0em;
+}
+.subcol{
+	height: 3em;
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+	color: #646464;
+}
+.text-left{
+	margin-left: 1em;
+}
+.pic{
+	height: 1.2em;
+	width: 0.8em;
+	margin-left: 0.5em;
+	margin-right: 1em;
+}
+.exit{
+	background-color: #ffffff;
+	height: 3em;
+	width: 100%;
+	color: #5d5d5d;
+	margin-top: 2em;
+}
+.pop{
+	height: 6em;
+	width: 100%;
+	color:#ffffff;
+	position:absolute;
+	left: 0;
+	bottom: 0;
+	
+	
+}
+.poprow1{
+	height: 3em;
+	background-color: #f2af27;
+}
+.poprow2{
+	height: 3em;
+	margin-top: 0.5em;
+	background-color: #f2af27;
+}
+.text1{
+	font-size: 0.8em;
+}

@@ -1,0 +1,34 @@
+.obody{ background: #f4f4f4;}
+.main_title{ height: 2.5em; background: #fff; color: #5d5d5d;}
+.title_active{ color: #f2af27; border-bottom: 2px solid #f2af27;}
+.order_num{ padding-top: 0.8em; padding-bottom: 0.8em; background: #fff; margin-top: 0.6em; padding-left: 0.8em; word-break: break-all; color: #535353; border-bottom: 1px solid #f4f4f4;}
+.order_state{ margin-left: 1em; padding-right: 0.6em; color: #f2af27;}
+.order_img img{ width: 5em; height: 5em;}
+.order_content{ background: #fff; padding-top: 0.8em; padding-bottom: 0.8em; padding-left: 0.8em;padding-right: 0.6em;}
+.order_detial{ color: #969696;  overflow: hidden; }
+.order_dtitle{ color: #5d5d5d; }
+.dcolor{ color: #f2af27;}
+.ordder_main{ margin-right: 0.6em;}
+.order_content{ border-bottom: 1px solid #f4f4f4;}
+.order_more{  color: #fff;}
+.order_up{ color: #fff;}
+.order_count{ padding-left: 0.8em; color: #5d5d5d; background: #fff; height: 2.5em;}
+.order_item{ background: #fff; margin-bottom: 0.5em; }
+.more_item{ height: 2.5em;border-bottom: 1px solid #f4f4f4; color: #969696; padding-left: 0.8em; padding-right: 0.6em;}
+.bcolor{ color: #5d5d5d;}
+.foot_warm{ padding: 1em; color: #c3c3c3}
+.checkbtn1{ margin-left: 3em;}
+.checkImg{ border: 1px solid #f2af27; width: 1em; height: 1em;}
+.checkImg img{ width: 1em; height: 1em;}
+.checked{ display: block;}
+.uncheck{ display: none; }
+.dimg img{ width: 1.5em;}
+
+.more_top{ height: 2.5em; background: #f2af27;}
+.item_left{ width: 55%;}
+.item_name{ width: 50%; padding-right: 0.5em;}
+.item_num{  width: 18%;}
+.item_count{  padding-left: 0.5em;}
+.item_apply{ padding: 0 0.5em; height: 2em; border: 1px solid #9e9a9a; border-radius: 5px;}
+
+

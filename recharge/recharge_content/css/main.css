@@ -1,0 +1,8 @@
+.obody{ background: #f4f4f4;}
+.main_title{ height: 2.5em; background: #fff; color: #5d5d5d;}
+.title_active{ color: #f2af27; border-bottom: 2px solid #f2af27;}
+.rechar_main{ padding: 1em 0.6em; border-bottom: 1px solid #f4f4f4; background: #fff;}
+.rechar_counts{ height: 3em; background: #fff; padding-left: 0.6em; color: #f2af27;}
+.rechar_time{ color: #c3c3c3; }
+.rechar_num{ margin-left: 3em; color: #666666;}
+.dtimg img{ width: 2em;}

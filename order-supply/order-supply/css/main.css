@@ -1,0 +1,64 @@
+.t-btn-w1{
+	background-image:url(myImg/refresh.png);
+}
+.uwh-tBtn{
+    width:1.75em;
+    height:1.75em;
+}
+.content{
+	
+	width: 100%;
+	background-color: #ffffff;
+	margin-top: 0.2em;
+	margin-bottom: 0.6em;
+}
+.order{
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+	height: 3em;
+	padding: 0 0.6em;
+}
+.order-left{
+	color: #5d5d5d;
+}
+.order-right{
+	color: #ec632f;
+}
+
+.order3{
+	padding: 0.8em 0.6em;
+	
+	color: #5d5d5d;
+}
+.money{
+	margin-left: 0.8em;
+}
+.order3-right{
+	
+	color: #ec632f;
+	height: 1.5em;
+	width: 4.2em;
+	border: 1px solid #ec632f;
+	border-radius: 0.3em;
+}
+.order3-right2{
+	color: #70b956;
+	height: 1.5em;
+	width: 4.2em;
+	border: 1px solid #70b956;
+	border-radius: 0.3em;
+}
+.foot_warm{ padding: 1em; color: #c3c3c3}
+.order_img img{ width: 5em; height: 5em;}
+.order_content{ background: #fff; padding-top: 0.8em; padding-bottom: 0.8em; padding-left: 0.6em;padding-right: 0.6em;}
+.order_detial{ color: #969696;  padding-left: 0.8em; overflow: hidden;}
+.order_dtitle{ color: #5d5d5d; }
+.dcolor{ color: #f2af27;}
+.ordder_main{ margin-right: 0.6em;}
+.order_content{ border-bottom: 1px solid #f4f4f4;}
+.order_more{ height: 2.5em; background: #f2af27; color: #fff;}
+.order_count{ padding-left: 0.6em; color: #5d5d5d; background: #fff; height: 2.5em;}
+.order_item{ background: #fff;}
+.more_item{ height: 2.5em;border-bottom: 1px solid #f4f4f4; color: #969696; padding-left: 0.6em; padding-right: 0.6em;}
+.bcolor{ color: #5d5d5d;}
+.foot_warm{ padding: 1em; color: #c3c3c3}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="xieyi/css/main.css">
+    </head>
+    <body class="um-vp bc-bg" ontouchstart>
+        <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-angle-left fa-2x"></div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">收藏夹</h1>
+                <div class="nav-btn nav-bt qk_btn qingkong" id="nav-right">
+                    清空
+                </div>
+            </div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 ">
+
+            </div>
+            <!--content结束--><!--footer开始-->
+            
+            <!--footer结束-->
+            <div id="footer" class="uf bc-text-head ub ubt bc-border">
+				<div class="ub " style=" height: 3em;width: 100%;">
+					<div class="ub ub-ac ub-f2" style="background: #313131">
+						<div class="ub-f1 ub" style=" height: 3em">
+							<div class="ub ub-ac ub-pc ub-f1" style="background: #f2af27">
+								<div class="ub ub-ac ub-pc">
+									<div class="ub ub-pc ub-ac open-submit goorder">查看购物车</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        </div>
+    </body>
+    <script src="../js/appcan.js"></script>
+    <script src="../js/appcan.control.js"></script>
+    <script src="../js/appcan.tab.js"></script>
+    <script type="text/javascript" src="../js/yfkj.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            var titHeight = $('#header').offset().height;
+            appcan.frame.open("content", "collect_content.html", 0, titHeight);
+            window.onorientationchange = window.onresize = function() {
+                appcan.frame.resize("content", 0, titHeight);
+            }
+        });
+       
+        appcan.button("#nav-left", function() {
+            appcan.window.close(-1);
+        })
+        //打开查看订单
+		appcan.button(".goorder", "ani-act", function(a, b) {
+
+				appcan.window.open("shopCar", "../shopCar/shopCar.html");
+				appcan.window.publish('notice', '');
+				//              appcan.window.publish('move', '1');
+			})
+		
+		appcan.button(".qingkong", "btn-act", function() {
+		    appcan.window.alert({
+                title: "提示",
+                content: "清空收藏夹将清除所有历史收藏商品,确定清空收藏夹？",
+                buttons: ['取消', '确定'],
+                callback: function(err, data, dataType, optId) {
+                    if(data == 1) {
+                        appcan.ajax({
+                            url: Serverurl + "/app/ShcangCancel",
+                            type: "POST",
+                            dataType: 'json',
+                            data: {
+                                Fuserid: Fsuper.getuserid(),
+                            },
+                            success: function(result) {
+                                if(result.code < 10000) {
+                                    if(result.code == 0) { //返回成功
+                                        appcan.window.publish('qingkong', '');
+                                       
+                                    }
+                                } else {
+                                    if(Fsuperdbg) {
+                                        alert(result.code);
+                                        alert(result.msg);
+                                        alert(result.debug);
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+			
+
+		})
+    </script>
+</html>

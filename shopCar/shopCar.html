@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="shopCar/css/main.css">
+	</head>
+
+	<body class="um-vp " ontouchstart>
+		<div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+			<!--header开始-->
+			<div id="header" class="uh bc-text-head ub bc-head">
+				<div class="nav-btn" id="nav-left">
+					<div class="ub-img " id="left_img">
+						<img class="uhide" src="" />
+					</div>
+					<div class="fa fa-angle-left fa-2x" id="goback"></div>
+				</div>
+				<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">购物车<img class="uhide" src="" /></h1>
+				<div class="nav-btn nav-bt" id="nav-right">
+					<div class="ub ub-pc clearcar" id="right_txt">清空</div>
+				</div>
+			</div>
+			<!--header结束-->
+			<!--content开始-->
+			<div id="content" class="ub-f1 tx-l">
+
+			</div>
+			<!--content结束-->
+			<!--footer-->
+			<div id="footer" class="uf bc-text-head ub ubt bc-border">
+				<div class="ub " style=" height: 3em;width: 100%;">
+					<div class="ub ub-ac ub-f2" style="background: #313131">
+						<div class="ub-f1 ub" style=" height: 3em">
+							<div class="ub ub-ac ub-f2" style="background: #313131">
+								<div class="ub ub-pc">
+									<div class="ub ub-ac ub-pc" style="margin-left: 0.5em;">合计：</div>
+
+									<span class="goodsNum">0</span>
+                                    <span >件</span>
+                                    <span class="umar-l">￥</span>
+									<span id="totalmoney">0.00</span>
+								</div>
+							</div>
+							<div class="ub ub-ac ub-pc ub-f1" style="background: #f2af27">
+								<div class="ub ub-ac ub-pc">
+									<div class="ub ub-pc ub-ac open-submit">查看订单</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script src="../js/appcan.js"></script>
+				<script src="../js/appcan.control.js"></script>
+				<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Fgoodsdata = '';
+		appcan.ready(function() {
+			 appcan.window.subscribe('goodsNum', function(msg) {
+               $(".goodsNum").text(msg);
+            });
+			//去结算更新购物车数据
+			appcan.window.subscribe('Fgoodsjiesuandata', function(msg) {
+				Fgoodsdata = Fsuper.getparm("newgoods");
+			});
+
+			//监听去结算价格
+			appcan.window.subscribe('totalmoney', function(msg) {
+				$("#totalmoney").text(Number(msg).toFixed(2));
+			});
+			var titHeight = $('#header').offset().height;
+			appcan.frame.open("content", "shopCar_content.html", 0, titHeight);
+			window.onorientationchange = window.onresize = function() {
+				appcan.frame.resize("content", 0, titHeight);
+			}
+		});
+		appcan.button("#nav-left", "btn-act", function() {
+			appcan.window.close(-1);
+		});
+		appcan.button("#cargoback", "btn-act", function() {
+			appcan.window.close(-1);
+		});
+		appcan.button(".uwh-btnBg", "ani-act", function() {
+			appcan.window.close(-1);
+		});
+
+		function winclose() {
+			appcan.window.close(-1);
+		}
+		/*去结算*/
+		$(".open-submit").click(function() {
+			var datas = {
+				Fgoodsdata: Fgoodsdata,
+			};
+			var url = "/app/updateCar";
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: datas,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							appcan.window.open("submit-order", "../submit-order/submit-order.html");
+							winclose();
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		});
+
+		function windowclose() {
+			appcan.window.close(-1);
+		}
+		/*清空购物车*/
+		$(".clearcar").click(function() {
+			appcan.window.alert({
+				title: "提示",
+				content: "您确定清空购物车",
+				buttons: ['取消', '确定'],
+				callback: function(err, data, dataType, optId) {
+					if(data == 1) {
+						deletecars();
+					} else if(data == 0) {
+						return;
+					}
+				}
+			});
+		});
+
+		function deletecars() {
+			var furl = "/app/downorderdeletecar";
+			var parm = {
+				Fgoodsid: "",
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getdelete(furl, parm, deletecalls);
+		}
+
+		function deletecalls() {
+			appcan.window.publish('clearrefsh', "");
+		}
+	</script>
+
+</html>

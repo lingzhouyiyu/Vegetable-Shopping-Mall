@@ -1,0 +1,72 @@
+.search{ margin-left: 2em; margin-right: 2em; border: 1px solid #C3C3C3; height: 2em; border-radius: 1em; margin-top: 0.5em; margin-bottom: 0.5em; }
+.search_input{ margin-left: 1em; margin-right: 1em;}
+.search_input input{ border: 0 none; outline: 0 none; color: #969696;}
+.search_icon img{ width: 1.5em; height: 1.5em; margin-top: 5px;}
+.search_icon span{ color: #c4c4c4;}
+
+.center_nav{ margin-left: 1em; margin-right: 1em; padding-top: 1em; padding-bottom: 1em; color: #646464; font-size: 0.8em; color: #646464;}
+.center_nav img{ width: 4em;}
+.flash{ position: relative;}
+.swiper-slide{ width: 100%; height: 10em; overflow: hidden;}
+.swiper-slide img{  width: 100%; height: 10em; overflow: hidden;}
+.pagination {
+  position: absolute;
+  z-index: 20;
+ bottom: 5px;
+ left:0;
+  width: 100%;
+  text-align: center;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.swiper-active-switch {
+  background: #f2af27;
+  
+}
+
+.pref{ color: #f2af27; font-size: 1.2em; height: 2em; border-top: 1px solid #f4f4f4; padding-left: 1em; padding-right: 1em;}
+.wrap_pref{ height: auto; background: #f4f4f4;margin-left: 0.8em; margin-right: 0.8em; padding-top: 0.3em;}
+.pref_listLeft{  margin-right: 0.3em;margin-left: 0.3em;}
+.pref_listRight{ margin-right: 0.3em;; }
+.pref_item img{ width: 100%;}
+.pref_itemTit{ color: #5d5d5d; margin-bottom: 5px; padding-top: 5px; }
+.pref_item{ background: #fff; margin-bottom: 0.3em;}
+.pref_itemDeti{ padding-bottom: 5px; color: #f2af27;}
+.pref_car{ padding-right: 8px;}
+.pref_car img{ width: 1.5em; height: 1.5em;}
+.item_img{ width: 100%; height: 8em;}
+.mybg{ background: #f4f4f4;}
+.wram_detial{ margin-top: 1em; margin-bottom: 2em; color: #6e7277;}
+.dbperson{ background: #f3f3f3; width: 6em; height: 2.5em; margin-right: 2em; border: 1px solid #cbcbcb;}
+.dbgo{ background: #f3f3f3; width: 6em; height: 2.5em;  border: 1px solid #cbcbcb;}
+
+.checkbtn1{ margin-left: 3em;}
+.checkImg{ border: 1px solid #f2af27; width: 1em; height: 1em;}
+.checked{ display: block;}
+.uncheck{ display: none;}
+.text-color{ color:#5d5d5d;}
+
+.txthide{ overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;}
+
+.img_height {
+	width: 50%;
+	
+}
+
+.txthide{ overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;}

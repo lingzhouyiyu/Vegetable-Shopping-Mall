@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="notice_content/css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="orderlist">
+
+		</div>
+		<div class="temp uhide">
+			<div class="ub ub-ver notice_list itemsorder">
+				<div class="ub ub-ac list_tite Fcontent">
+					
+				</div>
+				<div class="ub ub-ac notice_time Ftime">
+					
+				</div>
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Fstart = 0;
+		var pageSize = 10;
+		appcan.ready(function() {
+			getMessage();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					$('.orderlist').empty();
+					Fstart = 0;
+					getMessage();
+				} else if(type == 1) {
+					getMessage();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+
+		function getMessage() {
+			Fsuper.getrows('/App/getMessage', null, addorder);
+		}
+
+		function addorder(row, end) {
+			var list = $(".orderlist");
+			var item = $(".temp").clone();
+			var domitem = item.find(".itemsorder");
+			domitem.attr("id", row.Fgoodsid);
+			domitem.find(".Fcontent").text(row.Fcontent);
+			domitem.find(".Ftime").text(row.Ftime);
+			list.append(domitem);
+			Fstart = end;
+		}
+	</script>
+
+</html>

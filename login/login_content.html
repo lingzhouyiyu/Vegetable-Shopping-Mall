@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="login_content/css/main.css">
+
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #ffffff;">
+		<div class="logo ub ub-pc">
+			<img class="logo-pic" src="../css/images/logo.png" />
+		</div>
+		<div class="login ub ub-ver ub-pc">
+			<div class="accounts ub ub-ac">
+				<img class="pic" src="../css/images/user.png" />
+				<input id="Fusername" class="input ub ub-f1" type="text" placeholder="请输入您的帐号" />
+				<div class="accounts-tail ub ub-pe ruzhu open-setDown">
+					申请入驻
+				</div>
+			</div>
+			<div class="pwd ub ub-ac">
+				<img class="pic" src="../css/images/pwd.png" />
+				<input id="Fpassword" class="input ub" type="password" placeholder="请输入您的密码" />
+			</div>
+			<div class="change ub ub-ac ub-pc exchange uhide">
+				<div class="client ub ub-ac " id="customer">
+					客户端
+				</div>
+				<div class="distribution ub  ub-ac ub-pc ub-f1 change-act" id="delivery">
+					配送端
+				</div>
+				<div class="supply ub ub-ac ub-pe" id="supplier">
+					供应商
+				</div>
+			</div>
+			<div class="loginbtn ub ub-ac ub-pc login">
+				登&nbsp;&nbsp;录
+			</div>
+			<div class=" Agreement ub ub-ac ub-pc">
+				<div class="checkbox umar-r">
+					<input id="agree" type="checkbox" checked="checked" name="radio" class="uabs ub-con">
+				</div>
+				<div class="text1">
+					同意
+				</div>
+				<div class="text2 goxieyi">
+					《菜街子用户协议》
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		/*切换客户端*/
+		$(".exchange div").click(function() {
+			$(".exchange div").removeClass("change-act");
+			$(this).addClass("change-act");
+		})
+		appcan.ready(function() {
+			var userinfo = Fsuper.getuserinfo();
+			if(userinfo == null) {
+				return;
+			}
+			if(Fuserid != -1) {
+                var Fuserid = userinfo.Fusername;
+                var Fpassword = userinfo.Fpassword;
+                $("#Fusername").val(Fuserid);
+                $("#Fpassword").val(Fpassword);
+			}
+		});
+		//不同身份登录
+		appcan.button(".loginbtn", "ani-act", function(a, b) {
+			if(!$("#agree").prop("checked")) {
+				appcan.window.openToast('请同意用户协议！', '1000');
+				return;
+			}
+			var furl = '/app/login';
+			var parm = {
+				Fusername: $("#Fusername").val(),
+				Fpassword: $("#Fpassword").val()
+			};
+			Fsuper.getresult(furl, parm, login);
+		})
+
+		function login(row, code) {
+			if(code == 0) {
+				var data = row[0];
+				//var currport = $(".change-act").attr("id");
+				appcan.locStorage.setVal("userinfo", data);
+				var currport = data.Fusertype;
+				if(currport == "1") {
+					appcan.locStorage.setVal("ordersindex", 0);
+					appcan.window.publish('loginmove', '');
+					appcan.window.open("index", "../index/index.html");
+					appcan.window.publish('index', '');
+				}
+				if(currport == "2") {
+					appcan.window.open("MyTask", "../MyTask/mytask.html");
+					appcan.window.publish('MyTask', '');
+				}
+				if(currport == "3") {
+					appcan.window.open("order-supply", "../order-supply/order-supply.html");
+					appcan.window.publish('order-supply', '');
+				}
+
+			} else {
+				appcan.window.openToast('用户名或密码不正确！', '1000');
+			}
+
+		}
+
+		/*申请入驻*/
+		$(".open-setDown").click(function() {
+			appcan.window.open("setDown", "../setDown/setDown.html");
+		});
+		/*协议*/
+		 appcan.button(".goxieyi", "btn-act", function() {
+            appcan.window.open("ixeyi", "../xieyi/xieyi.html");
+        })
+	</script>
+
+</html>

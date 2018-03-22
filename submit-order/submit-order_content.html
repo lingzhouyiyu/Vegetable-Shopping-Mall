@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="submit/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="person-info ub">
+			<div class="left ub ub-ver ub-f1">
+				<div class="name ub ub-ac">
+					<div class="ub ub-f1">
+						收货人：
+						<span id="Fname"></span>
+					</div>
+					<div id="Fphone" class="ub ub-pe">
+
+					</div>
+				</div>
+				<div id="Faddress" style="margin-top: 0.5em;">
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pe open-manageaddress">
+				<img class="go-pic" src="submit/myImg/go.png" />
+			</div>
+
+		</div>
+		<div class="list ub ub-ver ">
+			<div class="ub ub-ac">
+				<img class="pic" src="submit/myImg/list.png" />
+				<div class="text">今日采购订单</div>
+			</div>
+			<div class="ub ub-ac umar-r">
+				<div class="ub">
+					<span>选择配送时间：</span>
+					<span id="Ftime">10:30</span>
+				</div>
+				<div class="ub ub-ac umar-l">
+					<img id="senddate" src="../css/icons/icon-cal-red.png" style="width: 1.5em; " />
+				</div>
+			</div>
+
+		</div>
+
+		<div class="ub table_top">
+			<div class="ub  ub-f1 ub-fh ub-ac ">
+				品名
+			</div>
+			<div class="ub  ub-f1 ub-fh ub-ac ">
+				单价
+			</div>
+			<div class="ub  ub-f1 ub-fh ub-ac">
+				数量
+			</div>
+			<div class="ub  ub-f1 ub-fh ub-ac">
+				小计
+			</div>
+			
+		</div>
+		<div class="list-detail ub ub-ver">
+			<div class="listall lists">
+
+			</div>
+			<div class="total ub ub-ac ub-pe">
+				<div>共<span id="totalcount"></span>件商品</div>
+				<div class="total-right">订单金额：<span id="totalmeony" class="total-money">0.00</span></div>
+			</div>
+		</div>
+		<div id="temp" class="list-detail ub ub-ver temp uhide">
+			<div class="listall">
+				<div id="" class="sublist ub ub-ac item">
+					<div id="Fgoodsname" class="Fgoodsname text1 ub ub-f1 ub-fh ub-ac">
+					</div>
+					<div class="text2 ub ub-f1 ub-fh ub-ac ">
+						<span>￥</span>
+						<span class="Fprice" id="Fprice"></span>
+					</div>
+					<div class="text3 ub ub-f1 ub-fh ub-ac " style="padding-left: 1.6em;">
+					    <span>x</span>
+						<span  id="FgoodsCount" ></span>
+					</div>
+					<div class="ub ub-ac ub-f1 ub-fh" style="padding-left: 1.5em;">
+						<span>￥</span>
+						<span id="Fmoney" class="Fmoney"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var cText = 0;
+		var cJson = 1;
+		var cInt = 2;
+		var userinfo = Fsuper.getuserinfo();
+		var Fgoodsids = appcan.locStorage.getVal("Fgoodsids"); //商品订单
+		var totalmeony = 0;
+		appcan.ready(function() {
+			getConfimeGoods();
+			getShopName();
+		});
+		//加载用户信息
+		function getShopName() {
+			var furl = '/app/getShopName';
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getresult(furl, parm, setvalues);
+		}
+
+		function setvalues(row, code) {
+			var data = row[0];
+			$("#Fname").text(data.Fname);
+			$("#Faddress").text(data.Faddress);
+			$("#Fphone").text(data.Fphone);
+		}
+		//加载购物车列表
+		function getConfimeGoods() {
+			var furl = "/app/getConfimeGoods";
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				Fgoodsid: Fgoodsids
+			};
+			Fsuper.getdata(furl, parm, additem, function() {
+				//提交订单实付金额
+				appcan.window.publish('shifumoney', totalmeony);
+				var lists = $(".lists .item");
+				getgoods(lists); //取到商品的id
+				$("#totalcount").text(i);
+				$("#totalmeony").text(totalmeony.toFixed(2));
+
+			});
+		}
+		var i = 0;
+
+		function additem(row) //加载订单
+		{
+			++i; //计算订单总数
+			var list = $(".lists");
+			var clonedom = $("#temp").clone();
+			var itemdom = clonedom.find(".item");
+			itemdom.attr("id", row.Fgoodsid);
+			itemdom.find("#Fgoodsname").text(row.Fgoodsname);
+			itemdom.find("#Fprice").text(row.Fprice.toFixed(2));
+			itemdom.find("#Fmoney").text(row.Fmoney.toFixed(2));
+			itemdom.find("#FgoodsCount").text(row.FgoodsCount);
+			list.append(itemdom);
+			totalmeony = totalmeony + Number(row.Fprice) * Number(row.FgoodsCount);
+		}
+
+		function getgoods(dom) { //取到商品的id
+			var goodsid = "";
+			dom.each(function(i, item) {
+				var Fgoodsid = $(item).attr("id");
+				goodsid = goodsid + Fgoodsid + ",";
+			});
+			var goods = goodsid.substring(0, goodsid.length - 1);
+			appcan.window.publish('goods', goods);
+			appcan.window.publish('Ftime', Fusersendtime+" "+$("#Ftime").text());
+
+		}
+		/*收货地址管理*/
+		$(".open-manageaddress").click(function() {
+			appcan.window.open("address", "../update-address/address.html");
+		});
+		var myDate = new Date();
+		var year = myDate.getFullYear(); 
+		var month = myDate.getMonth() + 1; 
+		var day = myDate.getDate();
+		var Fusersendtime = year+"-"+month+"-"+day;
+		appcan.button("#senddate", "ani-act", function() {
+			uexControl.cbOpenTimePicker = cbOpenTimePicker;
+			var houres = myDate.getHours();
+			var minutes = myDate.getMinutes();
+			uexControl.openTimePicker(houres, minutes);
+
+		})
+
+		function cbOpenTimePicker(opId, dataType, data) {
+			if(dataType == "1") {
+				var obj = eval('(' + data + ')');
+				 var mins = obj.minute;
+				 var hours = obj.hour;
+				if(Number(obj.minute) < 10){
+				    mins = "0"+obj.minute;
+				}
+				if(Number(obj.hour) <10){
+                    hours = "0"+obj.hour;
+                }
+				var time = hours+":"+mins;
+				//alert(Fusersendtime+" "+time);
+				$("#Ftime").text(time);
+				appcan.window.publish('Ftime', Fusersendtime+" "+$("#Ftime").text());
+			}
+		}
+	</script>
+
+</html>

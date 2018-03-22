@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="../submit-order/submit/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="person-info ub">
+			<div class="left ub ub-ver ub-f1">
+				<div class="name ub ub-ac">
+					<div class="ub ub-f1">
+						收件人：
+						<span id="Fname"></span>
+					</div>
+					<div id="Fphone" class="ub ub-pe">
+						
+					</div>
+				</div>
+				<div id="Faddress" style="margin-top: 0.5em;">
+					昆明
+				</div>
+			</div>
+		</div>
+		<div class="list ub ub-ac">
+			<img class="pic" src="../submit-order/submit/myImg/list.png" />
+			<div class="text">购物清单</div>
+		</div>
+		<div class="list-detail ub ub-ver">
+			<div class="listall lists">
+
+			</div>
+			<div class="total ub ub-ac ub-pe">
+				<div>共<span id="totalcount"></span>件商品</div>
+				<div class="total-right">合计：<span id="totalmeony" class="total-money">￥89.00</span></div>
+			</div>
+		</div>
+		<div id="temp" class="list-detail ub ub-ver temp uhide">
+			<div class="listall">
+				<div id="" class="sublist ub ub-ac item">
+					<div id="Fgoodsname" class="Fgoodsname text1 ub ub-f1 ub-fh ub-ac">
+					</div>
+					<div class="text2 ub ub-f1 ub-fh ub-ac ">
+						<span>x</span>
+						<span id="FgoodsCount"></span>
+					</div>
+					<div class="text3 ub ub-f1 ub-fh ub-ac  ">
+						<span>￥</span>
+						<span class="Fprice" id="Fprice"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var userinfo = Fsuper.getuserinfo();
+		$("#Fname").text(userinfo.Fname);
+		$("#Fphone").text(userinfo.Fphone);
+		var Fgoodsids = appcan.locStorage.getVal("sureorders");//商品订单
+		var totalmeony = 0;
+		appcan.ready(function() {
+			getConfimeGoods();
+		});
+		//加载购物车列表
+		function getConfimeGoods() {
+			var furl = "/app/getConfimeorderssaom";
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				Fgoodsid: Fgoodsids
+			};
+			Fsuper.getdata(furl, parm, additem, function() {
+				//提交订单实付金额
+				appcan.window.publish('queshifumoney', totalmeony);
+				var lists = $(".lists .item");
+				getgoods(lists);//取到商品的id
+				$("#totalcount").text(i);
+				$("#totalmeony").text(totalmeony.toFixed(2));
+				
+			});
+		}
+		var i = 0;
+		function additem(row) //加载订单
+		{
+			++i;//计算订单总数
+			var list = $(".lists");
+			var clonedom = $("#temp").clone();
+			var itemdom = clonedom.find(".item");
+			itemdom.attr("id", row.Fgoodsid);
+			itemdom.find("#Fgoodsname").text(row.Fgoodsname);
+			itemdom.find("#Fprice").text(row.FlastPrice.toFixed(2));
+			itemdom.find("#FgoodsCount").text(row.FtotalCount);
+			list.append(itemdom);
+			totalmeony = totalmeony + Number(row.Ftotalmoney);
+		}
+
+		function getgoods(dom) {//取到商品的id
+			var goodsid = "";
+			dom.each(function(i, item) {
+				var Fgoodsid = $(item).attr("id");
+				goodsid = goodsid + Fgoodsid + ",";
+			});
+			var goods = goodsid.substring(0, goodsid.length - 1);
+			appcan.window.publish('goods', goods);
+			
+		}
+		
+	</script>
+
+</html>

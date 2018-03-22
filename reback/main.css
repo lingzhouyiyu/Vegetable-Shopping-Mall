@@ -1,0 +1,52 @@
+.tel{
+	margin-top: 1em;
+	color: #5d5d5d;
+	margin-left: 1em;
+}
+.tel-input{
+	margin-left: 1em;
+	margin-right: 1em;
+	height: 3em;
+}
+.tel-input2{
+	margin-left: 1em;
+	margin-right: 1em;
+	height: 10em;
+}
+.inputval{
+	height: 2em;
+	font-size: 1em;
+	outline: 0 none;
+	border: 1px solid #eeeeee;
+	border-radius: 0.5em;
+	color: #c3c3c3;
+	padding-left: 0.5em;
+	outline: 0 none;
+	
+}
+.inputval2{
+	height: 10em;
+	font-size: 1em;
+	outline: 0 none;
+	border: 1px solid #eeeeee;
+	border-radius: 0.5em;
+	color: #c3c3c3;
+	padding-left: 0.5em;
+	margin-top: 0.5em;
+	padding: 5px;
+}
+.text{
+	color:  #c3c3c3;
+	margin-left: 0.3em;
+	
+}
+.submit{
+	margin-top: 2em;
+	background-color: #f2af27;
+	height: 2.5em;
+	margin-left: 1em;
+	margin-right: 1em;
+	border-radius: 0.5em;
+	color: #ffffff;
+}
+

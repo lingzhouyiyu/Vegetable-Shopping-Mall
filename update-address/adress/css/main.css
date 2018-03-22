@@ -1,0 +1,64 @@
+.column{
+	 background-color: #ffffff;
+	 height: 24em;
+}
+.subcol{
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+	height: 4em;
+}
+.subcol1{
+	height: 8em;
+}
+.col1{
+	height: 4em;
+}
+.col2{
+	height: 8em;
+}
+.left{
+	border: none;
+	border-right: 1px solid #f4f4f4;
+	width: 6em;
+	height: 2em;
+}
+.left1{
+	height: 5em;
+	width: 6em;
+	border: none;
+	border-right: 1px solid #f4f4f4;
+}
+.text{
+	color: #5d5d5d;
+	margin-left: 0.5em;
+}
+.right{
+	margin-left: 1em;
+}
+.right2{
+	margin-left: 1em;
+}
+.inputval{
+	border: none;
+	height: 2em;
+	font-size: 1em;
+	color: #b7b7b7;
+	outline: 0 none;
+}
+.inputval2{
+	border: none;
+	height: 6em;
+font-size: 1em;
+	color: #b7b7b7;
+	outline: 0 none;
+	columns: 10;
+}
+.reserve{
+	margin-top: 3em;
+	height: 2.5em;
+	margin-left: 1em;
+	margin-right: 1em;
+	background-color: #f2af27;
+	border-radius: 0.5em;
+	color: #ffffff;
+}

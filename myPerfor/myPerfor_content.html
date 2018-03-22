@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="../orders/orders_content/css/main.css" />
+		<link rel="stylesheet" href="myPerfor_content/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg obody" ontouchstart>
+		<!--
+        	作者：offline
+        	时间：2016-09-20
+        	描述：账单模板
+        -->
+		<div class="temp" style="display: none;">
+			<div class="itemsorder">
+				<div class="all_order" id="allOrderid">
+					<div class="order_item">
+						<div class="ub order_num">
+							<div class="ub ub-ac ub-f1">
+								订单号：<span class="ForderNum"></span>
+							</div>
+							<div class="ub ub-ac order_state FpayState">
+
+							</div>
+						</div>
+						<div class="ub order_content">
+							<div class="ub ub-f1 ordder_main">
+								<div class="ub ub-ver order_detial ub-f1">
+									<div class="ub umar-b order_dtitle">
+										<div class="ub-img dimg umar-r dimg">
+											<img src="../css/images/order3.png" />
+										</div>
+										<div class="ub ub-ac ForderName">
+
+										</div>
+									</div>
+									<div class="ub umar-b ">
+										商品总重量：<span class="Ftotalweight"></span> kg
+									</div>
+									<div class="ub ">
+										下单时间：<span class="FdownTime"></span>
+									</div>
+								</div>
+							</div>
+							<div class="ub ub-ver ub-pc uhide">
+								<div class="ub umar-b bcolor">
+									x<span>5</span>
+								</div>
+								<div class="ub dcolor">
+									￥<span class=""></span>
+								</div>
+							</div>
+						</div>
+						<!-- 查看更多-->
+						<div class="ub ub-ver order_more">
+							<div class="ub ub-ac  order_count">
+								<div class="ub ub-f1">
+									共<span class="Fcounts"></span>件商品 合计：¥ <span class="FlastPrice"></span>元<span></span>
+								</div>
+								<div class="ub ub-ac ub-pc ksxd Fstate">
+									已结算
+								</div>
+							</div>
+							<div class="ub ub-ac ub-pc more_top">
+								<div class="ub">查看更多</div>
+								<img src="../css/images/more.png" />
+							</div>
+						</div>
+						<div class="ub ub-ver more_count uhide morechild">
+<div class="ub table_top">
+			<div class="ub  ub-f1 ub-fh ub-ac ">
+				品名
+			</div>
+			<div class="ub  ub-f1 ub-fh ub-ac ">
+				数量
+			</div>
+			<div class="ub  ub-f1 ub-fh ub-ac">
+				单价
+			</div>
+			<div class="ub  ub-f1 ub-fh ub-ac">
+				小计
+			</div>
+			
+		</div>
+						</div>
+						<div class="ub ub-ver  order_up uhide">
+							<div class="ub ub-ac  order_count">
+								<div class="ub ub-f1">
+									共<span class="Fcounts"></span>件商品 合计：¥ <span class="FlastPrice"></span>元<span></span>
+								</div>
+								<div class="ub ub-ac ub-pc ksxd Fstate">
+									已结算
+								</div>
+							</div>
+							<div class="ub ub-ac ub-pc more_top">
+								<div class="ub">收起</div>
+								<img src="../css/images/more_up.png" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="ub perfor_top">
+    		<div class="ub ub-ac ub-f1">
+    			已结算总收益
+    		</div>
+    		<div class="ub ub-ac redcolor">
+    			<span>￥</span><span class="totalmoneys">0.00</span>
+    		</div>
+    	</div>
+    	<div class="ub pref_tltle">
+    		已结算明细
+    	</div>
+		<!-- 全部账单列表-->
+		<div id="orderlist" class="orderlist">
+
+		</div>
+		<!--
+        	作者：offline
+        	时间：2016-09-20
+        	描述：详情模板
+        -->
+		<div id="orderchildtemp" class="uhide">
+			<div class="ub ub-ac ub-f1 more_item childitem">
+				<div class="ub ub-f1 ub-fh Fgoodsname">
+				</div>
+				<div class="ub ub-ac ub-fh ub-f1">
+					x<span class="FtotalCount"></span>
+				</div>
+				<div class="ub ub-f1 ub-fh ub-ac dcolor">
+					￥<span class="FlastPrice"></span>
+				</div>
+				<div class="ub ub-ac ub-f1 ub-fh">
+					<span>￥</span>
+					<span class="Ftotalmoney"></span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Fstart = 0;
+		var totalmoneys = 0;
+		var pageSize = 10;
+		appcan.ready(function() {
+			appcan.window.subscribe('imgsuccess', function(msg) {
+				$('.orderlist').empty();
+				Fstart = 0;
+				getorderwait();
+			});
+
+			//确认收货刷新
+			appcan.window.subscribe('confirmgoods', function(msg) {
+				$('.orderlist').empty();
+				Fstart = 0;
+				getorderwait();
+			});
+			getorderwait();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					$('.orderlist').empty();
+					Fstart = 0;
+					totalmoneys = 0;
+					getorderwait();
+				} else if(type == 1) {
+					getorderwait();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+
+		$(".order_more").click(function() {
+			$(this).addClass("uhide");
+			$(this).siblings(".more_count").removeClass("uhide");
+			$(this).siblings(".order_up").removeClass("uhide");
+		});
+
+		$(".order_up").click(function() {
+			$(this).addClass("uhide");
+			$(this).siblings(".more_count").addClass("uhide");
+			$(this).siblings(".order_more").removeClass("uhide");
+		});
+
+		function getorderwait() {
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				pageSize: pageSize,
+				Fstart: Fstart,
+				Ftype:1
+			}
+			Fsuper.getrows('/App/getmyask', parm, addorder,setMoney);
+		}
+		function setMoney(){
+			$(".totalmoneys").text(totalmoneys.toFixed(2));
+		}
+		function addorder(row, end) {
+			totalmoneys = totalmoneys + Number(row.FlastPrice);
+			var list = $(".orderlist");
+			var item = $(".temp").clone();
+			var domitem = item.find(".itemsorder");
+			domitem.attr("id", row.Fgoodsid);
+			domitem.find(".Ftotalweight").text(row.Ftotalweight);
+			domitem.find(".ForderName").text(row.ForderName);
+			domitem.find(".ForderNum").text(row.ForderNum);
+			domitem.find(".FdownTime").text(row.FdownTime);
+			domitem.find(".FlastPrice").text(row.FlastPrice.toFixed(2));
+			domitem.find(".order_more").attr('onclick', "order_more(this)");
+			domitem.find(".order_up").attr('onclick', "order_up(this)");
+			domitem.find(".querensh").attr('onclick', "querensh(" + row.Forderid + ")");
+			getGoodsByCatid(list, domitem, row.Forderid);
+			list.append(domitem);
+			Fstart = end;
+		}
+
+		function order_more(dom) {
+			$(dom).addClass("uhide");
+			$(dom).siblings(".more_count").removeClass("uhide");
+			$(dom).siblings(".order_up").removeClass("uhide");
+		}
+
+		function order_up(dom) {
+			$(dom).addClass("uhide");
+			$(dom).siblings(".more_count").addClass("uhide");
+			$(dom).siblings(".order_more").removeClass("uhide");
+		}
+		//订单详情
+		function getGoodsByCatid(list, domitem, id) {
+			var furl = "/app/getorderwaitmx";
+			appcan.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				dataType: "json",
+				data: {
+					Forderid: id
+				},
+				success: function(result) {
+					var rows = result.data.rows;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					var length = rows.length;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								additems(list, domitem, row, length);
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+
+		}
+
+		function additems(list, domitem, row, length) {
+			domitem.find(".Fcounts").text(length);
+			var goodslist = domitem.find(".morechild");
+			var clonedom = $("#orderchildtemp").clone();
+			var goodsdom = clonedom.find(".childitem");
+			goodsdom.find(".Fgoodsname").text(row.Fgoodsname);
+			goodsdom.find(".FtotalCount").text(row.FtotalCount);
+			goodsdom.find(".FlastPrice").text(row.FlastPrice);
+			goodsdom.find(".Ftotalmoney").text(row.Ftotalmoney.toFixed(2));
+			goodslist.append(goodsdom);
+			list.append(domitem);
+		}
+		//确认收货
+		function querensh(payorderId) {
+			appcan.window.alert({
+				title: "提示",
+				content: "确定接单？",
+				buttons: ['取消', '确定'],
+				callback: function(err, data, dataType, optId) {
+					if(data == 1) {
+						appcan.ajax({
+							url: Serverurl + "/app/querensh",
+							type: "POST",
+							dataType: 'json',
+							data: {
+								Fuserid: Fsuper.getuserid(),
+								Forderid: payorderId
+							},
+							success: function(result) {
+								if(result.code < 10000) {
+									if(result.code == 0) { //返回成功
+										appcan.window.publish('confirmgoods', '');
+									}
+								} else {
+									if(Fsuperdbg) {
+										alert(result.code);
+										alert(result.msg);
+										alert(result.debug);
+									}
+								}
+							}
+						});
+					}
+				}
+			});
+		}
+
+	</script>
+
+</html>

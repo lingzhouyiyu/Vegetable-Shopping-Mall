@@ -1,0 +1,120 @@
+.footer-left{
+	background-color: #313131; 
+	height: 4em;
+	padding-right: 0.8em;
+}
+.submit{
+	background-color: #f2af27;
+}
+.person-info{
+	height: 6em;
+	width: 100%;
+	background-color: #ffffff;
+}
+.left{
+	color: #1a1a1a;
+	margin-left: 1em;
+}
+.name{
+	margin-top: 1em;
+	margin-right: 0.5em;
+}
+.go-pic{
+	height: 1.2em;
+	width: 0.8em;
+	margin-right: 1em;
+}
+
+.next{
+
+	width: 0.8em;
+	margin-left: 0.5em;
+	margin-right: 1em;
+}
+.list{
+	
+	background-color: #ffffff;
+	
+	margin-top: 0.5em;
+	color:#1a1a1a ;
+	padding: 0.6em 1em; overflow: hidden;
+}
+.pic{
+	
+	height: 2em;
+	width: 1.5em;
+}
+.text{
+	margin-left: 0.5em;
+}
+.list-detail{
+	background-color: #ffffff;
+	margin-top: 0.5em;
+	
+}
+.listall{
+	margin-left: 1em;
+	margin-right: 1em;
+	border: none;
+	border-bottom: 1px solid #d9d9d9;
+}
+.sublist{
+	
+	margin-right: 1em;
+	height: 2.5em;
+}
+.text1{
+	color: #5d5d5d;
+}
+.text2{
+	color: #a9a9a9;
+}
+.text3{
+	color: #2f2f2f;
+}
+.total{
+	height: 3em;
+	color: #5d5d5d;
+}
+.total-right{
+	margin-left: 1em;
+	margin-right: 3em;
+}
+.total-money{
+	color: #f2af27;
+}
+.way{
+	height: 6em;
+	margin-top: 0.8em;
+	margin-bottom: 10em;
+	background-color: #ffffff;
+	color: #5d5d5d;
+}
+.way-text{
+	margin-left: 1em;
+	margin-right: 1em;
+	border: none;
+	border-bottom: 1px solid #d9d9d9;
+	height: 3em;
+}
+.way-class{
+	height: 3em;
+	color: #5d5d5d;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.goods_contral{ padding: 1em 0; font-size: 1em; color: #5d5d5d;}
+.goods_reduce{ border: 1px solid #b7b7b7; width:1.6em; height:1.6em;background-color: #f4f4f4;}
+.goods_num{ border: 1px solid #b7b7b7;  width:1.6em; height:1.6em; border-left: 0 none;}
+.goods_add{border: 1px solid #b7b7b7;  width:1.6em; height:1.6em; border-left: 0 none;background-color: #f4f4f4;}
+.payway{ padding: 1em; background: #fff; }
+.waychoose{ background: #fff; margin-bottom: 2em;}
+.waybtns{ margin: 0 1em; border-top: 1px solid #F4F4F4; padding: 1em;}
+
+.checkImg{ border: 1px solid #f2af27; width: 1em; height: 1em;}
+.checkImg img{ width: 1em; height: 1em;}
+.checked{ display: block;}
+.uncheck{ display: none;}
+.payway1{ margin-right: 2em;}
+

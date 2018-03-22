@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="mytask/css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div id="page_0" class="up ub ub-ver" tabindex="0">
+			<!--header开始-->
+			<div id="header" class="uh bc-text-head ub bc-head header1">
+				<div class="nav-btn" id="nav-left">
+
+				</div>
+				<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">我的任务</h1>
+				<div class="nav-btn nav-bt" id="nav-right">
+					<div class="t-btn-w1 ub-img uwh-tBtn"></div>
+				</div>
+			</div>
+			<div id="header" class="uh bc-text-head ub uhide bc-head header3">
+				<div class="nav-btn" id="nav-left"></div>
+				<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">我的</h1>
+				<div class="nav-btn nav-bt" id="nav-right"></div>
+			</div>
+
+			<div id="picture" class=""></div>
+			<!--content开始-->
+			<div id="content" class="ub-f1">
+
+			</div>
+			<!--footer开始-->
+			<div id="footer" class="uf t-bla ub tab bc-text-head ubt bc-border">
+
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.tab.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var orderindex = appcan.locStorage.getVal("askindex");
+		var tabset = {
+			selector: "#footer",
+			hasIcon: true,
+			hasAnim: false,
+			hasLabel: true,
+			hasBadge: true,
+			index: 0,
+			ispico: true,
+			data: [{
+				label: "任务",
+				icon: "order-supply",
+				pico: "../css/images/renwu.png",
+				pactivico: "../css/images/renwu_red.png"
+			}, {
+				label: "扫一扫",
+				icon: "fa-shopping-cart",
+				pico: "../css/images/sao.png",
+				pactivico: "../css/images/sao.png"
+			}, {
+				label: "我的",
+				icon: "fa-cube",
+				pico: "../css/images/person.png",
+				badge: "1",
+				pactivico: "../css/images/person_red.png"
+			}]
+		};
+		tabset.data[2].badge = "";
+		var tabview = appcan.tab(tabset);
+		tabview.on("click", function(obj, index) {
+			if(index == '0') {
+				$(".header1").removeClass("uhide");
+				$(".header3").addClass("uhide");
+			}
+			if(index == '2') {
+				$(".header1").addClass("uhide");
+				$(".header3").removeClass("uhide");
+			}
+			if(index == '1') {
+				scannerOpen();
+			}
+			appcan.window.selectMultiPopover("content", index);
+		})
+		appcan.ready(function() {
+			var top = $('#header').offset().height;
+			appcan.frame.open({
+				id: "content",
+				url: [{
+					"inPageName": "MyTask",
+					"inUrl": "mytask_content.html",
+				}, {
+					"inPageName": "",
+					"inUrl": "",
+				}, {
+					"inPageName": "Mine",
+					"inUrl": "../Mine/mine_content.html",
+				}],
+				top: top,
+				left: 0,
+				index: 0,
+				change: function(index, res) {
+					if(res.multiPopSelectedIndex == '0') {
+						$(".header1").removeClass("uhide");
+						$(".header3").addClass("uhide");
+					}
+					if(res.multiPopSelectedIndex == '2') {
+						$(".header1").addClass("uhide");
+						$(".header3").removeClass("uhide");
+					}
+					tabview.moveTo(res.multiPopSelectedIndex);
+				}
+			});
+			window.onorientationchange = window.onresize = function() {
+				appcan.frame.resize("content", 0, top);
+			}
+		});
+
+		function scannerOpen() {
+			uexScanner.cbOpen = function(opCode, dataType, data) {
+				var datas = JSON.parse(data);
+				querenjiedan(datas.code);
+			}
+			uexScanner.open();
+		}
+
+		function querenjiedan(Fid) {
+			var furl = '/app/querenjiedan';
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				Forderid: Fid
+			};
+			Fsuper.getresult(furl, parm, gotoask);
+		}
+
+		function gotoask(row, code) {
+			if(code == 0) {
+				appcan.window.evaluateScript({
+					name: 'MyTask',
+					scriptContent: 'clearlist()'
+				});
+				appcan.window.publish('imgsuccess', '');
+				tabview.moveTo(0);
+				appcan.window.selectMultiPopover("content", 0);
+			}
+		}
+	</script>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="recharge_content/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg obody" ontouchstart>
+		<div class="orderlist">
+
+		</div>
+		<div id="temp" class="temp uhide">
+			<div class="ub rechar_main itemsorder">
+				<div class="ub ub-ver ub-f1 ub-fh  rechar_time Ftime">
+
+				</div>
+				<div class="ub dtimg ub-f1 ub-ac ub-pc ub-fh">
+					<img class="ub-img" src="../css/images/recharge.png" />
+				</div>
+				<div class="ub ub-ac ub-pe ub-f1 ub-fh  ub-ver rechar_num">
+					<div class="ub ub-ac umar-b Fmoney">
+
+					</div>
+					<div class="ub">
+						消费
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-ac rechar_counts">
+			<div class="ub umar-r">
+				合计
+			</div>
+			<div class="ub">
+				￥<span class="totalmoney">0.00</span>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Fstart = 0;
+		var pageSize = 10;
+		var totalmoney = 0;
+		var FdownTime = "";
+		appcan.ready(function() {
+			appcan.window.subscribe('Flooktime', function(msg) {
+				FdownTime = msg;
+				$('.orderlist').empty();
+				Fstart = 0;
+				totalmoney = 0;
+				getConsumed();
+			});
+			getConsumed();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					$('.orderlist').empty();
+					Fstart = 0;
+					totalmoney = 0;
+					getConsumed();
+				} else if(type == 1) {
+					getConsumed();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+
+		function getConsumed() {
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				pageSize: pageSize,
+				Fstart: Fstart,
+				FdownTime: FdownTime
+			}
+			Fsuper.getrows('/App/getConsumed', parm, addorder, function() {
+				$(".totalmoney").text(totalmoney.toFixed(2));
+			});
+		}
+
+		function addorder(row, end) {
+			totalmoney = totalmoney + Number(row.Fmoney);
+			var list = $(".orderlist");
+			var item = $(".temp").clone();
+			var domitem = item.find(".itemsorder");
+			domitem.attr("id", row.Fid);
+			domitem.find(".Ftime").text(row.Ftime);
+			domitem.find(".Fmoney").text(row.Fmoney.toFixed(2));
+			list.append(domitem);
+			Fstart = end;
+		}
+	</script>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="quickPay_content/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg mybg" ontouchstart>
+		<div class="ub ub-ac ub-pc pay_top">
+			- 恭喜您成功提交订单！-
+		</div>
+		<div class="ub ub-ver pay_list">
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					订单编号
+				</div>
+				<div class="ub ForderNum">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					配送方式
+				</div>
+				<div class="ub">
+					商家配送
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					收货人名
+				</div>
+				<div class="ub Fname">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					联系方式
+				</div>
+				<div class="ub Fphone">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					应付金额
+				</div>
+				<div class="ub redcolor">
+					<span>￥</span> <span class="FlastPrice"></span>
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_num">
+			<div class="ub ub-f1 ub-ac pay_item warColor">
+				<div class="ub ub-ac pay_left ">
+					可勾选余额支付
+				</div>
+				<div class="ub Ftotalmoney">
+
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-ac payway">
+			在线支付
+		</div>
+		<div class="ub waychoose">
+			<div class="ub ub-pc ub-ac ub-f1 waybtns">
+				<div class="ub ub-ac payway1 paybtns">
+					<div class="ub ub-ac ub-pc checkbtn1 ">
+						<div class="ub ub-ac umar-r checkImg goods_check">
+							<img class="ub-img uhide " Fpaymethod="0" rel="checked" src="../css/images/checkbtn.png" />
+						</div>
+					</div>
+					<div class="ub ub-ac chway">
+						在线支付
+					</div>
+				</div>
+				<div class="ub ub-ac paybtns">
+					<div class="ub ub-ac ub-pc checkbtn1 ">
+						<div class="ub ub-ac umar-r checkImg goods_check">
+							<img class="ub-img uhide " Fpaymethod="1" rel="checked" src="../css/images/checkbtn.png" />
+						</div>
+					</div>
+					<div class="ub ub-ac chway">
+						现金支付
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_btn_zhif">
+			<div class="ub ub-ac ub-pc ub-f1 btns lijizhif">
+				立即支付
+			</div>
+		</div>
+		<div class="ub pay_btn_chongzhi uhide">
+			<div class="ub ub-ac ub-pc ub-f1 btns lijichongzhi">
+				立即充值
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Fpaymethod = '';
+		var Ftotalmoney = 0;
+		var FlastPrice = 0;
+		var Forderid = appcan.locStorage.getVal("Forderid");
+		appcan.ready(function() {
+			appcan.window.subscribe('paysuccess', function(msg) {
+				getOrderInfoForPay();
+			});
+			appcan.window.subscribe('Fpaymethod', function(msg) {
+				if(Fpaymethod == "0") {
+					if(FlastPrice > Ftotalmoney) {
+						$(".pay_btn_zhif").addClass("uhide");
+						$(".pay_btn_chongzhi").removeClass("uhide");
+						appcan.window.openToast('您的可用余额不足，请充值！', '1500');
+					}
+				} else if(Fpaymethod == "1") {
+					if(FlastPrice > Ftotalmoney) {
+						$(".pay_btn_zhif").removeClass("uhide");
+						$(".pay_btn_chongzhi").addClass("uhide");
+					}
+				}
+			});
+			getOrderInfoForPay();
+		});
+
+		//跳转充值界面
+		appcan.button(".pay_btn_chongzhi", "ani-act", function(a, b) {
+				if(Fpaymethod == "") {
+					appcan.window.openToast('请选择支付方式！', '1500');
+					return;
+				}
+				appcan.window.open("pay", "../pay/pay.html");
+			})
+			//立即支付
+		appcan.button(".pay_btn_zhif", "ani-act", function(a, b) {
+				appcan.window.alert({
+					title: "提示",
+					content: "确定支付？",
+					buttons: ['取消', '确定'],
+					callback: function(err, data, dataType, optId) {
+						if(data == 1) {
+							if(Fpaymethod == "") {
+								appcan.window.openToast('请选择支付方式！', '1500');
+								return;
+							}
+							var furl = '/app/updateOrderPay';
+							var parm = {
+								Forderid: Forderid,
+								Fpaymethod: Fpaymethod,
+								Fuserid: Fsuper.getuserid()
+							};
+							appcan.ajax({
+								url: Serverurl + furl,
+								type: "POST",
+								dataType: "json",
+								data: parm,
+								success: function(result) {
+									var code = result.code;
+									var msg = result.msg;
+									var debug = result.debug;
+									if(code < 10000) {
+										if(code == 0) { //返回成功
+											gotoorder();
+										}
+									} else {
+										if(Fsuperdbg) {
+											alert(result.code);
+											alert(result.msg);
+											alert(result.debug);
+										}
+									}
+									if(callback != undefined) {
+										callback();
+									}
+								}
+							});
+						}
+					}
+				});
+			})
+			//订单跳转
+		function gotoorder() {
+			if(Fpaymethod == "0") {
+				appcan.locStorage.setVal("ordersindex", 0);
+				appcan.window.publish('quicksess', '');
+				appcan.window.publish('movetosuccess', ''); //发送到orders.html和orders-content.html
+				appcan.window.open("orders", "../orders/orders.html");
+
+			} else if(Fpaymethod == "1") {
+				appcan.locStorage.setVal("billindex", 1);
+				appcan.window.open("bills", "../bills/bills.html");
+				appcan.window.publish('quicksess', '');
+			}
+		}
+		//支付方式单选
+		$(".paybtns").click(function() {
+
+			$(".checkImg img").addClass("uhide");
+			$(this).find(".checkImg img").removeClass("uhide");
+			Fpaymethod = $(this).find(".checkImg img").attr("Fpaymethod");
+			appcan.window.publish('Fpaymethod', Fpaymethod);
+		});
+
+		function getOrderInfoForPay() {
+			var furl = '/app/getOrderInfoForPay';
+			var parm = {
+				Forderid: Forderid,
+			};
+			Fsuper.getresult(furl, parm, setresult);
+		}
+
+		function setresult(row, code) {
+			var data = row[0];
+			Ftotalmoney = data.Ftotalmoney;
+			FlastPrice = data.FlastPrice;
+			$(".Ftotalmoney").text(data.Ftotalmoney.toFixed(2));
+			$(".Fname").text(data.Fname);
+			$(".Fphone").text(data.Fphone);
+			$(".ForderNum").text(data.ForderNum);
+			$(".FlastPrice").text(data.FlastPrice.toFixed(2));
+		}
+	</script>
+
+</html>

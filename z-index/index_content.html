@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="index_content/css/main.css">
+		<link rel="stylesheet" href="index_content/css/idangerous.swiper.css" />
+
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<!-- 头部搜索开始-->
+		<div class="ub ub-ac ub-pc ub-f1 search ">
+			<div class="ub ub-ac ub-f1 search_input uhide">
+				<input class="ub ub-f1 search_text" type="text" />
+			</div>
+			<div class="ub ub-ac ub-pc search_icon ">
+				<img class="ub-img" src="../css/images/searchone.png" />
+				<span class="ub ub-ac">搜索</span>
+			</div>
+		</div>
+		<!-- 头部搜索结束-->
+		<!-- 头部幻灯片开始-->
+		<div class="flash">
+			<div class="swiper-container">
+				<div class="ub ub-ac swiper-wrapper">
+					<div class=" swiper-slide">
+						<img src="../css/images/slide1.jpg">
+					</div>
+					<div class="swiper-slide">
+						<img src="../css/images/slide1.jpg">
+					</div>
+					<div class="swiper-slide">
+						<img src="../css/images/slide1.jpg">
+					</div>
+				</div>
+			</div>
+			<div class="pagination"></div>
+		</div>
+		<!-- 中间按钮-->
+		<div class="ub center_nav">
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv">
+				<div class="ub">
+					<img src="../css/images/index_cnav1.gif" />
+				</div>
+				<div class="ub">快速下单</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv">
+				<div class="ub">
+					<img src="../css/images/index_cnav2.gif" />
+				</div>
+				<div class="ub">扫码验收</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv">
+				<div class="ub">
+					<img src="../css/images/index_cnav3.gif" />
+				</div>
+				<div class="ub">账单查询</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv">
+				<div class="ub">
+					<img src="../css/images/index_cnav4.gif" />
+				</div>
+				<div class="ub">配送查看</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv">
+				<div class="ub">
+					<img src="../css/images/index_cnav5.gif" />
+				</div>
+				<div class="ub">信息公告</div>
+			</div>
+		</div>
+		<!-- 今日推荐-->
+		<div class="ub ub-ac  pref">
+			<div class="ub ub-ac">|&nbsp;今日推荐</div>
+		</div>
+		<!-- 今日推荐列表-->
+		<div class="ub wrap_pref">
+			<div class="ub ub-f1 ub-fh ub-ver pref_listLeft ">
+				<div class="ub ub-ver pref_item " >
+					<img class="ub-img item_img"  src="../css/images/product1.jpg" />
+
+					<div class="ub">
+						<div class="ub  ub-ver ub-f1">
+							<div class="ub pref_itemTit">
+								原生态新鲜芦笋
+							</div>
+							<div class="ub ub-f1 pref_itemDeti">
+								<span>￥</span>
+								<span>48.00</span>
+								<span>/kg</span>
+							</div>
+						</div>
+						<div class="ub ub-ac ub-pc ub-pe pref_car">
+							<img class="ub ub-img" src="../css/images/shopCar.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ub ub-f1 pref_listRight ub-ver ub-fh ub-ver">
+				<div class="ub ub-ver  ub-f1  pref_item ">
+					<img class="ub ub-img " src="../css/images/product1.jpg" />
+
+					<div class="ub">
+						<div class="ub ub-ver ub-f1">
+							<div class="ub pref_itemTit">
+								原生态新鲜芦笋
+							</div>
+							<div class="ub ub-f1 pref_itemDeti">
+								<span>￥</span>
+								<span>48.00</span>
+								<span>/kg</span>
+							</div>
+						</div>
+						<div class="ub ub-ac ub-pc ub-pe pref_car">
+							<img class="ub ub-img" src="../css/images/shopCar.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script type="text/javascript" src="../js/idangerous.swiper.min.js"></script>
+		<script src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			//appcan.initBounce();
+		});
+		//头部搜索框
+		$(".search").click(function() {
+			$(".search_input").removeClass("uhide");
+			$(".search_icon").addClass("uhide");
+			$("input").focus();
+		});
+
+		var mySwiper = new Swiper('.swiper-container', {
+			pagination: '.pagination',
+			loop: true,
+			grabCursor: true,
+			paginationClickable: true,
+			autoplay: 5000,
+		});
+	</script>
+
+</html>

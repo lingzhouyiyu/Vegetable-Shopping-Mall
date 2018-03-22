@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="Client-content/css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="mine ub ub-ac ub-pc ub-ver">
+			<div class="tou-bac ub ub-ac ub-pc" >
+				<img id="userimg"  class="tou-pic" src="../css/images/user.png" />
+			</div>
+			<div class="edit ub Fname"></div>
+		</div>
+		<div class="Time">
+			
+			<div class="money ub ub-ac">
+				<div class="balance ub ub-f1">
+					<div class=" ub ub-f1">余额&nbsp;<span class="num Ftotalmoney">0.00</span></div>
+					<div class="text ub ub-ac ub-pc  open-pay">充值</div>
+				</div>
+				<div class="Recharge ub ub-f1 gotopay uhide">
+					<div class="ub ub-f1">欠款&nbsp;<span class="num Nopaymoney">0.00</span></div>
+					<div class="text ub ub-ac ub-pc">结算</div>
+				</div>
+			</div>
+		</div>
+		<div class="order">
+			<div class="order-detail ub ub-ac">
+				<div class="text-left ub ub-f1">我的订单</div>
+				<div class=" ub ub-pe">
+					<div class="ub ub-ac text1">查看全部订单</div>
+					<img class="pic" src="../css/images/go.png" />
+				</div>
+			</div>
+			<div class="order-pic ub ub-ac">
+				<div class="pic1 ub ub-ver ub-f1 ub-fh  ub-ac ub-pc btn1">
+					<img src="../css/images/order3.png" />
+					<div class="text1">
+						<span>待发货</span>
+						<i class="redStatus uhide daifahuo"></i>
+					</div>
+				</div>
+				<div class="pic1 ub ub-ver ub-f1 ub-fh  ub-ac ub-pc btn2">
+					<img src="../css/images/order4.png" />
+					<div class="text1">
+						<span>待收货</span>
+						<i class="redStatus uhide daishouhuo"></i>
+					</div>
+				</div>
+				<div class="pic1 ub ub-ver ub-f1 ub-fh  ub-ac ub-pc btn3">
+					<img src="../css/images/order2.png" />
+					<div class="text1">
+						<span>待付款</span>
+						<i class="redStatus uhide daifukuan"></i>
+					</div>
+				</div>
+				<div class="pic1 ub ub-ver ub-f1 ub-fh ub-ac ub-pc btn4">
+					<img src="../css/images/order1.png" />
+					<div class="text1">
+						<span>已完成</span>
+						<i class="redStatus overcount uhide"></i>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="subcol ub ub-ac bills">
+				<div class="text-left ub-f1 ">对账单  </div>
+				<div class=" ub ub-ac ub-pe">
+					<div class="text1">查看全部账单</div>
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac recharge">
+				<div class="text-left ub-f1">充值/消费记录</div>
+				<div class=" ub ub-pe">
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac open-manageaddress">
+				<div class="text-left ub-f1">负责人管理</div>
+				<div class=" ub ub-pe">
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac open-reback">
+				<div class="text-left ub-f1">意见建议</div>
+				<div class=" ub ub-pe">
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac call">
+				<div class="text-left ub-f1">客服电话</div>
+				<div class=" ub ub-pe">
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac open-managepwd">
+				<div class="text-left ub-f1">密码管理</div>
+				<div class=" ub ub-pe">
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac goabout">
+				<div class="text-left ub-f1">关于我们</div>
+				<div class=" ub ub-pe">
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac open-xieyi">
+				<div class="text-left ub-f1">用户协议</div>
+				<div class=" ub ub-pe">
+					<img class="pic" src="../Mine-Supplier/supply-content/css/myImg/go.png" />
+				</div>
+			</div>
+		</div>
+		<div class="exit loginexit ub ub-ac ub-pc">退出帐号</div>
+		<div class="pop uhide">
+			<div class="poptel ub ub-ver">
+				<div class="poprow1 ub ub-ac ub-pc">087167362612</div>
+				<div class="poprow2 ub ub-ac ub-pc quxiao">取消</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			//uexUploaderMgr.cbCreateUploader = cbCreateUploader;
+            //uexUploaderMgr.onStatus = onStatus;
+			appcan.window.subscribe('gettip', function(msg) {
+				gettip();
+			});
+			gettip();
+			appcan.window.subscribe('userinfo', function(msg) {
+				getuserinfo();
+				getHasDay();
+				getNoPayMoney();
+			});
+			appcan.window.subscribe('click4', function(msg) {
+				getuserinfo();
+				getHasDay();
+				getNoPayMoney();
+			});
+			getuserinfo();
+			getHasDay();
+			getNoPayMoney();
+			$(".recharge div").click(function() {
+				appcan.window.open("recharge", "../recharge/recharge.html");
+			});
+			/*充值*/
+			appcan.button(".open-pay", "ani-act", function(a, b) {
+				appcan.window.open("pay", "../pay/pay.html");
+			})
+			
+			/*结算*/
+			appcan.button(".gotopay", "ani-act", function(a, b) {
+				appcan.locStorage.setVal("billindex", 1);
+				appcan.window.open("bills", "../bills/bills.html");
+				appcan.window.publish('quicksess', '');
+			})
+			/*全部订单*/
+			appcan.button(".order-detail", "ani-act", function(a, b) {
+				appcan.locStorage.setVal("ordersindex", 0);
+				appcan.window.open("orders", "../orders/orders.html");
+			})
+			/*我的账单*/
+			appcan.button(".bills", "ani-act", function(a, b) {
+				appcan.window.open("bills", "../bills/bills.html");
+			})
+		
+			/*客服电话*/
+			appcan.button(".call", "ani-act", function(a, b) {
+				$(".pop").removeClass("uhide");
+			})
+			
+			appcan.button(".quxiao", "ani-act", function(a, b) {
+				$(".pop").addClass("uhide");
+			})
+			/*收货地址管理*/
+			appcan.button(".open-manageaddress", "ani-act", function(a, b) {
+				appcan.window.open("manage-address", "../manage-address/manage-address.html")
+			})
+			
+			/*意见建议*/
+			appcan.button(".open-reback", "ani-act", function(a, b) {
+				appcan.window.open("reback", "../reback/reback.html");
+			})
+			
+			/*密码管理*/
+			appcan.button(".open-managepwd", "ani-act", function(a, b) {
+				appcan.window.open("manage-pwd", "../manage-pwd/manage-pwd.html");
+			})
+			/*关于我们*/
+			appcan.button(".goabout", "ani-act", function(a, b) {
+				appcan.window.open("about", "../about/about.html");
+			})
+			
+			/*用户协议*/
+			appcan.button(".open-xieyi", "ani-act", function(a, b) {
+				appcan.window.open("xieyi", "../xieyi/xieyi.html");
+			})
+		});
+		//		// 现在的时间点（在变）
+		//		// 未来的时间点（不变）
+		//		var iNow = new Date();
+		//		// var iNew = new Date( 2017, 10, 27,  0,0,0  );
+		//
+		//		var iNew = new Date('May  29,2017');
+		//
+		//		var t = Math.floor((iNew - iNow) / 1000);
+		//
+		//		var str = Math.floor(t / 86400) + '天';
+		//
+		//		document.getElementById('tday').innerHTML = str;
+
+		//今日订单点击事件
+		appcan.button(".btn1", "ani-act", function(a, b) {
+
+			upoverlook();
+
+			appcan.locStorage.setVal("ordersindex", 0);
+			appcan.window.open({
+				name: "orders",
+				dataType: 0,
+				aniId: 9,
+				data: "../orders/orders.html"
+			});
+		})
+
+		function upoverlook() {
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			var url = '/app/upoverlook';
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+
+				}
+			});
+		}
+		//待付款点击事件
+		appcan.button(".btn3", "ani-act", function(a, b) {
+
+			daifukuanlook();
+			appcan.locStorage.setVal("ordersindex", 2);
+			appcan.window.open({
+				name: "orders",
+				dataType: 0,
+				aniId: 9,
+				data: "../orders/orders.html"
+			});
+		})
+		//已完成点击事件
+		appcan.button(".btn4", "ani-act", function(a, b) {
+
+			daifukuanlook();
+			appcan.locStorage.setVal("ordersindex", 3);
+			appcan.window.open({
+				name: "orders",
+				dataType: 0,
+				aniId: 9,
+				data: "../orders/orders.html"
+			});
+		})
+
+		function daifukuanlook() {
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			var url = '/app/daifukuanlook';
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+
+				}
+			});
+		}
+		//待发货点击事件
+		appcan.button(".btn1", "ani-act", function(a, b) {
+			fahuuolook();
+			appcan.locStorage.setVal("ordersindex", 0);
+			appcan.window.open({
+				name: "orders",
+				dataType: 0,
+				aniId: 9,
+				data: "../orders/orders.html"
+			});
+		})
+
+		function fahuuolook() {
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			var url = '/app/fahuuolook';
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+
+				}
+			});
+		}
+		//待收货点击事件
+		appcan.button(".btn2", "ani-act", function(a, b) {
+			shouhuolook();
+			appcan.locStorage.setVal("ordersindex", 1);
+			appcan.window.open({
+				name: "orders",
+				dataType: 0,
+				aniId: 9,
+				data: "../orders/orders.html"
+			});
+		})
+
+		function shouhuolook() {
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			var url = '/app/shouhuolook';
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+
+				}
+			});
+		}
+		//退出登录
+		appcan.button(".loginexit", "ani-act", function(a, b) {
+				appcan.locStorage.remove("userinfo");
+				//appcan.locStorage.setVal("orderindex",0);
+				appcan.window.open("login", "../login/login.html");
+			})
+			//查询个人中心用户信息
+		function getuserinfo() {
+			var furl = '/app/getMoney';
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getresult(furl, parm, setuser);
+		}
+
+		function setuser(row, code) {
+			var data = row[0];
+			$(".Fname").text(data.Fname);
+			$(".Ftotalmoney").text(data.Ftotalmoney.toFixed(2));
+		}
+
+		function getNoPayMoney() {
+			var furl = '/app/getNoPayMoney';
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getresult(furl, parm, setNopay);
+		}
+
+		function setNopay(row, code) {
+			var data = row[0];
+			$(".Nopaymoney").text(data.Nopaymoney.toFixed(2));
+		}
+
+		function getHasDay() {
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			var url = '/app/getHasDay';
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					if(msg == "0") {
+						$(".hasguaz").removeClass("uhide");
+						$("#tday").text(code);
+					} else if(msg == "1") {
+						$(".hasguaz").addClass("uhide");
+					}
+				}
+			});
+		}
+		//查询显示
+		function gettip() {
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			var url = '/app/gettip';
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var data = result;
+					var daifahuo = Number(data.fastService);
+					var overcount = Number(data.overmoney);
+					var daifukuan = Number(data.servicemoney);
+					var daishouhuo = Number(data.ownermoney);
+					if(daifahuo > 0) {
+						$(".daifahuo").removeClass("uhide");
+
+					}
+					if(overcount > 0) {
+
+						$(".overcount").removeClass("uhide");
+
+					}
+					if(daifukuan > 0) {
+						$
+						$(".daifukuan").removeClass("uhide");
+
+					}
+					if(daishouhuo > 0) {
+
+						$(".daishouhuo").removeClass("uhide");
+					}
+				}
+			});
+		}
+
+		function getphone(id) {
+			curid = id;
+			appcan.window.open({
+				name: 'setface',
+				dataType: 0,
+				data: '../Mine-Client/setface.html',
+				aniId: 12,
+				type: 256
+			});
+		}
+		 function cbCreateUploader(id, dataType, data) {
+            if (data == 0) {
+                uexUploaderMgr.uploadFile(1, curpath, "inname", 0, 800);
+            } else {
+                //appcan.window.openToast('图片上传成功!', '500');
+            }
+        }
+
+        function onStatus(id, fileSize, percent, serverPath, status) {
+            switch (status) {
+            case 0:
+                // appcan.window.openToast("", 2000, 5);
+                break;
+            case 1:
+                serverfaceurl = serverPath;
+                $("#"+curid)[0].src = serverPath + "?temp=" + Math.random();
+                $("#" + curid).addClass("updimg");
+                uexUploaderMgr.closeUploader(1);
+                break;
+            case 2:
+                uexUploaderMgr.closeUploader(1);
+                break;
+            }
+        }
+	</script>
+
+</html>

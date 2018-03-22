@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="quickPay_content/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg mybg" ontouchstart>
+		<div class="ub ub-ac ub-pc pay_top">
+
+		</div>
+		<div class="ub ub-ver pay_list">
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					订单笔数:
+				</div>
+				<div class="ub ForderNumTotal">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					配送方式
+				</div>
+				<div class="ub">
+					商家配送
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					收货人名
+				</div>
+				<div class="ub Fname">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					联系方式
+				</div>
+				<div class="ub Fphone">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					应付金额
+				</div>
+				<div class="ub redcolor">
+					<span>￥</span> <span class="FlastPrice"></span>
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_num">
+			<div class="ub ub-f1 ub-ac pay_item warColor">
+				<div class="ub ub-ac pay_left ">
+					可勾选余额支付
+				</div>
+				<div class="ub Ftotalmoney">
+
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-ver pay_way">
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac ub-f1 ">
+					支付方式
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item paychoose uhide">
+				<div class="ub ub-f1 payMain">
+					<div class="ub ub-ac ub-pc pay_img">
+						<img class="ub-img" src="../css/images/pay_wx.png" />
+					</div>
+					<div class="ub ub-ver pay_war">
+						<div class="ub ub-ac">
+							微信支付
+						</div>
+						<div class="ub ub-ac umar-t warColor">
+							推荐安装5.0以上版本
+						</div>
+					</div>
+				</div>
+				<div class="radiobox umar-r">
+					<input type="radio" name="radio" value="2" class="uabs ub-con" rel="0">
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item paychoose">
+				<div class="ub ub-f1 payMain">
+					<div class="ub ub-ac ub-pc pay_img">
+						<img class="ub-img" src="../css/images/pay_yl.png" />
+					</div>
+					<div class="ub ub-ver pay_war">
+						<div class="ub ub-ac">
+							银联支付
+						</div>
+						<div class="ub ub-ac umar-t warColor">
+							安全极速支付，无需开通网银
+						</div>
+					</div>
+				</div>
+				<div class="radiobox umar-r">
+					<input type="radio" name="radio" value="1" class="uabs ub-con" rel="0">
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item paychoose">
+				<div class="ub ub-f1 payMain">
+					<div class="ub ub-ac ub-pc pay_img">
+						<img class="ub-img" src="../css/images/pay_zfb.png" />
+					</div>
+					<div class="ub ub-ver pay_war">
+						<div class="ub ub-ac">
+							支付宝支付
+						</div>
+						<div class="ub ub-ac umar-t warColor">
+							推荐有支付宝的用户使用
+
+						</div>
+					</div>
+				</div>
+				<div class="radiobox umar-r">
+					<input type="radio" name="radio" value="2" class="uabs ub-con" rel="1">
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item paychoose">
+				<div class="ub ub-f1 payMain">
+					<div class="ub ub-ac ub-pc pay_img">
+						<img class="ub-img" src="../css/images/1.png" />
+					</div>
+					<div class="ub ub-ver pay_war">
+						<div class="ub ub-ac">
+							余额支付
+						</div>
+						<div class="ub ub-ac umar-t warColor">
+							余额不足可充值
+
+						</div>
+					</div>
+				</div>
+				<div class="radiobox umar-r">
+					<input type="radio" name="radio" value="0" class="uabs ub-con" rel="1">
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_btn_zhif">
+			<div class="ub ub-ac ub-pc ub-f1 btns lijizhif">
+				立即支付
+			</div>
+		</div>
+		<div class="ub pay_btn_chongzhi uhide">
+			<div class="ub ub-ac ub-pc ub-f1 btns lijichongzhi">
+				立即充值
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	<script src="../js/jquery-2.1.4.min.js"></script>
+	<script src="../js/jquery.md5.js"></script>
+	<script src="../js/des.js"></script>
+	</body>
+	<script>
+		var Fpaymethod = undefined;
+		var Ftotalmoney = Number(Fsuper.getuserinfo().Ftotalmoney);
+		var FlastPrice = 0;
+		var ForderNum = "";
+		var values =0;
+		appcan.ready(function() {
+			$(".Ftotalmoney").text(Fsuper.getuserinfo().Ftotalmoney);
+			$(".Fphone").text(Fsuper.getuserinfo().Fphone);
+			$(".Fname").text(Fsuper.getuserinfo().Fname);
+			ForderNum = appcan.locStorage.getVal("payForderids");
+		    values = appcan.locStorage.getVal("values");
+			$(".FlastPrice").text(values);
+			if(ForderNum != "") {
+				var orders = ForderNum.split(",");
+				$(".ForderNumTotal").text(orders.length);
+			}
+			uexAliPay.onStatus = alipaySuccess;
+			uexUnionPay.cbStartPay = unionpayover;//银联
+			//getOrderInfoForPay();
+		});
+		var msg = "";
+		//立即支付
+		appcan.button(".pay_btn_zhif", "ani-act", function(a, b) {
+			Fpaymethod = $("input[type='radio']:checked").val();
+			if(Fpaymethod == undefined) {
+				appcan.window.openToast('请选择支付方式！', '1500');
+				return;
+			}
+			appcan.window.alert({
+				title: "提示",
+				content: "确定支付？",
+				buttons: ['取消', '确定'],
+				callback: function(err, data, dataType, optId) {
+					if(data == 1) {
+						
+						if(Fpaymethod == "") {
+							appcan.window.openToast('请选择支付方式！', '1500');
+							return;
+						}
+						
+						var Fje = "0.01";
+						if(Fpaymethod == "0") {
+							
+							FyeZhiFu();
+						} else {
+							var furl = '/app/updateOrderPayNum';
+							var parm = {
+								Forderid: ForderNum,
+								Fuserid: Fsuper.getuserid()
+							};
+							appcan.ajax({
+								url: Serverurl + furl,
+								type: "POST",
+								dataType: "json",
+								data: parm,
+								success: function(result) {
+									var code = result.code;
+								    msg = result.msg;
+									var debug = result.debug;
+									if(code < 10000) {
+										if(code == 0) { //返回成功
+											if(msg != "") {
+												if(Fpaymethod == "1") { //银联支付
+													if(Fje != "" && msg != "") {
+														UnionPay(Fje, msg);
+													}
+												}
+												if(Fpaymethod == "2") { //支付宝支付
+
+													if(Fje != "" && msg != "") {
+														alipay(Fje, msg);
+													}
+												}
+											}
+										}
+									} else {
+										if(Fsuperdbg) {
+											alert(result.code);
+											alert(result.msg);
+											alert(result.debug);
+										}
+									}
+								}
+							});
+						}
+					}
+				}
+			});
+		})
+		var partner = "2088421707819665";
+		var seller = "3434502507@qq.com";
+		var rsaPrivate = "MIIBVgIBADANBgkqhkiG9w0BAQEFAASCAUAwggE8AgEAAkEA8PcdHPfoTJaBADIucejSUb29DgV3S8dvdu6GBOF+r7ZxQkh3CZLS8RnNTmP4gUhwVKff2MMbhdQgpfE81zLIvQIDAQABAkEAnYJ6dlAaec27fzxOHcl5iVMEfGDYTSGNW+mokxIvNH1BpCumIsghzb+I8Xxlr+lapLdx8jNgROiHMBcv8ZNXpQIhAPzY9onys114a0C6VfmTy1loQfVgw4XYRnL8brjgUrKfAiEA8/g5nta9ArAQaWX3fuMSjG0o1SerPRDu6TtZONljgyMCIG+2/NbeYNl/hwPGUI5A+qu6IMplwn20nQvY9KLCmkdJAiEAhdEyccBhXhcKeXVXgn60jtfVHM2sbEtccAuAjeEXZzcCIQD7gIppdLycW8WRaQAcVpndxmMCUOzxRDX71JdS3iObOw==";
+		var rsaPublic = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAPD3HRz36EyWgQAyLnHo0lG9vQ4Fd0vHb3buhgThfq+2cUJIdwmS0vEZzU5j+IFIcFSn39jDG4XUIKXxPNcyyL0CAwEAAQ==";
+
+		function setInfo() {
+			var notifyUrl = Serverurl + "/Pay/ZfbCallback";
+			uexAliPay.setPayInfo(partner, seller, rsaPrivate, rsaPublic, notifyUrl);
+
+		}
+		//支付宝支付
+		function alipay(fee, num) {
+			setInfo();
+			var subject = num;
+			var body = "菜街子支付订单";
+			uexAliPay.pay(num, subject, body, fee);
+		}
+
+		function alipaySuccess(status, des) {
+			if(status == 0) { //支付成功
+				appcan.locStorage.setVal("ordersindex", 2);
+				appcan.window.publish('quicksess', '');
+				appcan.window.publish('movetosuccess', ''); //发送到orders.html和orders-content.html
+				appcan.window.open("orders", "../orders/orders.html");
+			}
+		}
+		//订单跳转
+		function gotoorder() {
+			appcan.locStorage.setVal("ordersindex", 2);
+			appcan.window.publish('quicksess', '');
+			appcan.window.publish('movetosuccess', ''); //发送到orders.html和orders-content.html
+			appcan.window.open("orders", "../orders/orders.html");
+		}
+
+//		function getOrderInfoForPay() {
+//			var furl = '/app/getOrderInfoForPay';
+//			var parm = {
+//				Forderid: Forderid,
+//			};
+//			Fsuper.getresult(furl, parm, setresult);
+//		}
+//
+//		function setresult(row, code) {
+//			var data = row[0];
+//			Ftotalmoney = data.Ftotalmoney;
+//			FlastPrice = data.FlastPrice;
+//			$(".Ftotalmoney").text(data.Ftotalmoney.toFixed(2));
+//			$(".Fname").text(data.Fname);
+//			$(".Fphone").text(data.Fphone);
+//			//$(".ForderNum").text(data.ForderNum);
+//			//$(".FlastPrice").text(data.FlastPrice.toFixed(2));
+//		}
+		//银联
+		function UnionPay(fee, num) {
+			var parm = {
+				txnAmt: fee,
+				ForderNum: num
+			}
+			Safe.post(Serverurl + "/pay/orderunionpay", parm, function(result) {
+				var tx = result.data;
+				//银联订单号
+				var code = result.code;
+				if(code == 0) {
+					var params = {
+						orderInfo: tx,
+						mode: "00"
+					};
+					var data_union = JSON.stringify(params);
+					uexUnionPay.startPay(data_union);
+				}
+			});
+		}
+		//银联支付
+		function unionpayover(data) {
+			var json = JSON.parse(data);
+			if(json.payResult == 0) {
+				appcan.locStorage.setVal("ordersindex", 2);
+				appcan.window.publish('quicksess', '');
+				appcan.window.publish('movetosuccess', ''); //发送到orders.html和orders-content.html
+				appcan.window.open("orders", "../orders/orders.html");
+			}
+		}
+
+		function FyeZhiFu() { //余额支付
+			if(values > Ftotalmoney) {
+				appcan.window.openToast('您的可用余额不足，请充值！', '1500');
+				return;
+			}
+			var furl = '/app/updateOrderPaynew';
+			var parm = {
+				Forderid: ForderNum,
+				Fpaymethod: Fpaymethod,
+				Fuserid: Fsuper.getuserid()
+			};
+			appcan.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							gotoorder();
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+					if(callback != undefined) {
+						callback();
+					}
+				}
+			});
+		}
+	</script>
+
+</html>

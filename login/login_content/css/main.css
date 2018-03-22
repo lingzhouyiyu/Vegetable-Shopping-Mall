@@ -1,0 +1,115 @@
+
+/*.c-wh-pLG{
+	background-color:#f2f2f2;
+}
+.uinn-pLb1{
+	padding-bottom:0.7em;
+}
+.userImg{
+	background-image:url('myImg/userImg.png');
+}
+.pwdImg{
+	background-image:url('myImg/pwdImg.png');
+}
+.b-gra3{
+	border-color:#d8d8d8;
+}
+.uinn-a4{
+	padding:0.9em 0.625em 0.8125em 0.625em;
+}
+.t-gra2 {
+	color: #d8d8d8;
+}
+.t-gra3 {
+	color: #484848;
+}
+.mar-ar2 {
+margin-right: 0.375em;
+}
+.uinn-a5 {
+padding: 0.8125em 0.625em 0.9em 0.625em;
+}
+.uinn-a6 {
+padding: 1em 0.65em 0 0.65em;
+}
+.uinn-a1{
+    padding:0.625em;
+}
+.c-wh{
+    background-color: white;
+}
+*/
+
+.logo{
+	height: 15em;
+	width: 100%;
+}
+.logo-pic{
+	height: 12em;
+	width: 12em;
+	margin-top: 2em;
+}
+.login{
+	color: #b4b4b4;
+margin-left: 1.5em;
+	margin-right: 1.5em;
+}
+.accounts{
+	border: none;
+	border-bottom: 1px solid #dcdcdc;
+	height: 2em;
+	
+}
+.pic{
+	height: 1.4em;
+	width: 1.4em;
+}
+.input{
+	border: hidden;
+	margin-left: 0.5em;
+	font-size: 0.9em;
+	height: 1.5em;
+	outline: 0 none;
+}
+.accounts-tail{
+	color: #f2af27;
+}
+.pwd{
+	border: none;
+	border-bottom: 1px solid #dcdcdc;
+	margin-top: 1em;
+	height: 2em;
+}
+.change{
+	height: 2.8em;
+	border: none;
+	border-bottom: 1px solid #dcdcdc;
+	margin-left: ;
+}
+.change-act{
+	color:#f2af27 ;
+}
+.loginbtn{
+	background-color: #f2af27;
+	height: 2.5em;
+	margin-top: 2em;
+	border-radius: 0.5em;
+	color: #ffffff;
+}
+.Agreement{
+	height: 3em;
+	
+}
+.checked{
+	border-color:#f2af27 ;
+	height: 1.8em;
+	width: 1.8em;
+}
+.text1{
+	margin-left: 0.3em;
+}
+.text2{
+	margin-left: 0.3em;
+	color: #f2af27;
+	text-decoration: underline;
+}

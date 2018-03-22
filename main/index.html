@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+    </head>
+
+    <body class="um-vp " ontouchstart>
+        <div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh bc-text-head ub bc-head">
+                <div class="nav-btn" id="nav-left"></div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0"><img src="../css/images/top_logo.png" /></h1>
+                <div class="nav-btn nav-bt" id="nav-right"></div>
+            </div>
+            <!--header结束-->
+            <!--content开始-->
+            <div id="content" class="ub-f1 tx-l">
+
+            </div>
+            <!--content结束-->
+            <!--footer开始-->
+            <div id="footer" class="ub bc-text-head" style="border-top: 1px solid #f2af27; background-color: #FFFFFF; "></div>
+            <script src="../js/appcan.js"></script>
+            <script src="../js/appcan.control.js"></script>
+            <script type="text/javascript" src="../js/yfkj.tab.js" ></script>
+            <script type="text/javascript" src="../js/yfkj.js" ></script>
+    </body>
+    <script>
+        var orderindex = appcan.locStorage.getVal("orderindex");
+        var tabset = {
+            selector : "#footer",
+            hasIcon : true,
+            hasAnim : false,
+            hasLabel : true,
+            hasBadge : true,
+            index : 0,
+            ispico : true,
+            data : [{
+                label : "首页",
+                icon : "fa-home",
+                pico : "../css/images/home.png",
+                pactivico : "../css/images/home_red.png"
+            }, {
+                label : "全部分类",
+                icon : "fa-shopping-cart",
+                pico : "../css/images/all.png",
+                pactivico : "../css/images/all_red.png"
+            }, {
+                label : "购物车",
+                icon : "fa-search",
+                pico : "../css/images/shop.png",
+                pactivico : "../css/images/shop_red.png"
+            }, {
+                label : "我的",
+                icon : "fa-cube",
+                pico : "../css/images/person.png",
+                badge : "1",
+                pactivico : "../css/images/person_red.png"
+            }]
+        };
+        tabset.data[2].badge = "";
+        var tabview = appcan.tab(tabset);
+        tabview.on("click", function(obj, index) {
+            appcan.window.selectMultiPopover("content", index);
+        })
+        appcan.ready(function() {
+ var top = $('#header').offset().height;
+                appcan.frame.open({
+                    id : "content",
+                    url : [{
+                        "inPageName" : "index",
+                        "inUrl" : "index_content.html",
+                    }, {
+                        "inPageName" : "allCate",
+                        "inUrl" : "../allCate/allCate_content.html",
+                    }, {
+                        "inPageName" : "shopCar",
+                        "inUrl" : "../shopCar/shopCar_content.html",
+                    }, {
+                        "inPageName" : "personal",
+                        "inUrl" : "../personal/personal_content.html",
+                    }],
+                    top : top,
+                    left : 0,
+                    index : 0,
+                    change : function(index, res) {
+                        tabview.moveTo(res.multiPopSelectedIndex);
+                    }
+                });
+                window.onorientationchange = window.onresize = function() {
+                    appcan.frame.resize("content", 0, top);
+                }
+        });
+
+    </script>
+
+    </script>
+
+</html>

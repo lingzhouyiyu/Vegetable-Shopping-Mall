@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="cateDetial_content/css/main.css">
+	</head>
+	<div id="temp" class="open-product ub ub-ver ub-f1 ub-fv  temp uhide">
+		<div class="ub ub-ver item">
+			<img id="imges" class="ub-img" src="" />
+			<div class="ub">
+				<div class="ub  ub-ver ub-f1">
+					<div id="Fgoodsname" class="ub pref_itemTit">
+
+					</div>
+					<div class="ub">
+						<div class="ub ub-ver ub-f1 pref_itemDeti">
+							<div>
+								<span>￥</span>
+								<span id="Fgoodsprice"></span>
+							</div>
+							<div>
+								规格:
+								<span id="Ftypename"></span>
+							</div>
+						</div>
+						<div class="ub ub-ac ub-pc  pref_car">
+							<img class="ub ub-img" src="../css/images/shopCar.png" />
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub list_main">
+			<div class="open-product ub ub-ver ub-f1 ub-fv ub-con list0 ">
+
+			</div>
+			<div class="open-product ub ub-ver ub-f1 ub-con ub-fv list1 ">
+
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script src="../js/yfkj.js"></script>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+	</body>
+	<script>
+		var Fsuperdbg = true;
+		var Fstart = 0;
+		var pageSize = 10;
+		var user = Fsuper.getuserinfo();
+		var catid = appcan.locStorage.getVal("typetogoods");
+		var i = 0;
+		appcan.ready(function() {
+			getGoodsByCatid();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					Fstart = 0;
+					var list0 = $(".list0");
+					var list1 = $(".list1");
+					list0.empty();
+					list1.empty();
+					getGoodsByCatid();
+				} else if(type == 1) {
+					getGoodsByCatid();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+
+		})
+
+		function getGoodsByCatid() {
+			var furl = "/app/getGoodsByCatid";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				async: false,
+				jsonp: 'callback',
+				dataType: "jsonp",
+				data: {
+					_parentId: catid,
+					Fbmid: user.FBmid,
+					pageSize: pageSize,
+					Fstart: Fstart
+				},
+				success: function(result) {
+					var rows = result.data.rows;
+					var code = result.code;
+					var msg = result.msg;
+					var end = result.data.end;
+					var debug = result.debug;
+
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								var index = i % 2;
+								additem(row, index, end);
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+
+		}
+
+		function additem(row, index, end) {
+			var strs = new Array();
+			strs = row.Fimgs.split(",");
+			var list = $(".list" + index);
+			var clonedom = $("#temp").clone();
+			var itemdom = clonedom.find(".item");
+			itemdom.attr("id", row.Fgoodsid);
+			itemdom.find("#Fgoodsprice").text(row.Fgoodsprice + "元");
+			itemdom.find("#Fgoodsname").text(row.Fgoodsname);
+			itemdom.find("#Ftypename").text(row.Ftypename);
+			itemdom.find("#imges").attr("src", Serverurl + "/" + strs[0]);
+			itemdom.attr("onclick", "selectgoods('" + row.Fgoodsid + "')");
+			list.append(itemdom);
+			Fstart = end;
+		}
+
+		function selectgoods(id) {
+			var goods = {
+				Fbmid: Fsuper.getuserinfo().FBmid,
+				Fgoodsid: id
+			}
+			Fsuper.setparm(goods);
+			appcan.window.open("productDetial", "../productDetial/productDetial.html")
+		}
+	</script>
+
+</html>

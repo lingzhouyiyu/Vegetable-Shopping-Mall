@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="shopCar/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="ub ub-ac ub-pc header">
+			<div class="ub  shopCar_top ub-ver">
+				<div class="ub ub-ac" style="font-weight: bold;color: #FF7670; margin-left: 0.6em; margin-bottom: 0.4em;">
+					配送说明：
+				</div>
+				<div class="ub ub-pc ub-ac" style="padding-left: 0.5em;">
+					尊敬的客户，请按计划提前下单。我公司于每天7:30～10:30配送上一日订单。若有当日下单，并要求当日配送的订单，因库存原因，我公司不能保证按系统价格执行，但会及时送到，同时会有客服人员与您联系处理订单。
+				</div>
+			</div>
+		</div>
+		<div class="ub buiess" onclick="checkall('allchoose')">
+			<div class="ub buiess_bg ub-f1">
+				<div class="ub ub-f1 ub-ac checkbtn">
+					<div class="ub  ub-ac ub-pc umar-r checkImg">
+						<img id="allchoose" class="allitem uncheck ub-img" rel="checked" src="../css/images/checkbtn.png" />
+					</div>
+					<img class="ub-img shopLogo" src="shopCar/css/myImg/waipo.png" />
+					<span class="text-color Fshopname"></span>
+				</div>
+				<div class="ub ub-ac suggest_btn">
+					填写备注
+				</div>
+			</div>
+		</div>
+		<div id="list" class="list">
+
+		</div>
+		<div class="uhide" id="temp">
+			<div id="" class="ub goods_list ub-ver item">
+				<div class="ub goods">
+					<div id="" class="itemimg ub ub-pc ub-ac checkbtn " onclick="checkone(this)">
+						<div class="ub ub-ac ub-pc umar-r checkImg goods_check">
+							<img href="" class="ub-img uncheck " rel="checked" src="../css/images/checkbtn.png" />
+						</div>
+					</div>
+					<div class="ub ub-ver ub-pc ub-f1 ub-fh" style="width:20em ;">
+						<div id="Fgoodsname" class="ub umar-b text-color">
+
+						</div>
+						<div class="ub goods_detial" style="font-size:0.6em ;">
+							规格:<span id="Fcounts"></span><span></span><span id="Ftypename"></span>
+						</div>
+					</div>
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh goods_contral">
+						<div href="" class="ub ub-ac ub-pc goods_reduce" onclick="">-</div>
+						<div id="FgoodsCount" class="ub ub-ac ub-pc goods_num">1</div>
+						<div class="ub ub-ac ub-pc goods_add" price="" onclick="">+</div>
+					</div>
+					<div class="ub ub-ver umar-l ub-f1 ub-fh  ub-ac ub-pc" style="color: #5d5d5d;">
+						<div class="ub">
+							X<span class="checkCount">1</span>
+						</div>
+						<div class="ub redcolor">
+							￥<span class="Fprice" id="Fprice">0.00</span>
+						</div>
+					</div>
+					<div class="ub ub-ac ">
+						￥<span class="total" id="total">0.00</span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!--填写备注弹窗-->
+		<div class="mask uhide">
+			<div class="ub ub-ver mask_main">
+				<div class="ub  ub-ac ub-pc mask_top">
+					填写详细备注
+				</div>
+				<div class="ub mask_input">
+					<div class="uba bc-border  uinput ub ub-f1">
+						<textarea id="Fdesc" type="text">
+                    	
+                    </textarea>
+					</div>
+				</div>
+				<div class="ub ub-f1 mask_bottom">
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh border_r ext_btn">
+						取消
+					</div>
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh sure_btn">
+						确定
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var totalmoney = 0;
+		var Fgoodsids = "";
+		appcan.locStorage.setVal("Fdesc", null);
+		appcan.ready(function() {
+			var userinfo = Fsuper.getuserinfo();
+			$("#Fshopname").text(userinfo.Fshopname);
+			$(".Fshopname").text(userinfo.Fshopname);
+			appcan.window.subscribe('successorder', function(msg) {
+				$("#list").empty();
+				totalmoney = 0;
+				getGoodsCar();
+				checkall('allchoose');
+			});
+			appcan.window.subscribe('submitsuccess', function(msg) {
+				$("#list").empty();
+				totalmoney = 0;
+				getGoodsCar();
+				checkall('allchoose');
+			});
+
+			appcan.window.subscribe('shopCar_content', function(msg) {
+				$("#list").empty();
+				totalmoney = 0;
+				getGoodsCar();
+				checkall('allchoose');
+			});
+			//清空购物车刷新
+			appcan.window.subscribe('clearrefsh', function(msg) {
+				$("#list").empty();
+				totalmoney = 0;
+				getGoodsCar();
+				checkall('allchoose');
+			});
+			getGoodsCar();
+		});
+
+		//添加商品和减少商品
+		var goods_reduce = $(".goods_reduce"); //减少商品按钮
+		var goods_add = $(".goods_add"); //增加商品数量
+		var num = "";
+		//跳转收货地址
+		appcan.button(".carRed", "ani-act", function(a, b) {
+				appcan.window.open("carRed", "../new-address/address.html");
+				appcan.window.publish('carRed', '');
+			})
+			//加载购物车列表
+		function getGoodsCar() {
+			var furl = "/app/getGoodsCar";
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getdata(furl, parm, additem, function() {
+				checkall('allchoose');
+				var lengthdom = $(".list .goods_list");
+				//alert(lengthdom.length);
+				console.log(lengthdom.length);
+				appcan.window.publish('goodsNum', lengthdom.length);
+			});
+		}
+		var goodsNum = 0;
+
+		function additem(row) //加载订单
+		{
+			//++goodsNum;
+			var list = $(".list");
+			var clonedom = $("#temp").clone();
+			var itemdom = clonedom.find(".item");
+			itemdom.find("img").attr("id", "chooseId" + row.Fgoodsid);
+			itemdom.find("img").attr("href", row.FgoodsCount);
+			itemdom.find(".itemimg").attr("id", row.Fgoodsid);
+			itemdom.find("#Fgoodsname").text(row.Fgoodsname);
+			itemdom.find("#Fprice").text(row.Fprice.toFixed(2));
+			itemdom.find("#FgoodsCount").text(row.FgoodsCount);
+			itemdom.find("#Ftypename").text(row.Ftypename);
+			//itemdom.find("#Fcounts").text(row.Fcounts);
+			itemdom.find("#total").text((row.Fprice * row.FgoodsCount).toFixed(2));
+			itemdom.find(".checkCount").text(row.FgoodsCount);
+			itemdom.find(".goods_reduce").attr("onclick", "reduce(this)");
+			itemdom.find(".goods_reduce").attr("href", row.Fgoodsid);
+			itemdom.find(".goods_reduce").attr("price", row.Fprice.toFixed(2));
+			itemdom.find(".goods_add").attr("onclick", "add(this)");
+			itemdom.find(".goods_add").attr("price", row.Fprice.toFixed(2));
+			list.append(itemdom);
+		}
+		//购物车数量添加
+		function add(dom) {
+			totalmoney = 0;
+			var goods_num = $(dom).siblings(".goods_num"); //增加前商品数量
+			var checkCount = $(dom).parent().siblings().find(".checkCount"); //增加前x1商品数量
+
+			num = $(goods_num).text();
+			num++;
+			goods_num.text(num); //增加后商品数量
+			checkCount.text(num); //增加后x1商品数量
+			$(dom).parent().siblings().find(".total").text((num * $(dom).attr("price")).toFixed(2));
+			$(dom).parent().parent().find("img").attr("href", num);
+			var list = $("#list .checkradio");
+			eachlist(list);
+		}
+		//购物车数量减少
+		function reduce(dom) {
+			totalmoney = 0;
+			//如果文本框的值大于0才执行减去方法  
+			var goods_num = $(dom).siblings(".goods_num");
+			var checkCount = $(dom).parent().siblings().find(".checkCount");
+			num = $(goods_num).text();
+			if(num > 0) {
+				if(num == 1) {
+					//执行删除操作
+					var Fgoodsid = $(dom).attr("href");
+					deletecar(Fgoodsid);
+				} else {
+					num--;
+					goods_num.text(num);
+					checkCount.text(num);
+					$(dom).parent().parent().find("img").attr("href", num);
+					$(dom).parent().siblings().find(".total").text((num * $(dom).attr("price")).toFixed(2));
+					var list = $("#list .checkradio");
+					eachlist(list);
+				}
+			}
+		}
+		//全选按钮
+		function checkall(id) {
+			totalmoney = 0;
+			if($("#" + id).hasClass('allitem')) {
+				$("#" + id).removeClass('uncheck').addClass('checked');
+				$("#list img").removeClass('uncheck').addClass('checked');
+				$("#list img").addClass("checkradio");
+				$("#" + id).removeClass('allitem');
+			} else {
+				appcan.locStorage.setVal("totalmoney", totalmoney);
+				appcan.window.publish('totalmoney', '');
+				$("#" + id).removeClass('checked').addClass('uncheck');
+				$("#list img").removeClass('checked').addClass('uncheck');
+				$("#" + id).addClass('allitem');
+				$("#list img").removeClass("checkradio");
+			}
+			var list = $(".list .checkradio");
+			eachlist(list);
+		}
+
+		function checkone(dom) {
+			totalmoney = 0;
+			var allength = $("#list img").length;
+			$("#allchoose").addClass('allitem uncheck');
+			var id = "chooseId" + $(dom).attr("id");
+			if($("#" + id).hasClass('checkradio')) {
+				$("#" + id).removeClass('checked').addClass('uncheck');
+				$("#" + id).removeClass('checkradio');
+			} else {
+				$("#" + id).removeClass('uncheck').addClass('checked');
+				$("#" + id).addClass('checkradio');
+			}
+			var checklength = $("#list .checkradio").length;
+			if(allength == checklength) {
+				$("#allchoose").removeClass('uncheck allitem').addClass('checked');
+			}
+			var list = $("#list .checkradio");
+			eachlist(list);
+		}
+
+		function eachlist(doms) {
+			nFdetailbillId = "";
+			var goods = [];
+			if($(doms).length > 0) {
+				doms.each(function(i, item) {
+					var obj = {};
+					var id = $(item).attr("id");
+					id = id.substr(8, id.length - 8);
+					var Fgoodsid = id;
+					nFdetailbillId = nFdetailbillId + id + ",";
+					var selectparm = $(item).parent().parent().parent();
+					var Fcount = selectparm.find(".checkCount").text();
+					var Fprice = selectparm.find(".Fprice").text();
+					obj.Fgoodsid = Fgoodsid;
+					obj.Fcount = Fcount;
+					obj.Fprice = Fprice;
+					obj.Fuserid = Fsuper.getuserid();
+					goods.push(obj);
+					selectmoney(Fcount, Fprice);
+				});
+				Fgoodsids = nFdetailbillId.substring(0, nFdetailbillId.length - 1);
+				appcan.locStorage.setVal("Fgoodsids", Fgoodsids);
+				var newgoods = goods;
+				Fsuper.setparm(newgoods); //此数据发送到index.html和shopCar.html界面
+				appcan.window.publish('Fcargoodsids', Fgoodsids); //清空购物车商品id  发送到  index/index.html
+				appcan.window.publish('Fgoodsjiesuandata', ''); //发送到index.html
+			} else {
+				selectmoney(0, 0);
+			}
+		}
+
+		function selectmoney(count, money) {
+			totalmoney = totalmoney + Number(count) * Number(money);
+			appcan.window.publish('totalmoney', totalmoney); //去结算价格  发送到  index/index.html
+		}
+		//购物车数量减到一 删除购物车
+		function deletecar(ids) {
+			var furl = "/app/deletecar";
+			var parm = {
+				Fgoodsid: ids,
+				Fuserid: Fsuper.getuserid(),
+			};
+			Fsuper.getdelete(furl, parm, deletecall, function() {
+				checkall('allchoose')
+			});
+		}
+		//删除后操作
+		function deletecall() {
+			$("#list").empty();
+			totalmoney = 0;
+			getGoodsCar();
+		}
+
+		function windowclosedd() {
+			alert("ddd");
+		}
+
+		//打开配送说明
+		appcan.button(".suggest_btn", "ani-act", function(a, b) {
+				appcan.locStorage.setVal("Fdesc", null);
+				$(".mask").removeClass("uhide");
+
+				//              appcan.window.publish('move', '1');
+			})
+			//取消配送说明
+		appcan.button(".ext_btn", "ani-act", function(a, b) {
+			$(".mask").addClass("uhide");
+			var Fdesc = $("#Fdesc").val();
+			appcan.locStorage.setVal("Fdesc", null);
+		})
+		appcan.button(".sure_btn", "ani-act", function(a, b) {
+			var Fdesc = $("#Fdesc").val().trim();
+			appcan.locStorage.setVal("Fdesc", Fdesc);
+			$(".mask").addClass("uhide");
+			
+		})
+	</script>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+        <link rel="stylesheet" href="../css/appcan.icon.css">
+        <link rel="stylesheet" href="../css/appcan.control.css">
+        <link rel="stylesheet" href="index_content/css/main.css">
+        <link rel="stylesheet" href="index_content/css/idangerous.swiper.css" />
+
+    </head>
+
+    <body class="um-vp bc-bg " ontouchstart>
+        <!-- 头部搜索开始-->
+        <div class="ub ub-ac ub-pc ub-f1 search ">
+            <div class="ub ub-ac ub-f1 search_input uhide">
+                <input class="ub ub-f1 search_text" type="text" />
+            </div>
+            <div class="ub ub-ac ub-pc search_icon ">
+                <img class="ub-img" src="../css/images/searchone.png" />
+                <span class="ub ub-ac">搜索</span>
+            </div>
+        </div>
+        <!-- 头部搜索结束-->
+        <div class="ub ub-ac ub-pc ub-ver">
+        	<div class="ub ub-ac">
+        		<img style="width: 3em;" src="../css/images/warming.png" />
+        	</div>
+        	<div class="ub wram_detial">
+        		对不起，没有找到相关商品
+        	</div>
+        	<div class="ub ub-ac">
+        		<div class="ub ub-ac ub-pc dbperson">个人中心</div>
+        		<div class="ub ub-ac ub-pc dbgo">去逛逛</div>
+        	</div>
+        </div>
+        <script src="../js/appcan.js"></script>
+        <script src="../js/appcan.control.js"></script>
+        <script type="text/javascript" src="../js/idangerous.swiper.min.js"></script>
+        <script src="../js/yfkj.js"></script>
+    </body>
+    <script>
+        appcan.ready(function() {
+            //appcan.initBounce();
+        });
+        //头部搜索框
+        $(".search").click(function() {
+            $(".search_input").removeClass("uhide");
+            $(".search_icon").addClass("uhide");
+            $("input").focus();
+        });
+
+        var mySwiper = new Swiper('.swiper-container', {
+            pagination: '.pagination',
+            loop: true,
+            grabCursor: true,
+            paginationClickable: true,
+            autoplay: 5000,
+        });
+        
+        //个人中心
+         appcan.button(".dbperson", "ani-act", function(a, b) {
+
+            appcan.window.open("dbperson", "../Mine-Client/client.html");
+            appcan.window.publish('dbperson', '');
+            //              appcan.window.publish('move', '1');
+        })
+         //个人中心
+         appcan.button(".dbgo", "ani-act", function(a, b) {
+
+            appcan.window.open("allCate", "../allCate/allCate.html");
+            appcan.window.publish('allCate', '');
+            //              appcan.window.publish('move', '1');
+        })
+    </script>
+
+</html>

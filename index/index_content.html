@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="index_content/css/main.css">
+		<link rel="stylesheet" href="index_content/css/idangerous.swiper.css" />
+
+	</head>
+
+	<body class="bc-bg" ontouchstart>
+		<!-- 头部搜索开始-->
+		<div class="ub ub-ac ub-pc ub-f1 search ">
+			<div class="ub ub-ac ub-f1 search_input  uinput">
+				<input class="ub ub-f1 search_text searchkey" type="text" />
+			</div>
+			<div class="ub ub-ac ub-pc search_icon" onclick="searchkey()" style="padding-right: 0.6em;">
+				<img class="ub-img" src="../css/images/searchone.png" />
+			</div>
+		</div>
+		<!-- 头部搜索结束-->
+		<!-- 头部幻灯片开始-->
+		<div class="flash">
+			<div class="swiper-container">
+				<div class="ub ub-ac swiper-wrapper">
+					<!--<div class=" swiper-slide">
+						<img src="../css/images/slide1.jpg">
+					</div>
+					<div class="swiper-slide">
+						<img src="../css/images/slide1.jpg">
+					</div>
+					<div class="swiper-slide">
+						<img src="../css/images/slide1.jpg">
+					</div>-->
+				</div>
+			</div>
+			<div class="pagination"></div>
+		</div>
+		<!-- 中间按钮-->
+		<div class="ub center_nav">
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv quickOrder">
+				<div class="ub">
+					<img src="../css/images/index_cnav1.gif" />
+				</div>
+				<div class="ub">
+					快速下单
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv smys">
+				<div class="ub">
+					<img src="../css/images/index_cnav2.gif" />
+				</div>
+				<div class="ub">
+					扫码验收
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv bills">
+				<div class="ub">
+					<img src="../css/images/index_cnav3.gif" />
+				</div>
+				<div class="ub">
+					账单查询
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv open-distribution">
+				<div class="ub">
+					<img src="../css/images/index_cnav4.gif" />
+				</div>
+				<div class="ub">
+					配送查看
+				</div>
+			</div>
+			<div class="ub ub-ac ub-pc ub-f1 ub-ver ub-fv notice">
+				<div class="ub">
+					<img src="../css/images/index_cnav5.gif" />
+				</div>
+				<div class="ub">
+					信息公告
+				</div>
+			</div>
+		</div>
+		<!-- 今日推荐-->
+		<div class="ub ub-ac  pref">
+			<div class="ub ub-ac">
+				|&nbsp;今日推荐
+			</div>
+		</div>
+		<!-- 今日推荐列表-->
+		<div class="ub wrap_pref">
+			<div class="ub ub-f1 ub-fh ub-ver pref_list0 pref_listLeft">
+
+			</div>
+			<div class="ub ub-f1 ub-ver ub-fh ub-ver pref_list1 pref_listRight">
+
+			</div>
+		</div>
+		<!--今日推荐填值模板-->
+		<div class="ub ub-ver tmp uhide">
+			<div class="item pref_item">
+				<img class="ub-img item_img" src="" />
+				<div class="ub">
+					<div class="ub  ub-ver ub-f1">
+						<div class="ub ub-f1 pref_itemTit txthide">
+
+						</div>
+						<div class="ub ub-f1 pref_itemDeti">
+							<div class="ub ub-ver">
+								<div class="ub ub-f1 txthide">
+									<span class="dl">￥:</span>
+									<span class="Fgoodsprice"></span>
+								</div>
+								<div class="ub ub-f1 txthide">
+									<span class="gg">规格:</span>
+									<span class="Ftypename"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ub ub-ac ub-pc ub-pe pref_car">
+						<img class="ub ub-img" src="../css/images/shopCar.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script type="text/javascript" src="../js/idangerous.swiper.min.js"></script>
+		<script src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var user = Fsuper.getuserinfo();
+		appcan.ready(function() {
+			getIndexImg();
+			//appcan.initBounce();
+			jrtj_add();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					ex.Fstart = 0;
+					$('.pref_list0').empty();
+					$('.pref_list1').empty();
+					jrtj_add();
+				} else if(type == 1) {
+					jrtj_add();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+		//		var mySwiper = new Swiper('.swiper-container', {
+		//			pagination: '.pagination',
+		//			loop: true,
+		//			grabCursor: true,
+		//			paginationClickable: true,
+		//			autoplay: 5000,
+		//		});
+
+		//快速下单
+		appcan.button(".quickOrder", "ani-act", function(a, b) {
+
+				appcan.window.open("quickOrder", "../quickOrder/quickOrder.html");
+				appcan.window.publish('quickOrder', '');
+				//              appcan.window.publish('move', '1');
+			})
+			//扫码验收
+		appcan.button(".smys", "ani-act", function(a, b) {
+				scannerOpen();
+			})
+			//扫描验收
+		function scannerOpen() {
+			uexScanner.cbOpen = function(opCode, dataType, data) {
+				var datas = JSON.parse(data);
+				var url = '/app/GetHasOrder';
+				var parm = {
+					Fuserid: Fsuper.getuserid(),
+					ForderNum: datas.code
+				}
+				appcan.ajax({
+					url: Serverurl + url,
+					type: "POST",
+					dataType: "json",
+					data: parm,
+					success: function(result) {
+						var rows = result.data[0];
+						var code = result.code;
+						var msg = result.msg;
+						var debug = result.debug;
+						if(code < 10000) {
+							var count = rows.count;
+							if(count > 0) {
+								querenjiedan(datas.code);
+							}
+
+						} else {
+							if(Fsuperdbg) {
+								alert(result.code);
+								alert(result.msg);
+								alert(result.debug);
+							}
+						}
+					}
+				});
+
+			}
+			uexScanner.open();
+		}
+
+		function querenjiedan(Fid) {
+			appcan.locStorage.setVal("sureorders", Fid);
+			appcan.window.open("sureOrder", "../sureOrder/sureOrder.html");
+		}
+		//账单查询
+		appcan.button(".bills", "ani-act", function(a, b) {
+
+				appcan.window.open("bills", "../bills/bills.html");
+				appcan.window.publish('bills', '');
+				//              appcan.window.publish('move', '1');
+			})
+			//配送查看
+		appcan.button(".open-distribution", "ani-act", function(a, b) {
+
+				appcan.window.open("distribution", "../Distribution/distribution.html");
+				appcan.window.publish('distribution', '');
+				//              appcan.window.publish('move', '1');
+			})
+			//信息公告
+		appcan.button(".notice", "ani-act", function(a, b) {
+
+				appcan.window.open("notice", "../notice/notice.html");
+				appcan.window.publish('notice', '');
+				//              appcan.window.publish('move', '1');
+			})
+			//商品详情
+		appcan.button(".pref_item", "ani-act", function(a, b) {
+				appcan.window.open("productDetial", "../productDetial/productDetial");
+				appcan.window.publish('productDetial', '');
+				//              appcan.window.publish('move', '1');
+			})
+			//查询今日推荐
+		function jrtj_add() {
+			var parm = {
+				keywords: $(".searchkey").val(),
+				Fbmid: user.FBmid,
+				pageSize: ex.pageSize,
+				Fstart: ex.Fstart
+			}
+			Fsuper.getrows('/App/getjrtj', parm, addtj);
+		}
+
+		function addtj(row, end) {
+			var strs = new Array();
+			strs = row.Fimgs.split(",");
+			var col = (row.RowNumber - 1) % 2;
+			var list = $($(".pref_list" + col));
+			//填值
+			console.log(row.Fimgs);
+			var item = $(".tmp .item").clone();
+			item.attr("id", row.Fgoodsid);
+			item.find(".pref_car").attr("goodsid", row.Fgoodsid);
+			item.find(".item_img").attr('onclick', "goodsDetail(this)");
+			item.find(".item_img").attr("id", row.Fgoodsid)
+			item.find(".pref_car").attr('onclick', "addCarsplitquick(" + row.Fgoodsid + ")");
+			item.find(".item_img").attr('src', Serverurl + "/" + strs[0]);
+			item.find(".pref_itemTit").text(row.Fgoodsname);
+			item.find(".Fgoodsprice").text(row.Fgoodsprice + "元");
+			item.find(".Ftypename").text(row.Ftypename);
+			list.append(item);
+			ex.Fstart = end;
+		}
+
+		function goodsDetail(dom) {
+			var parm = {
+				Fbmid: Fsuper.getuserinfo().FBmid,
+				Fgoodsid: $(dom).attr("id")
+			}
+			Fsuper.setparm(parm);
+			appcan.window.open("productDetial", "../productDetial/productDetial.html");
+			appcan.window.publish('productDetial');
+		}
+
+		function IndexgoodsDetail(Fid) {
+			if(Fid != "") {
+				var parm = {
+					Fbmid: Fsuper.getuserinfo().FBmid,
+					Fgoodsid: Fid
+				}
+				Fsuper.setparm(parm);
+				appcan.window.open("productDetial", "../productDetial/productDetial.html");
+				appcan.window.publish('productDetial');
+			}
+		}
+
+		function car() {
+			alert("购物车");
+			event.stopPropagation();
+		}
+		var ex = {
+				Fstart: 0,
+				pageSize: 10
+			}
+			//关键字搜索
+		function searchkey() {
+			ex.Fstart = 0;
+			$('.pref_list0').empty();
+			$('.pref_list1').empty();
+			jrtj_add();
+		}
+		//加入购物车 
+		function addCarsplitquick(Fid) {
+			var furl = '/app/addCarsplitquick';
+			var datas = {
+				Fuserid: Fsuper.getuserid(),
+				Fbmid: user.FBmid,
+				Fgoodsid: Fid
+			}
+			Fsuper.getresult(furl, datas, addcarcounts);
+		}
+
+		function addcarcounts(row, code) {
+			if(code == 0) {
+				appcan.window.openToast('已加入购物车!', '1500');
+			}
+		}
+		//首页图片轮播
+		function getIndexImg() {
+			appcan.ajax({
+				url: Serverurl + "/app/getIndexImg",
+				type: "POST",
+				dataType: 'json',
+				success: function(result) {
+					var dataid = result.data[0].Fgoodsid;
+					var data = result.data[0].Fimg;
+					if(result.code == 0) {
+						var imgs = data;
+						var newimg = imgs.split(',');
+						for(var i = 0; i < newimg.length; i++) {
+							var img = "";
+							if(dataid != "") {
+								img = '<div onclick="IndexgoodsDetail(' + dataid + ')" class="swiper-slide"><img src=' + Serverurl + '/' + newimg[i] + ' class = "" /></div>'
+							} else {
+								img = '<div  class="swiper-slide"><img src=' + Serverurl + '/' + newimg[i] + ' class = "" /></div>'
+							}
+							$(".swiper-wrapper").append(img);
+						}
+						//  图片轮播js
+						var swiper = new Swiper('.swiper-container', {
+							pagination: '.pagination',
+							loop: true,
+							grabCursor: true,
+							paginationClickable: true,
+							autoplay: 5000,
+						});
+					}
+				},
+				error: function(e) {
+					appcan.window.openToast('服务器出错1!', '500');
+				}
+			});
+		}
+	</script>
+
+</html>

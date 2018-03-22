@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="pay_content/css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg mybg" ontouchstart>
+		<div class="ub ub-ver pay_list">
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac ub-f1">
+					充值账户
+				</div>
+				<div class="ub Fphone">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac ub-f1">
+					账户余额
+				</div>
+				<div class="ub">
+					<span class="Ftotalmoney">0.00</span>元
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac ub-f1">
+					欠款金额
+				</div>
+				<div class="ub">
+					<span class="Nopaymoney">0.00</span>元
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_num">
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac redcolor">
+					充值金额
+				</div>
+				<input class="ub pay_input" type="text" placeholder="请输入充值金额" />
+			</div>
+		</div>
+		<div class="ub ub-ver pay_way">
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac ub-f1 ">
+					支付方式
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item paychoose uhide">
+				<div class="ub ub-f1 payMain">
+					<div class="ub ub-ac ub-pc pay_img">
+						<img class="ub-img" src="../css/images/pay_wx.png" />
+					</div>
+					<div class="ub ub-ver pay_war">
+						<div class="ub ub-ac">
+							微信支付
+						</div>
+						<div class="ub ub-ac umar-t warColor">
+							推荐安装5.0以上版本
+						</div>
+					</div>
+				</div>
+				<div class="radiobox umar-r">
+					<input type="radio" name="radio" value="2" class="uabs ub-con" rel="0">
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item paychoose">
+				<div class="ub ub-f1 payMain">
+					<div class="ub ub-ac ub-pc pay_img">
+						<img class="ub-img" src="../css/images/pay_yl.png" />
+					</div>
+					<div class="ub ub-ver pay_war">
+						<div class="ub ub-ac">
+							银联支付
+						</div>
+						<div class="ub ub-ac umar-t warColor">
+							安全极速支付，无需开通网银
+						</div>
+					</div>
+				</div>
+				<div class="radiobox umar-r">
+					<input type="radio" name="radio" value="3" class="uabs ub-con" rel="0">
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item paychoose">
+				<div class="ub ub-f1 payMain">
+					<div class="ub ub-ac ub-pc pay_img">
+						<img class="ub-img" src="../css/images/pay_zfb.png" />
+					</div>
+					<div class="ub ub-ver pay_war">
+						<div class="ub ub-ac">
+							支付宝支付
+						</div>
+						<div class="ub ub-ac umar-t warColor">
+							推荐有支付宝的用户使用
+
+						</div>
+					</div>
+				</div>
+				<div class="radiobox umar-r">
+					<input type="radio" name="radio" value="1" class="uabs ub-con" rel="0">
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_btn" onclick="pay()">
+			<div class="ub ub-ac ub-pc ub-f1 btns">
+				立即充值
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script src="../js/appcan.listview.js"></script>
+		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script src="../js/jquery.md5.js"></script>
+		<script src="../js/des.js"></script>
+		<script type="text/javascript" src="../js/yfkj.js"></script>
+
+	</body>
+	<script>
+		$(".payMain").click(function() {
+			var chitem = $(this).siblings().find(".payBox")
+			var chflag = $(this).siblings().find(".payBox").prop("checked");
+			console.log(chflag);
+			if(chflag == '') {
+				$(chitem).prop("checked", "true");
+			} else {
+				$(chitem).removeAttr("checked");
+
+			}
+			getchoose();
+		});
+		//取得余额
+		function getNoPayMoney() {
+			var furl = '/app/getNoPayMoney';
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getresult(furl, parm, setNopay);
+		}
+
+		function setNopay(row, code) {
+			var data = row[0];
+			$(".Nopaymoney").text(data.Nopaymoney.toFixed(2));
+		}
+		//取得支付方式值
+		function getchoose() {
+			var chooseval = $(".radiobox input[type=radio]:checked").val();
+			return chooseval;
+		}
+
+		appcan.ready(function() {
+			uexAliPay.onStatus = alipaySuccess;
+			uexUnionPay.cbStartPay = unionpayover;
+			getNoPayMoney();
+			getUserInfoForPay();
+			appcan.initBounce();
+		})
+		var partner = "2088421707819665";
+		var seller = "3434502507@qq.com";
+		var rsaPrivate = "MIIBVgIBADANBgkqhkiG9w0BAQEFAASCAUAwggE8AgEAAkEA8PcdHPfoTJaBADIucejSUb29DgV3S8dvdu6GBOF+r7ZxQkh3CZLS8RnNTmP4gUhwVKff2MMbhdQgpfE81zLIvQIDAQABAkEAnYJ6dlAaec27fzxOHcl5iVMEfGDYTSGNW+mokxIvNH1BpCumIsghzb+I8Xxlr+lapLdx8jNgROiHMBcv8ZNXpQIhAPzY9onys114a0C6VfmTy1loQfVgw4XYRnL8brjgUrKfAiEA8/g5nta9ArAQaWX3fuMSjG0o1SerPRDu6TtZONljgyMCIG+2/NbeYNl/hwPGUI5A+qu6IMplwn20nQvY9KLCmkdJAiEAhdEyccBhXhcKeXVXgn60jtfVHM2sbEtccAuAjeEXZzcCIQD7gIppdLycW8WRaQAcVpndxmMCUOzxRDX71JdS3iObOw==";
+		var rsaPublic = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAPD3HRz36EyWgQAyLnHo0lG9vQ4Fd0vHb3buhgThfq+2cUJIdwmS0vEZzU5j+IFIcFSn39jDG4XUIKXxPNcyyL0CAwEAAQ==";
+
+		function setInfo() {
+			var notifyUrl = Serverurl + "/Pay/Alipay_recharge_notice";
+			uexAliPay.setPayInfo(partner, seller, rsaPrivate, rsaPublic, notifyUrl);
+
+		}
+
+		function getUserInfoForPay() {
+			var furl = '/app/getUserInfoForPay';
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+			};
+			Fsuper.getresult(furl, parm, setresult);
+		}
+
+		function setresult(row, code) {
+			var data = row[0];
+			$(".Ftotalmoney").text(data.Ftotalmoney.toFixed(2));
+			$(".Fphone").text(data.Fphone);
+		}
+
+		//支付宝支付
+		function alipay(fee, num) {
+			setInfo();
+			var subject = "充值";
+			var body = "菜街子充值";
+			//fee = "0.01";
+			uexAliPay.pay(num, subject, body, fee);
+		}
+
+		function alipaySuccess(status, des) {
+			if(status == 0) { //支付成功
+				Ftag = 0;
+				appcan.window.publish('userinfo', '');
+				appcan.window.publish('closepay', '');
+			}
+		}
+		var Ftag = 0;
+
+		function pay() {
+			if(Ftag == 0) {
+				Ftag = 1;
+				var FpayNum = $(".pay_input").val();
+				if(FpayNum == "") {
+					alert("请输入充值金额！");
+					return;
+				}
+				var pay_way = getchoose();
+
+				if(pay_way == "1") {
+					var parm = {
+						Fuser_id: Fsuper.getuserid(),
+						FpayNum: FpayNum,
+					}
+					Safe.post(Serverurl + "/pay/Order_form", parm, function(result) {
+						var code = result.code;
+						var fee = result.data.FpayNum;
+						var num = result.data.FserialNum;
+						if(code == 0) {
+							alipay(fee, num)
+						}
+					});
+				} else if(pay_way == "3") {
+					var Fuser_id = Fsuper.getuserid();
+					UnionPay(FpayNum, Fuser_id);
+				}
+			}
+		}
+
+		function UnionPay(fee, Fuser_id) {
+			var parm = {
+				txnAmt: fee
+			}
+			Safe.post(Serverurl + "/pay/unionpay", parm, function(result) {
+				var tx = result.data;
+				//银联订单号
+				var code = result.code;
+				var FserialNum = result.msg;
+
+				if(code == 0) {
+					//订单号返回成功 开始下单
+					var parm = {
+						Fuser_id: Fuser_id,
+						FpayNum: fee,
+						FserialNum: FserialNum
+					}
+					Safe.post(Serverurl + "/pay/unionpay_order", parm, function(result) {
+						var code = result.code;
+						if(code == 0) {
+							var params = {
+								orderInfo: tx,
+								mode: "00"
+							};
+							var data_union = JSON.stringify(params);
+							uexUnionPay.startPay(data_union);
+						}
+					});
+				}
+			});
+		}
+		//银联支付
+		function unionpayover(data) {
+			var json = JSON.parse(data);
+			if(json.payResult == 0) {
+				Ftag = 0;
+				appcan.window.publish('userinfo', '');
+				appcan.window.publish('closepay', '');
+			}
+		}
+	</script>
+
+</html>

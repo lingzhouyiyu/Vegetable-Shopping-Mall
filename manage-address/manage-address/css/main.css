@@ -1,0 +1,38 @@
+.address-item{
+	background-color: #ffffff;
+	height: 6em;
+	width: 100%;
+margin-bottom: 0.8em;
+}
+.item1{
+	margin-left: 1em;
+	margin-right: 1em;
+	height: 3em;
+}
+.item2{
+	margin-left: 1em;
+	margin-right: 1em;
+	height: 3em;
+}
+.right{
+	margin-right: 0.8em;
+}
+.cy{
+	height: 1.5em;
+	width: 2.4em;
+	background-color: #70b956;
+	color: #ffffff;
+	border-radius: 0.3em;
+}
+.name{
+	margin-left: 0.8em;
+	color: #5d5d5d;
+}
+.buttom{
+background-color: #333333;
+	color: #ffffff;
+	height: 4em;
+}
+
+.dimg1{ width: 1.5em;}
+.dimg2{ width: 1.5em; margin-left: 1em;}

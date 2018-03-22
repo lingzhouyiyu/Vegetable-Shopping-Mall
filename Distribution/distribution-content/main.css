@@ -1,0 +1,64 @@
+.content1{
+	width: 100%;
+	background-color: #ffffff;
+	margin-top: 0.2em;
+}
+.column{
+	height: 3em;
+	font-family: "微软雅黑";
+	color: #5d5d5d;
+	border:none;
+	border-bottom: 1px solid #f4f4f4;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+.text{
+	color: #969696;
+}
+.total{
+	height: 3em;
+	margin-left: 1em;
+	font-family: "微软雅黑";
+	color: #5d5d5d;
+}
+.total-money{
+	margin-left: 0.3em;
+}
+.content2{
+	
+	background-color:#ffffff ;
+	margin-top: 0.5em;
+	font-family: "微软雅黑";
+	color: #5d5d5d;
+}
+.subinfo{
+	margin-left: 1em;
+	height: 2em;
+}
+.pic-liu{
+	height: 6em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+.text2{
+	font-size: 0.8em;
+	margin-top: 0.3em;
+}
+.line{
+	height: 1px;
+	 background-color: #969696;
+}
+.pic-liu img{ width: 2em;}
+.order-pic{
+	padding: 1em;
+	
+	border-bottom: 1px solid #f4f4f4;
+}
+.order-pic img{ width: 2em;}
+.order-text{
+	height: 1em;
+	margin-left: 2em;
+	margin-right: 2em;
+	font-size: 0.8em;
+}
+.dbtext{ font-size: 0.8em;}

@@ -1,0 +1,13 @@
+.mybg{ background: #f4f4f4;}
+.pay_list{ background: #fff; margin-bottom: 1em; }
+.pay_item{padding: 1em; border-bottom: 1px solid #e5e5e5; }
+.pay_num{ background: #fff; margin-bottom: 1em;}
+.redcolor{ color: #ff8025;}
+.pay_way{ background: #fff;}
+.pay_img{ margin-right: 0.5em;}
+.pay_img img{ width: 2em;}
+.pay_war{ padding-left: 0.6em;}
+.warColor{ color: #bcbcbc;}
+.pay_btn{ margin-top: 2em; margin-left: 2em; margin-right: 2em; padding-bottom: 3em;}
+.pay_input{  outline: 0 none; border: 0 none; margin-left: 1em; font-size: 1em;}
+.btns{ background: #f2af27; height: 2.5em; color: #fff; border-radius: 0.5em;}

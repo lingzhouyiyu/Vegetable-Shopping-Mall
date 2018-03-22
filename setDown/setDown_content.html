@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="setDown_content/css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg mybg" ontouchstart>
+		<div class="ub set_title">
+			<div class="ub umar-r">
+				<img style="width: 1.5em;" class="ub-img" src="../css/images/edit.png" />
+			</div>
+			<div class="ub ub-ac">
+				申请填写
+			</div>
+		</div>
+		<div class="ub  set_main">
+			<div class="ub ub-ac  ub-f1 set_warm">
+				创建您的资料( <span class="redcolor">以下信息*皆为必填项，请认真填写！</span>)
+			</div>
+		</div>
+		<div class="ub ub-ver set_detial">
+			<div class="ub ub-ac ub-f1 input_item">
+				<div class="ub input_left ub-pe">
+					<span class="xcolor umar-r">*</span> 姓名
+				</div>
+				<div class="ub ub-ac ub-f1 umar-l uinput">
+					<input id="Fname" class="ub ub-f1" type="text" />
+				</div>
+			</div>
+			<div class="ub ub-ac ub-f1 input_item ">
+				<div class="ub input_left ub-pe">
+					<span class="xcolor umar-r">*</span> 电话
+				</div>
+				<div class="ub ub-ac ub-f1 umar-l uinput">
+					<input id="Fphone" class="ub ub-f1" type="text" />
+				</div>
+			</div>
+			<div class="ub ub-ac ub-f1 input_item uhide">
+				<div class="ub input_left ub-pe">
+					<span class="xcolor umar-r">*</span> 邮箱
+				</div>
+				<div class="ub ub-ac ub-f1 umar-l uinput">
+					<input id="Fyx" class="ub ub-f1" type="text" />
+				</div>
+			</div>
+			<div class="ub ub-ac ub-f1 input_item">
+				<div class="ub input_left ub-pe">
+					<span class="xcolor umar-r">*</span> 地址
+				</div>
+				<div class="ub ub-ac ub-f1 umar-l uinput">
+					<input id="Faddress" class="ub ub-f1" type="text" />
+				</div>
+
+			</div>
+			<div id="usertype" class="ub ub-ac ub-pc input_item item_chose">
+				<div class="ub dbchoose">
+					<div class="ub radiobox ub-ac ">
+						<input type="radio" value="2" name="radio" />
+
+					</div>
+					<div class="ub ub-ac umar-l">配送员</div>
+				</div>
+
+				<div class="ub dbchoose">
+					<div class="ub radiobox ub-ac ub-pe">
+						<input type="radio" value="3" name="radio" />
+
+					</div>
+					<div class="ub ub-ac umar-l">供应商</div>
+				</div>
+				<div class="ub">
+					<div class="ub radiobox ub-ac ub-pe">
+						<input type="radio" value="1" name="radio" />
+
+					</div>
+					<div class="ub ub-ac umar-l">客户</div>
+				</div>
+			</div>
+		</div>
+		<div class="ub ub-pc ub-ac submit">
+			<div class="ub ub-f1 ub-pc ub-ac btns">
+				提交申请
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			appcan.initBounce();
+		})
+		$(".submit").click(function() {
+			adduser();
+		});
+
+		function adduser() {
+			var furl = "/app/adduser";
+			if($("#Fname").val() == "") {
+				appcan.window.openToast('姓名不能为空', '1000');
+				return;
+			}
+			if($("#Fphone").val() == "") {
+				appcan.window.openToast('电话不能为空', '1000');
+				return;
+			}
+//			if($("#Fyx").val() == "") {
+//				appcan.window.openToast('邮箱不能为空', '1000');
+//				return;
+//			}
+			if($("#Faddress").val() == "") {
+				appcan.window.openToast('地址不能为空', '1000');
+				return;
+			}
+			if($("input[name='radio']:checked").val() == undefined) {
+				appcan.window.openToast('请选择客户类型', '1000');
+				return;
+			}
+			var parm = {
+				Fname: $("#Fname").val(),
+				Fphone: $("#Fphone").val(),
+				Fyx: "",
+				Faddress: $("#Faddress").val(),
+				Fusertype: $("input[name='radio']:checked").val()
+			};
+			var datas = {
+				p1: encodeURI(JSON.stringify(parm)),
+				Fphone: $("#Fphone").val()
+			};
+			Fsuper.getresult(furl, datas, addcall);
+		}
+		//申请入驻后操作
+		function addcall(row, code) {
+			if(code == 0) {
+				if(row == 1) {
+					appcan.window.openToast('您已经申请入驻过', '1000');
+					return;
+				} else if(row == 0) {
+				    
+					appcan.window.open("login", "../login/login.html");
+					appcan.window.evaluateScript({
+
+                         name: 'setDown',
+                         scriptContent: 'windowclose()'
+                         });
+				}
+			}
+		}
+	</script>
+
+</html>

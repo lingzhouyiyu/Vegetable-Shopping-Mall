@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="input1 ub ub-f1 ub-ac">
+			<input class="inputpwd ub ub-f1 ub-ac ub-pc currentpassword" placeholder="当前密码" type="password" />
+		</div>
+		<div class="input2 ub ub-f1 ub-ac">
+			<input class="inputpwd ub ub-f1 ub-ac ub-pc newpassword" placeholder="新密码" type="password" />
+		</div>
+		<div class="input2 ub ub-f1 ub-ac">
+			<input class="inputpwd ub ub-f1 ub-ac ub-pc querenpassword" placeholder="确认新密码" type="password" />
+		</div>
+		<div class="config ub ub-ac ub-pc subpassword">确认提交</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js" ></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			
+		});
+		appcan.button(".subpassword", "ani-act", function(a, b) {
+			getOldpassword();
+		})
+		function getOldpassword() {
+			var furl = '/app/getOldpassword';
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getresult(furl, parm, setNopay);
+		}
+
+		function setNopay(row, code) {
+			var code =code;
+			var data = row[0];
+			if(code == 0){
+				var oldpawd = data.Fpassword;
+				var newpassword = $(".newpassword").val();//新密码
+				var querenpassword = $(".querenpassword").val();//确认新密码
+				var currentpassword = $(".currentpassword").val();//当前密码
+				if(currentpassword == ""){
+					appcan.window.openToast('当前密码不能为空！', '1500');
+					return;
+				}
+				if(newpassword == ""){
+					appcan.window.openToast('新密码不能为空！', '1500');
+					return;
+				}
+				if(querenpassword == ""){
+					appcan.window.openToast('确认密码不能为空！', '1500');
+					return;
+				}
+				if(oldpawd != currentpassword){
+					appcan.window.openToast('当前密码不正确！', '1500');
+					return;
+				}
+				addnewpassword(querenpassword);
+			}
+			
+		}
+		
+		function addnewpassword(password) {
+			var furl = '/app/updateNewPassword';
+			var parm = {
+				Fuserid:Fsuper.getuserid(),
+				Fpassword: password
+			};
+			Fsuper.getresult(furl, parm, uppassword);
+		}
+		function uppassword(row, code){
+			if(code == 0){
+				appcan.locStorage.setVal("userinfo", null);
+				appcan.window.open("login", "../login/login.html");
+			}
+		}
+	</script>
+
+</html>

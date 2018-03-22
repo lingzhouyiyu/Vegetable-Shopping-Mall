@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="index_content/css/main.css" />
+	</head>
+
+	<body class="um-vp " ontouchstart>
+		<div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+			<!--header开始-->
+			<div id="header" class="uh bc-text-head ub bc-head header1 ">
+				<div class="nav-btn" id="nav-left">
+				</div>
+				<h1 id="htitle" class="ub-pc mypd ub-f1 ub ub-ac" tabindex="0">
+                    <img style="height: 1em;"  src="../css/images/top_logo.png" / >
+                </h1>
+				<div class="nav-btn nav-bt" id="nav-right">
+				</div>
+			</div>
+			<div id="header" class="uh mypd bc-text-head uhide ub bc-head ub-pc ub-ac header2">
+				<div class="nav-btn" id="nav-left">
+					<div class="ub-img " id="left_img">
+						<div class="fa fa-angle-left fa-2x" id="categoback"></div>
+					</div>
+					<div class="fa fa-angle-left fa-2x uhide" id="goback"></div>
+				</div>
+				<h1 class="ut ub-ac ub-pc ub-f1 ulev-3 ut-s tx-c" tabindex="0"><span>商品分类</span><img class="uhide"  src="" /></h1>
+				<div class="nav-btn nav-bt" id="nav-right">
+					<div class="ub-img umar-t" id="right_img">
+					</div>
+					<div class="ub ub-pc" id="right_txt"></div>
+				</div>
+			</div>
+			<div id="header" class="uh mypd bc-text-head ub bc-head uhide header3">
+				<div class="nav-btn" id="nav-left">
+					<div class="fa fa-angle-left fa-2x" id="cargoback"></div>
+				</div>
+				<h1 class="ut ub-f1  ulev-3 ut-s tx-c" tabindex="0">购物车</h1>
+				<div class="nav-btn nav-bt" id="nav-right">
+					<div href="" class="clearcar ub ub-pc" id="right_txt">清空</div>
+				</div>
+			</div>
+			<div id="header" class="mypd uh bc-text-head ub bc-head uhide  header4">
+				<div class="nav-btn" id="nav-left"></div>
+				<h1 class="ut ub-f1  ulev-3 ut-s tx-c" tabindex="0">我的</h1>
+				<div class="nav-btn nav-bt set" id="nav-right">
+				</div>
+			</div>
+			<!--header结束-->
+			<!--content开始-->
+			<div id="content" class="ub-f1 tx-l">
+
+			</div>
+			<!--content结束-->
+			<!--footer开始-->
+			<div id="footer" class="ub bc-text-head footer1 " style="border-top: 1px solid #f2af27; background-color: #FFFFFF; "></div>
+			<div id="footer" class="uf bc-text-head ub ubt uhide bc-border  footer2">
+				<div class="ub " style=" height: 3em;width: 100%;">
+					<div class="ub ub-ac ub-f2" style="background: #313131">
+						<div class="ub-f1 ub" style=" height: 3em">
+							<div class="ub ub-ac ub-f2" style="background: #313131">
+								<div class="ub ub-pc">
+									<div class="ub ub-ac ub-pc" style="margin-left: 0.5em;">合计：</div>
+									<span class="goodsNum">0</span>
+									<span>件</span>
+									<span class="umar-l">￥</span>
+									<span id="totalmoney">0.00</span>
+								</div>
+							</div>
+							<div class="ub ub-ac ub-pc ub-f1" style="background: #f2af27">
+								<div class="ub ub-ac ub-pc">
+									<div class="ub ub-pc ub-ac open-submit">查看订单</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script type="text/javascript" src="../js/yfkj.tab.js"></script>
+		<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		Fsuperdbg = true;
+		var orderindex = appcan.locStorage.getVal("orderindex");
+		var Fgoodsdata = "";
+		var tabset = {
+			selector: "#footer",
+			hasIcon: true,
+			hasAnim: false,
+			hasLabel: true,
+			hasBadge: true,
+			index: 0,
+			ispico: true,
+			data: [{
+				label: "首页",
+				icon: "fa-home",
+				pico: "../css/images/home.png",
+				pactivico: "../css/images/home_red.png"
+			}, {
+				label: "全部分类",
+				icon: "fa-shopping-cart",
+				pico: "../css/images/all.png",
+				pactivico: "../css/images/all_red.png"
+			}, {
+				label: "购物车",
+				icon: "fa-search",
+				pico: "../css/images/shop.png",
+				pactivico: "../css/images/shop_red.png"
+			}, {
+				label: "我的",
+				icon: "fa-cube",
+				pico: "../css/images/person.png",
+				badge: "1",
+				pactivico: "../css/images/person_red.png"
+			}]
+		};
+		tabset.data[2].badge = "";
+		var tabview = appcan.tab(tabset);
+		tabview.on("click", function(obj, index) {
+			if(uexWidgetOne.getPlatform() == "1") { //android
+				if(index == '3') {
+					$(".header1").addClass("uhide");
+					$(".header2").addClass("uhide");
+					$(".header3").addClass("uhide");
+					$(".header4").removeClass("uhide");
+					$(".footer1").removeClass("uhide");
+					$(".footer2").addClass("uhide");
+					appcan.window.publish('userinfo', '');
+					appcan.window.publish('gettip', '');
+				}
+			} else { //ios
+				if(index == '0') {
+					$(".header1").removeClass("uhide");
+					$(".header2").addClass("uhide");
+					$(".header3").addClass("uhide");
+					$(".header4").addClass("uhide");
+					$(".footer1").removeClass("uhide");
+					$(".footer2").addClass("uhide");
+				}
+				if(index == '1') {
+					$(".header1").addClass("uhide");
+					$(".header2").removeClass("uhide");
+					$(".header3").addClass("uhide");
+					$(".header4").addClass("uhide");
+					$(".footer1").removeClass("uhide");
+					$(".footer2").addClass("uhide");
+					appcan.window.publish('allCate_content', '');
+				}
+				if(index == '2') {
+					$(".header1").addClass("uhide");
+					$(".header2").addClass("uhide");
+					$(".header3").removeClass("uhide");
+					$(".header4").addClass("uhide");
+					$(".footer2").removeClass("uhide");
+					$(".footer1").addClass("uhide");
+					appcan.window.publish('shopCar_content', '');
+				}
+				if(index == '3') {
+					$(".header1").addClass("uhide");
+					$(".header2").addClass("uhide");
+					$(".header3").addClass("uhide");
+					$(".header4").removeClass("uhide");
+					$(".footer1").removeClass("uhide");
+					$(".footer2").addClass("uhide");
+					appcan.window.publish('userinfo', '');
+					appcan.window.publish('gettip', '');
+				}
+			}
+			appcan.window.selectMultiPopover("content", index);
+		})
+		appcan.ready(function() {
+			//getversion();
+			appcan.window.subscribe('goodsNum', function(msg) {
+				$(".goodsNum").text(msg);
+			});
+			var c1c = 0;
+			uexWindow.setReportKey(0, 1);
+			uexWindow.onKeyPressed = function() {
+				if(c1c > 0) {} else {
+					uexWidgetOne.exit();
+				}
+			}
+
+			appcan.window.subscribe('loginmove', function(index) {
+				appcan.window.selectMultiPopover("content", orderindex);
+				tabview.moveTo(orderindex);
+			});
+			version = "";
+			sversion = "";
+			function cbGetCurrentWidgetInfo(opId, dataType, data) {
+				var obj = eval('(' + data + ')');
+				version = obj.version;
+				//获取当前APP的一些信息，比如应用ID之类的数据
+			}
+			//监听去结算价格
+			appcan.window.subscribe('totalmoney', function(msg) {
+				$("#totalmoney").text(Number(msg).toFixed(2));
+			});
+			//去结算更新购物车数据
+			appcan.window.subscribe('Fgoodsjiesuandata', function(msg) {
+				Fgoodsdata = Fsuper.getparm("newgoods");
+			});
+			//清空购物车
+			appcan.window.subscribe('Fcargoodsids', function(msg) {
+				$(".clearcar").attr("href", msg);
+			});
+			var top = $('#header').offset().height;
+			appcan.frame.open({
+				id: "content",
+				url: [{
+					"inPageName": "index",
+					"inUrl": "index_content.html",
+				}, {
+					"inPageName": "allCate",
+					"inUrl": "../allCate/allCate_content.html",
+				}, {
+					"inPageName": "shopCar",
+					"inUrl": "../shopCar/shopCar_content.html",
+				}, {
+					"inPageName": "Mine-Client",
+					"inUrl": "../Mine-Client/client_content.html",
+				}],
+				top: top,
+				left: 0,
+				index: 0,
+				change: function(index, res) {
+					if(res.multiPopSelectedIndex == '0') {
+						$(".header1").removeClass("uhide");
+						$(".header2").addClass("uhide");
+						$(".header3").addClass("uhide");
+						$(".header4").addClass("uhide");
+						$(".footer1").removeClass("uhide");
+						$(".footer2").addClass("uhide");
+					}
+					if(res.multiPopSelectedIndex == '1') {
+						//                   appcan.window.publish('myindex2', '');
+						$(".header1").addClass("uhide");
+						$(".header2").removeClass("uhide");
+						$(".header3").addClass("uhide");
+						$(".header4").addClass("uhide");
+						$(".footer1").removeClass("uhide");
+						$(".footer2").addClass("uhide");
+						appcan.window.publish('allCate_content', ''); //侧滑
+					}
+					if(res.multiPopSelectedIndex == '2') {
+						$(".header1").addClass("uhide");
+						$(".header2").addClass("uhide");
+						$(".header3").removeClass("uhide");
+						$(".header4").addClass("uhide");
+						$(".footer2").removeClass("uhide");
+						$(".footer1").addClass("uhide");
+						appcan.window.publish('shopCar_content', '');
+					}
+					if(res.multiPopSelectedIndex == '3') {
+						$(".header1").addClass("uhide");
+						$(".header2").addClass("uhide");
+						$(".header3").addClass("uhide");
+						$(".header4").removeClass("uhide");
+						$(".footer1").removeClass("uhide");
+						$(".footer2").addClass("uhide");
+						appcan.window.publish('userinfo', '');
+						appcan.window.publish('gettip', '');
+					}
+
+					tabview.moveTo(res.multiPopSelectedIndex);
+
+				}
+			});
+			window.onorientationchange = window.onresize = function() {
+				appcan.frame.resize("content", 0, top);
+			}
+		});
+
+		/*购物车单选框*/
+		$(".checkbtn1").click(function() {
+
+			var curr = $(this).find(".goods_check img");
+			var flag = $(curr).attr("rel");
+
+			//单选框
+			if(flag == "checked") {
+				$(curr).removeClass("uncheck");
+				$(curr).attr("rel", "uncheck");
+			} else {
+				$(curr).addClass("uncheck");
+				$(curr).attr("rel", "checked");
+			}
+
+		});
+
+		/*去结算*/
+		$(".open-submit").click(function() {
+			var datas = {
+				Fgoodsdata: Fgoodsdata,
+			};
+			var url = "/app/updateCar";
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: datas,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							appcan.window.open("submit-order", "../submit-order/submit-order.html");
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		});
+		/*清空购物车*/
+		$(".clearcar").click(function() {
+			appcan.window.alert({
+				title: "提示",
+				content: "您确定清空购物车",
+				buttons: ['取消', '确定'],
+				callback: function(err, data, dataType, optId) {
+					if(data == 1) {
+						var ids = $(".clearcar").attr("href"); ////清空购物车的商品id
+						deletecars(ids);
+					} else if(data == 0) {
+						return;
+					}
+				}
+			});
+		});
+
+		function deletecars(ids) {
+			var furl = "/app/downorderdeletecar";
+			var parm = {
+				Fgoodsid: "",
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getdelete(furl, parm, deletecalls);
+		}
+
+		function deletecalls() {
+			$(".clearcar").attr("href", "");
+			appcan.window.publish('clearrefsh', "");
+		}
+		appcan.button("#cargoback", "btn-act", function() {
+			$(".header1").removeClass("uhide");
+			$(".header2").addClass("uhide");
+			$(".header3").addClass("uhide");
+			$(".header4").addClass("uhide");
+			$(".footer1").removeClass("uhide");
+			$(".footer2").addClass("uhide");
+			appcan.window.selectMultiPopover("content", 0);
+			tabview.moveTo(0);
+		});
+		appcan.button("#categoback", "btn-act", function() {
+			$(".header1").removeClass("uhide");
+			$(".header2").addClass("uhide");
+			$(".header3").addClass("uhide");
+			$(".header4").addClass("uhide");
+			$(".footer1").removeClass("uhide");
+			$(".footer2").addClass("uhide");
+			appcan.window.selectMultiPopover("content", 0);
+			tabview.moveTo(0);
+		});
+	</script>
+
+</html>

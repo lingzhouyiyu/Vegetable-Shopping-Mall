@@ -1,0 +1,14 @@
+.c-gra{
+	background-color:#e1e1e1;
+}
+.b-gra{
+	border-color:#ababab;
+}
+input[type = radio] + div > div.t-gra1 {
+}
+input[type = radio]:checked + div > div.t-gra1 {
+	border-bottom:2px solid #f78c3e;
+}
+.umhh1{
+	min-height:2.6em;
+}

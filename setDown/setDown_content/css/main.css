@@ -1,0 +1,15 @@
+.mybg{ background: #f4f4f4;}
+.set_title{ background: #fff; color: #ec632f; padding: 1em;}
+.set_main{ background: #fff; color: #5b5b5b;}
+.set_warm{ padding-bottom: 0.5em; border-bottom: 1px solid #e0dfdf; margin: 0 2em; margin-bottom: 2em; padding: 0 0.5em 0.5em 0.5em;}
+.redcolor{ color: #f2af27;}
+.xcolor{ color: #ec632f;}
+.set_detial{ background: #fff; color: #333333; padding-right: 1.2em;}
+.input_item{ margin-bottom: 1em;}
+.input_left{ width:4em;}
+.input_item input{ outline: 0 none; height: 2.5em; border: 1px solid #e0dfdf; padding: 0 5px; }
+.item_chose{ padding-left: 1.2em;}
+.btns{ background: #f2af27; height: 2.5em; color: #fff; margin-left: 3em; margin-right: 1.5em; border-radius: 0.5em;}
+.submit{ background: #fff; padding-bottom: 2em; padding-top: 1em;}
+
+.dbchoose{ margin-right: 1.2em;}

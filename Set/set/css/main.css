@@ -1,0 +1,20 @@
+.column{
+	height: 12em;
+	width: 100%;
+	background-color: #ffffff;
+	font-family: "微软雅黑";
+	color: #5d5d5d;
+}
+.subcol{
+	height: 3em;
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+}
+.subcol-right{
+	margin-left: 0.8em;
+}
+.img{
+	margin-left: 1em;
+	height: 1.5em;
+	width: 1.4em;
+}

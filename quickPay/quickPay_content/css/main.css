@@ -1,0 +1,45 @@
+.mybg{ background: #f4f4f4;}
+.pay_list{ background: #fff; margin-bottom: 1em; }
+.pay_item{padding: 1em; border-bottom: 1px solid #e5e5e5;  color: #5d5d5d;}
+.pay_num{ background: #fff; margin-bottom: 1em;}
+.redcolor{ color: #f2af27;}
+
+.warColor{ color: #b2b2b2; font-size: 0.9em;}
+.pay_btn{ margin-top: 2em; margin-left: 2em; margin-right: 2em; padding-bottom: 3em;}
+.pay_input{  outline: 0 none; border: 0 none; margin-left: 1em;}
+.btns{ background: #f2af27; height: 2.5em; color: #fff; border-radius: 0.5em;}
+.pay_left{ margin-right: 1em;}
+.pay_top{ padding: 0.6em; color: #5d5d5d;}
+
+.fail{ position: fixed; width: 100%; height: 100%; z-index: 1000; filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#4C000000', endColorstr='#4C000000');background:rgba(0,0,0,0.3); left: 0; top: 0;}
+.wrap_fali{ background: #fff; height: 10em; margin-left: 3em; margin-right: 3em; top: 50%; margin-top: -5em; border-radius: 0.5em; }
+.dcolor{ color: #5d5d5d;}
+.dsure{  border-top: 1px solid #e1e1e1;}
+.warSize{ font-size: 0.9em;}
+
+.way-class{
+	height: 3em;
+	color: #5d5d5d;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.goods_contral{ padding: 1em 0; font-size: 1em; color: #5d5d5d;}
+.goods_reduce{ border: 1px solid #b7b7b7; width:1.6em; height:1.6em;background-color: #f4f4f4;}
+.goods_num{ border: 1px solid #b7b7b7;  width:1.6em; height:1.6em; border-left: 0 none;}
+.goods_add{border: 1px solid #b7b7b7;  width:1.6em; height:1.6em; border-left: 0 none;background-color: #f4f4f4;}
+.payway{ padding: 1em; background: #fff; }
+.waychoose{ background: #fff; margin-bottom: 2em;}
+.waybtns{ margin: 0 1em; border-top: 1px solid #F4F4F4; padding: 1em;}
+
+.checkImg{ border: 1px solid #f2af27; width: 1em; height: 1em;}
+.checkImg img{ width: 1em; height: 1em;}
+.checked{ display: block;}
+.uncheck{ display: none;}
+.payway1{ margin-right: 2em;}
+
+.pay_way{ background: #fff;}
+.pay_img{ margin-right: 0.5em;}
+.pay_img img{ width: 2em;}
+.pay_war{ padding-left: 0.6em;}
+.pay_btn_zhif{ margin: 2em 1em;}

@@ -1,0 +1,8 @@
+.left_nav{ width: 7em; overflow: auto;}
+.nav_item{ width: 7em; background: #f4f4f4; height: 3em; color: #646464;  margin-bottom: 1px;}
+.nav_active{ background: #fff; color: #f39700;}
+.cont_box{ padding-top: 1em; overflow-y: scroll;overflow-x: hidden;}
+.cont_item{ color: #646464;}
+.cont_item img{ width: 100%;}
+.cont_left{ padding-left:0.6em; padding-right: 2px;}
+.cont_right{ padding-left: 2px; padding-right: 0.6em;}

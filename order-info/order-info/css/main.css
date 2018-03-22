@@ -1,0 +1,93 @@
+.backbtn{
+	height: 1.8em;
+	width: 1.4em;
+}
+.content1{
+	background-color: #ffffff;
+	height: 4em;
+	width: 100%;
+	font-family: "微软雅黑";
+	color: #5d5d5d;
+	margin-top: 0.2em;
+}
+.content1-img{
+	margin-left: 2em;
+	width: 2em;
+}
+.text{
+	margin-left: 0.8em;
+}
+
+.content2{
+	margin-top: 0.5em;
+	background-color: #ffffff;
+	font-family: "微软雅黑";
+	color: #5d5d5d;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+.order{
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+	height: 6.5em;
+}
+.order-pic{
+	padding: 1em 0;
+	
+	border-bottom: 1px solid #f4f4f4;
+}
+.order-pic img{ width: 2em;}
+.line{
+	height: 1px;
+	
+	background-color: #969696;
+}
+.order-text{
+	height: 1em;
+	margin-left: 2em;
+	margin-right: 2em;
+	font-size: 0.8em;
+}
+.information1{
+	margin-top: 1em;
+	
+	padding-bottom: 1em;
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+	color: #f2af27;
+}
+.subinfo{
+	line-height: 1.8em;
+}
+.information2{
+	
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+	height: 3.5em;
+}
+.text2{
+	color: #5d5d5d;
+}
+.number{
+	color:#969696;
+}
+.price{
+		color:#969696;
+		margin-right: 0.8em;
+}
+.total{
+	margin-left: 2em;
+	height: 3em;
+	color: #5d5d5d;
+}
+.next{
+	height: 2.5em;
+	width: 100%;
+	background-color: #ffffff;
+	margin-top: 0.8em;
+	margin-bottom: 2em;
+	color: #f2af27;
+	font-family: "微软雅黑";
+}
+.dbtext{ font-size: 0.8em;}
+.infor_btns{ color: #fff; background: #c8c8c8; font-size: 0.9em; border-radius: 5px; padding: 0 5px;}

@@ -1,0 +1,157 @@
+.mine{
+	height: 9em;
+	width: 100%;
+	background:url(myImg/background.png) no-repeat;
+	background-size: 100%;
+	margin-bottom: 0em;
+}
+.tou-bac{
+	height: 3em;
+	width: 3em;
+	border-radius: 2em;
+	background-color: #ffffff;
+}
+.tou-pic{
+	height: 2em;
+	width: 2em;
+}
+.edit{
+	color: #5d5d5d;
+	margin-top: 0.5em;
+}
+.Time{
+	/*height: 6em;*/
+	width: 100%;
+	margin-top: 0.5em;
+	background-color: #ffffff;
+}
+.time{
+	height: 3em;
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+	color: #ec632f;
+}
+.time-down{
+	height: 2em;
+	width: 3em;
+	border: 1px solid #ec632f;
+	border-radius: 0.3em;
+	margin-left: 0.5em;
+}
+.balance{
+	border: none;
+	border-right: 1px solid #f4f4f4;
+	margin-top: 0.8em;
+	margin-bottom: 0.8em;
+	margin-left: 0.8em;
+}
+.num{
+	color: #f2af27;
+}
+.text{
+	height: 1.6em;
+	width: 3em;
+	background-color:#f2af27 ;
+	color: #ffffff;
+	border-radius: 0.3em;
+	margin-right: 1em;
+	font-size: 0.8em;
+}
+.text1{
+	font-size: 0.8em;
+}
+.Recharge{
+	margin-left: 1em;
+}
+.order{
+	height: 8em;
+	width: 100%;
+	margin-top: 0.8em;
+	background-color:  #ffffff;
+	
+}
+.order-detail{
+	height: 3em;
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+}
+.text-left{
+	margin-left: 1em;
+}
+.pic{
+	height: 1.2em;
+	width: 0.8em;
+	margin-right: 1em;
+	margin-left: 0.5em;
+}
+/*.img{
+	height: 2em;
+	width: 2em;*/
+}
+.order-pic{
+	height: 3em;
+}
+	
+.pic1{
+	border: none;
+	border-right: 1px solid #f4f4f4;
+	margin-top: 1em;
+	
+}
+.redStatus{display: inline-block; background: red;height: 0.8em; width: 0.8em; border-radius: 50%;}
+.column{
+	height: 24em;
+	width: 100%;
+	margin-top: 1em;
+	background-color: #ffffff;
+	color: #5d5d5d;
+}
+.sub{
+	height: 3em;
+	background-color: #ffffff;
+	
+	color: #5d5d5d;
+	margin-left: 0.5em;
+}
+.subcol{
+	height: 3em;
+	border: none;
+	border-bottom: 1px solid #f4f4f4;
+}
+.exit{
+	color:#5d5d5d;
+	background-color:#ffffff;
+	margin-top: 1em;
+	margin-bottom: 5em;
+	height: 3em;
+}
+.pop{
+	height: 100%;
+	width: 100%;
+	filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#B2564D4D', endColorstr='#B2564D4D');
+	background:rgba(86,77,77,0.7);
+	margin-top: 0;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+.poptel{
+	height: 6em;
+	width: 100%;
+	color:#ffffff;
+	position:absolute;
+	left: 0;
+	bottom: 0;	
+}
+.poprow1{
+	height: 3em;
+	background-color: #f2af27;
+}
+.poprow2{
+	height: 3em;
+	margin-top: 0.5em;
+	background-color: #f2af27;
+}
+.pic1 img{ width: 1.5em;}	
+	
+	

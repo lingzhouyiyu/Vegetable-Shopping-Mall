@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="adress/css/main.css">
+	</head>
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="column">
+			<div class="subcol ub ub-ac">
+				<div class="left ub ub-ac">
+					<div class="text">姓名</div>
+				</div>
+				<div class="right">
+					<input class="inputval Fname" placeholder="请填写收货人的姓名" />
+				</div>
+			</div>
+			<div class="subcol ub ub-ac">
+				<div class="left ub ub-ac">
+					<div class="text">手机</div>
+				</div>
+				<div class="right">
+					<input class="inputval Fphone" placeholder="请填写收货人的手机号码" />
+				</div>
+			</div>
+			<div class="subcol1 ub ub-ver uhide">
+				<div class=" col2 ub">
+					<div class="left">
+						<div class="text">收货地址</div>
+					</div>
+					<div class="right">
+						<textarea class="ub inputval2 Faddress" placeholder="请填写楼号门牌号等"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="reserve ub ub-ac ub-pc loginbtn">确认保存</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			getShopName();
+		});
+		appcan.button(".loginbtn", "ani-act", function(a, b) {
+			appcan.ajax({
+				url: Serverurl+"/app/addFaddress",
+				type: "POST",
+				dataType: "json",
+				data: {
+					Fname: $(".Fname").val(),
+					Fphone: $(".Fphone").val(),
+					Faddress: $(".Faddress").val(),
+					Fuserid: Fsuper.getuserid()
+				},
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) {
+							appcan.window.publish('upaddress', '');
+							appcan.window.open("manage-address", "../manage-address/manage-address.html");
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		})
+		 function getShopName(){
+		 	 var furl = '/app/getShopName';
+                var parm = {
+                    Fuserid : Fsuper.getuserid()
+                };
+                Fsuper.getresult(furl, parm, setvalues);
+		 }
+		 function setvalues(row, code){
+		 	var data = row[0];
+		 	$(".Fname").val(data.Fname);
+		 	$(".Faddress").text(data.Faddress);
+		 	$(".Fphone").val(data.Fphone);
+		 }
+	</script>
+</html>

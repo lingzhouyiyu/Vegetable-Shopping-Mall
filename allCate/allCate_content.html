@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="allCate_content/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg ub" ontouchstart>
+		<div class="ub ub-f1">
+			<!-- 左侧导航-->
+			<div id="leftlist" class="ub leftlist ub-ver left_nav">
+
+			</div>
+			<div id="lefttemp" class="uhide">
+				<div class="ub ub-ac ub-pc nav_item  nav_active item" onclick="" id="">
+					
+				</div>
+			</div>
+			<!-- 右侧列表-->
+			<div id="" class="ub ub-f1 cont_box">
+				<div id="list0" class="ub ub-f1 ub-fh ub-ver cont_left list0">
+
+				</div>
+				<div id="list1" class="ub ub-f1 ub-fh ub-ver cont_left list1">
+
+				</div>
+			</div>
+			<div id="righttemp" class="ub ub-f1 cont_box righttemp uhide">
+				<div class="ub ub-f1 ub-fh ub-ver cont_left">
+					<div id="" class="ub ub-ac ub-pc ub-ver cont_item item">
+						<img class="ub ub-img" id="imges" class="ub-img" src="" />
+						<div id="Fname" class="ub ub-pc">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script src="../js/yfkj.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.1.4.min.js" ></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			appcan.window.subscribe('allCate_content', function(msg) {
+				var list = $(".leftlist");
+				list.empty();
+				getGoodsCategory();
+			});
+		});
+
+		function getGoodsCategory() {
+			var furl = "/app/getGoodsCategory";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				dataType: "jsonp",
+				async: false,
+				jsonp: 'callback',
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					var Firstid = "";
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								if(i == 0) {
+									Firstid = row.Fid;
+								}
+								additem(row);
+							});
+							if(Firstid != "") {
+								selectclick(Firstid);
+							}
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		function additem(row) {
+			var list = $(".leftlist");
+			var clonedom = $("#lefttemp").clone();
+			var itemdom = clonedom.find(".item");
+			itemdom.attr("id", row.Fid);
+			itemdom.attr("Ffullid", row.Ffullid);
+			itemdom.text(row.Fname);
+			itemdom.attr("onclick", "detailgoods('" + row.Ffullid + "',this)");
+			list.append(itemdom);
+		}
+
+		function selectclick(id) {
+			$(".left_nav div").removeClass("nav_active");
+			$("#" + id).addClass("nav_active");
+			var list0 = $(".list0");
+			list0.empty();
+			var list1 = $(".list1");
+			list1.empty();
+			getChildrenCategory($("#" + id).attr("Ffullid"));
+		}
+
+		function detailgoods(id, dom) {
+			$(".left_nav div").removeClass("nav_active");
+			$(dom).addClass("nav_active");
+			var list0 = $(".list0");
+			list0.empty();
+			var list1 = $(".list1");
+			list1.empty();
+			getChildrenCategory(id);
+		}
+
+		function getChildrenCategory(catid) {
+			var furl = "/app/getChildrenCategory";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				async: false,
+				dataType: "jsonp",
+				jsonp: 'callback',
+				data: {
+					_parentId: catid
+				},
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					console.log(rows);
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								var index = i % 2;
+								Childrenadditem(row, index);
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+
+		}
+
+		function Childrenadditem(row, index) {
+			var strs = new Array();
+			strs = row.Fimgs.split(",");
+			var list = $(".list" + index);
+			var clonedom = $("#righttemp").clone();
+			var itemdom = clonedom.find(".item");
+			itemdom.attr("id", row.Fid);
+			itemdom.find("#Fname").text(row.Fname);
+			itemdom.find("#imges").attr("src", Serverurl+"/" + strs[0]);
+			itemdom.attr("onclick", "selectgoods('" + row.Fid + "')");
+			list.append(itemdom);
+		}
+
+		function selectgoods(id) {
+			appcan.locStorage.setVal("typetogoods", id);
+			appcan.window.open("cateDetial", "../cateDetial/cateDetial.html")
+		}
+	</script>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="productDetial_content/css/main.css" />
+		<link rel="stylesheet" href="../js/swiper/swiper.min.css" />
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart>
+		<div class="flash">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+
+				</div>
+			</div>
+			<div class="pagination"></div>
+		</div>
+		<div class="ub umar-l umar-t umar-r umar-b pro_detial">
+			<div class="ub  pro_left ub-ver ub-f1">
+				<div id="Fgoodsname" class="ub umar-b pro_title">
+
+				</div>
+				<div id="Fdesc" class="ub">
+
+				</div>
+				<div class="ub pro_price">
+					￥:<span id="Fgoodsprice"></span>
+				</div>
+			</div>
+			<div class="ub ub-pe ub-ac ub-pc pro_right">
+				<div class="ub ub-ac ub-pc pro_reduce">-</div>
+				<div class="ub ub-ac ub-pc pro_num FgoodsNum">1</div>
+				<div class="ub ub-ac ub-pc pro_add">+</div>
+			</div>
+		</div>
+		<div class="ub weight">
+			<div class="ub ub-ac umar-r">规格：</div>
+			<div class="ub ub-ac weight_list">
+				<div class="box">
+					<div class="ub ub-ac ufl weight_litem weight_active">
+						<span id="Fcounts" class="uhide"></span><span id="Ftypename"></span>
+					</div>
+				</div>
+			</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/swiper/swiper.min.js"></script>
+	<script src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var goods = $.parseJSON(Fsuper.getparm());
+		console.log(goods);
+		appcan.locStorage.setVal("Fcargoodsid", goods.Fgoodsid); //商品id,传到productDetial.html界面
+		appcan.ready(function() {
+			appcan.window.publish('FgoodsNum', $(".FgoodsNum").text());
+			getGoodsDetails();
+		});
+		//幻灯片
+		var mySwiper = new Swiper('.swiper-container', {
+			pagination: '.pagination',
+			loop: true,
+			grabCursor: true,
+			paginationClickable: true,
+			autoplay: 5000,
+		});
+
+		//选择重量
+		$(".weight_list .weight_litem").click(function() {
+			$(".weight_list .weight_litem").removeClass("weight_active");
+			$(this).addClass("weight_active");
+		});
+
+		//添加商品和减少商品
+		var goods_reduce = $(".pro_reduce"); //减少商品按钮
+		var goods_add = $(".pro_add"); //增加商品数量
+		var num = "";
+
+		/*添加数量的方法*/
+		$(goods_add).click(function() {
+			var goods_num = $(".pro_num"); //增加前商品数量
+			num = $(goods_num).text();
+			num++;
+			//appcan.locStorage.remove("FgoodsNum");
+			appcan.window.publish('FgoodsNum', num);
+			goods_num.text(num); //增加后商品数量
+			//ajax代码可以放这里传递到数据库实时改变总价  
+		});
+
+		/*减少数量的方法*/
+		$(goods_reduce).click(function() {
+			//如果文本框的值大于0才执行减去方法  
+			var goods_num = $(".pro_num");
+			num = $(goods_num).text();
+
+			if(num > 0) {
+				//并且当文本框的值为1的时候，减去后文本框直接清空值，不显示0  
+				if(num == 1) {
+					num--;
+					goods_num.val("1");
+				}
+				//否则就执行减减方法  
+				else {
+					num--;
+					goods_num.text(num);
+					//appcan.locStorage.remove("FgoodsNum");
+					appcan.window.publish('FgoodsNum', num);
+				}
+
+			}
+		});
+
+		function getGoodsDetails() {
+			var furl = '/app/getGoodsDetails';
+			var parm = {
+				Fbmid: goods.Fbmid,
+				Fgoodsid: goods.Fgoodsid
+			}
+			Fsuper.getresult(furl, parm, goodsinfo);
+		}
+
+		function goodsinfo(row, code) {
+			if(code == 0) {
+				var goodsdata = row[0];
+				appcan.locStorage.setVal("Fprice", goodsdata.Fgoodsprice);
+				$("#Fgoodsname").text(goodsdata.Fgoodsname);
+				$("#Fgoodsprice").text(goodsdata.Fgoodsprice+"元");
+				$("#Ftypename").text(goodsdata.Ftypename);
+				//$("#Fcounts").text(goodsdata.Fcounts + "kg");
+				$("#Fdesc").text(goodsdata.Fdesc);
+				var Fimg = goodsdata.Fimgs;
+				var strs = new Array();
+				strs = Fimg.split(",");
+				var length = strs.length;
+				console.log(strs);
+				for(var i = 0; i < length; i++) {
+					var img = '<div class="swiper-slide "><img src=' + Serverurl+"/" + strs[i] + ' style="width: 100%" /></div>'
+					$(".swiper-wrapper").append(img);
+					var swiper = new Swiper('.swiper-container', {
+						paginationClickable: true,
+						longSwipesRatio: 0.3,
+						touchRatio: 4,
+						observer: true,
+						observeParents: true,
+						loop: true,
+						pagination: '.swiper-pagination',
+						nextButton: '.swiper-button-next',
+						prevButton: '.swiper-button-prev',
+					});
+				}
+			}
+		}
+	</script>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="tel">联系方式</div>
+		<div class="tel-input ub ub-f1 ub-ac">
+			<input class="inputval ub ub-f1 Fphone" placeholder="请填写您的手机号" />
+		</div>
+		<div class="tel">问题和意见<span class="text">(您的宝贵意见会让我们更美好)</span></div>
+		<div class="tel-input2 ub ub-f1">
+			<textarea class="inputval2 ub ub-f1 Fsuggest" placeholder="根据您反馈的内容我们将在48小时内以邮件、短信或电话的方式进行回复"></textarea>
+		</div>
+
+		<div class="submit ub ub-ac ub-pc">提交</div>
+
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+
+		});
+		appcan.button(".submit", "btn-act", function() {
+			addSuggest();
+		})
+
+		function addSuggest() {
+			var furl = '/app/addSuggest';
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				Fphone: $(".Fphone").val(),
+				Fsuggest: $(".Fsuggest").val()
+			};
+			Fsuper.getresult(furl, parm, setsuccess);
+		}
+
+		function setsuccess(row, code) {
+			if(code == 0) {
+				appcan.window.evaluateScript({
+
+					name: 'reback',
+					scriptContent: 'windowclose()'
+				});
+
+			}
+		}
+	</script>
+
+</html>

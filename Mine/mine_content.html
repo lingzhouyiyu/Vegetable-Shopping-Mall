@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="mine-content/css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="mine ub ub-ac ub-pc ub-ver">
+			<div class="tou-bac ub ub-ac ub-pc">
+				<img class="tou-pic" src="../css/images/user.png" />
+			</div>
+			<div class="edit ub Fname"></div>
+		</div>
+		<div class="column">
+			<div class="subcol ub ub-ac openperfor">
+				<div class="text-left ub ub-f1 ">我的绩效</div>
+				<img class="pic" src="mine-content/css/myImg/go.png" />
+			</div>
+			<div class="subcol ub ub-ac">
+				<div class="text-left ub ub-f1">消息中心</div>
+				<img class="pic" src="mine-content/css/myImg/go.png" />
+			</div>
+			<div class="subcol ub ub-ac call">
+				<div class="text-left ub ub-f1 ">客服电话</div>
+				<img class="pic" src="mine-content/css/myImg/go.png" />
+			</div>
+		</div>
+		<div class="exit ub ub-ac ub-pc loginexit">退出登录</div>
+
+		<div class="pop uhide ub ub-ver">
+			<div class="poprow1 ub ub-ac ub-pc">087167362612</div>
+			<div class="poprow2 ub ub-ac ub-pc quxiao">取消</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		/*客服电话*/
+		appcan.ready(function() {
+			var user = Fsuper.getuserinfo();
+			$(".Fname").text(user.Fname);
+			$(".call").click(function() {
+				$(".pop").removeClass("uhide");
+			});
+			$(".quxiao").click(function() {
+				$(".pop").addClass("uhide");
+			});
+			/*我的绩效*/
+			$(".openperfor").click(function() {
+				appcan.window.open("myPerfor", "../myPerfor/myPerfor.html");
+			});
+		});
+		appcan.button(".loginexit", "ani-act", function(a, b) {
+			appcan.locStorage.remove("userinfo");
+			appcan.locStorage.setVal("orderindex",0);
+			appcan.window.open("login", "../login/login.html");
+		})
+	</script>
+
+</html>

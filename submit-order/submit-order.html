@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="submit/main.css">
+	</head>
+
+	<body class="um-vp " ontouchstart>
+		<div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
+			<!--header开始-->
+			<div id="header" class="uh bc-text-head ub bc-head">
+				<div class="nav-btn" id="nav-left">
+					<div class="fa fa-angle-left fa-2x"></div>
+				</div>
+				<h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">订单提交</h1>
+				<div class="nav-btn nav-bt" id="nav-right">
+				</div>
+			</div>
+			<!--header结束-->
+			<!--content开始-->
+			<div id="content" class="ub-f1 tx-l">
+
+			</div>
+			<!--content结束-->
+			<!--footer-->
+			<div id="footer" class="ubt bc-border ub sc-bg  bc-text-head" style="height: 2.5em;">
+				<div class=" footer-left ub ub-f2 ub-pe ub-ac " style="height: 2.5em;">订单金额:￥<span id="totalmoney"></span></div>
+				<div class="submit ub ub-f1 ub-ac ub-pc suborder" style="height: 2.5em;">提交订单</div>
+			</div>
+		</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script src="../js/appcan.control.js"></script>
+		<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Ftjstate = "";
+		var Fsuperdbg = true;
+		var goods = null;
+		var Ftime = null;
+		var Fpaymethod = '';
+		var userinfo = Fsuper.getuserinfo();
+		var Fdesc = appcan.locStorage.getVal("Fdesc");
+		appcan.ready(function() {
+			//提交订单实付金额 
+			appcan.window.subscribe('shifumoney', function(msg) {
+				$("#totalmoney").text(Number(msg).toFixed(2));
+				getHasDay();
+			});
+			appcan.window.subscribe('goods', function(msg) {
+				goods = msg;
+			});
+			appcan.window.subscribe('Ftime', function(msg) {
+				Ftime = msg;
+			});
+			var titHeight = $('#header').offset().height;
+			appcan.frame.open("content", "submit-order_content.html", 0, titHeight);
+			window.onorientationchange = window.onresize = function() {
+				appcan.frame.resize("content", 0, titHeight);
+			}
+		});
+		appcan.button(".nav-btn", "btn-act", function() {
+			appcan.window.close(-1);
+		})
+		appcan.button(".btn", "ani-act", function() {
+				appcan.window.close(-1);
+			})
+			//提交订单
+		var cftag = 0;
+		appcan.button(".submit", "ani-act", function(a, b) {
+			if(cftag == 0) {
+				cftag = 1;
+				uexWindow.toast({
+					type: 1,
+					location: 5,
+					msg: "正在下单,请稍等!",
+					duration: 0
+				});
+
+				if(Ftjstate == "0") {
+					appcan.window.openToast('账单已到期，请去结算!', '2000');
+					return;
+				}
+				var furl = "/app/downorder";
+				var parm = {
+					Fuserid: Fsuper.getuserid(),
+					goods: goods,
+					Fmoney: Number($("#totalmoney").text()),
+					Fbmid: userinfo.FBmid,
+					Ftime: Ftime,
+					Fdesc: Fdesc
+				};
+				appcan.ajax({
+					url: Serverurl + furl,
+					type: "POST",
+					dataType: "json",
+					data: parm,
+					success: function(result) {
+						var code = result.code;
+						var msg = result.msg;
+						var debug = result.debug;
+						if(code < 10000) {
+							if(code == 0) { //返回成功
+								uexWindow.closeToast();
+								deletecars(goods); //
+								sendsmskhphone();
+								appcan.locStorage.setVal("ordersindex", 0);
+								appcan.window.publish('submitsuccess', ''); //发送到orders.html和orders-content.html
+								appcan.window.open("orders", "../orders/orders.html");
+								appcan.window.evaluateScript({
+									name: 'shopCar',
+									scriptContent: 'windowclose()'
+								});
+								windowclose();
+							}
+						} else {
+							if(Fsuperdbg) {
+								alert(result.code);
+								alert(result.msg);
+								alert(result.debug);
+							}
+						}
+					}
+				});
+			}
+
+		})
+
+		function deletecars(ids) {
+			var furl = "/app/downorderdeletecar";
+			var parm = {
+				Fgoodsid: ids,
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getdelete(furl, parm, deletecalls);
+		}
+
+		function deletecalls() {
+			$(".clearcar").attr("href", "");
+			appcan.window.publish('clearrefsh', "");
+		}
+
+		function windowclose() {
+			appcan.window.close(-1);
+		}
+
+		function getHasDay() {
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			var url = '/app/getHasDay';
+			appcan.ajax({
+				url: Serverurl + url,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					if(msg == "0") {
+						if(code == 0) {
+							Ftjstate = "0";
+						} else {
+							Ftjstate = "1";
+						}
+					} else if(msg == "1") {
+						Ftjstate = "1";
+					}
+				}
+			});
+		}
+		//发短信
+		function sendsmskhphone() {
+			var furl = "/app/sendsmskhphone";
+			var parm = {
+				Fmoney: Number($("#totalmoney").text()),
+				Fphone: Fsuper.getuserinfo().Fphone
+			};
+			Fsuper.getdelete(furl, parm, deletecalls);
+		}
+
+		function sendsmskhcallback() {
+
+		}
+	</script>
+
+</html>

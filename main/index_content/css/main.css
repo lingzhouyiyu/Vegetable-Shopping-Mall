@@ -1,0 +1,44 @@
+.search{ margin-left: 2em; margin-right: 2em; border: 1px solid #dcdcdc; height: 2em; border-radius: 1em; margin-top: 1em; margin-bottom: 1em;}
+.search_input{ margin-left: 1em; margin-right: 1em;}
+.search_input input{ border: 0 none; outline: 0 none; color: #969696;}
+.search_icon img{ width: 1.5em; height: 1.5em; margin-top: 5px;}
+.search_icon span{ color: #c4c4c4;}
+
+.center_nav{ margin-left: 1em; margin-right: 1em; padding-top: 1em; padding-bottom: 1em; color: #646464; font-size: 0.8em; color: #646464;}
+.flash{ position: relative;}
+.swiper-slide{ width: 100%; height: auto; overflow: hidden;}
+.swiper-slide img{  width: 100%; height: auto; overflow: hidden;}
+.pagination {
+  position: absolute;
+  z-index: 20;
+ bottom: 5px;
+ left:0;
+  width: 100%;
+  text-align: center;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.swiper-active-switch {
+  background: #f2af27;
+  
+}
+
+.pref{ color: #f2af27; font-size: 1.2em; height: 2em; border-top: 1px solid #f4f4f4; padding-left: 1em; padding-right: 1em;}
+.wrap_pref{ height: auto; background: #f4f4f4;padding-left: 0.6em; padding-right: 0.6em; padding-top: 0.6em;}
+.pref_listLeft{ padding-left: 0.6em; padding-right: 2px;}
+.pref_listRight{ padding-left: 2px; padding-right: 0.6em;}
+.pref_item img{ width: 100%;}
+.pref_itemTit{ color: #5d5d5d; margin-bottom: 5px; padding-top: 5px; }
+.pref_item{ background: #fff; margin-bottom: 0.6em;}
+.pref_itemDeti{ padding-bottom: 5px; color: #f2af27;}
+.pref_car{ padding-right: 8px;}
+.pref_car img{ width: 1.2em; height: 1.2em;}
+.item_img{ width: 100%;}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="manage-address/css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="address-item ub ub-ver">
+			<div class="item1 ub ub-ac">
+				<div class="left ub ub-f1">
+					<div class="cy ub ub-ac ub-pc">常用</div>
+					<div class="name Fname"></div>
+					<div class="name Fphone"></div>
+				</div>
+				<div class="dright ub-ac ub-pc ub ub-pe">
+					<div class="ub ub-ac">
+						<img class="ub-img dimg1 upaddress" src="manage-address/css/myImg/edit2.png" />
+					</div>
+					<div class="ub ub-ac uhide">
+						<img class="ub-img dimg2" src="manage-address/css/myImg/delete.png" />
+					</div>
+				</div>
+			</div>
+			<div class="item2 Faddress"></div>
+		</div>
+
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		appcan.ready(function() {
+			appcan.window.subscribe('upaddress', function(msg) {
+				getShopName();
+			});
+			getShopName();
+		});
+		$(".upaddress").click(function() {
+			appcan.window.open("address", "../update-address/address.html");
+		})
+
+		function getShopName() {
+			var furl = '/app/getShopName';
+			var parm = {
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getresult(furl, parm, setvalues);
+		}
+
+		function setvalues(row, code) {
+			var data = row[0];
+			$(".Fname").text(data.Fname);
+			$(".Faddress").text(data.Faddress);
+			$(".Fphone").text(data.Fphone);
+		}
+	</script>
+
+</html>

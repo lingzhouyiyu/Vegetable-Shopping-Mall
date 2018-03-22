@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body class="um-vp bc-bg ub" ontouchstart>
+		<div class="ub-f1 ub-ac ub-pc hot listgoods">
+
+		</div>
+		<div class="orderchildtemp uhide">
+			<div rel="uncheck" class="ub ub-ac ub-pc collect_item ufl childitem Fname"></div>
+		</div>
+		<!--清除弹窗-->
+		<div class="mask uhide">
+			<div class="ub ub-ver mask_main">
+				<div class="ub  ub-ac ub-pc mask_top">
+					是否清空收藏夹
+				</div>
+				<div class="ub ub-ac ub-pc warm_main">
+					确认清空收藏夹历史收藏的菜品将全部清除，是否确认清空
+				</div>
+				<div class="ub ub-f1 mask_bottom">
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh border_r ext_btn">
+						取消
+					</div>
+					<div class="ub ub-ac ub-pc ub-f1 ub-fh sure_btn">
+						确定
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	<script>
+		appcan.ready(function() {
+			appcan.window.subscribe('qingkong', function(msg) {
+			     $(".listgoods").empty();
+                 gethasBuygoodsid();
+                 getCollectGoods();
+			   // alert("yyy");
+				//$(".mask").removeClass("uhide");
+				//ShcangCancel();
+			});
+			appcan.button(".ext_btn", "btn-act", function() {
+				$(".mask").addClass("uhide");
+			})
+			appcan.button(".sure_btn", "btn-act", function() {
+				$(".mask").addClass("uhide");
+			})
+		});
+		var cargoodsids = null;
+		var user = Fsuper.getuserinfo();
+		appcan.ready(function() {
+			gethasBuygoodsid();
+			getCollectGoods();
+		});
+
+		$(".collect_item").click(function() {
+			var cur = $(this);
+			if(cur.hasClass("item_active")) {
+				cur.removeClass("item_active");
+			} else {
+				cur.addClass("item_active");
+			}
+		});
+		//查询购物车商品id		
+		function gethasBuygoodsid() {
+			var furl = "/app/gethasBuygoodsid";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				async: false,
+				dataType: "json",
+				data: {
+					Fuserid: Fsuper.getuserid()
+				},
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							cargoodsids = rows;
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+		//商品列表
+		function getCollectGoods() {
+			var furl = "/app/getCollectGoods";
+			$.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				async: false,
+				dataType: "json",
+				data: {
+					Fuserid: Fsuper.getuserid()
+				},
+				success: function(result) {
+					var rows = result.data;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								additems(row);
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		function additems(row) {
+			var list = $(".listgoods");
+			var clonedom = $(".orderchildtemp").clone();
+			var goodsdom = clonedom.find(".childitem");
+			goodsdom.text(row.Fname);
+			goodsdom.attr("id", row.Fgoodsid);
+			//goodsdom.attr("href", row.Fgoodsprice);
+			goodsdom.attr("onclick", "selectgoods(this)");
+			var Fid = row.Fgoodsid;
+			$(cargoodsids).each(function(i, dom) {
+				var cargoodsid = dom.Fgoodsid;
+				if(cargoodsid == Fid) {
+					$(goodsdom).addClass("item_active");
+					$(goodsdom).attr("rel", "checked");
+				}
+			});
+			//goodsdom.find(".appTusu").attr("onclick", "appTusu(" + row.Fgoodsid + "," + id + ",this)");
+			list.append(goodsdom);
+		}
+		//点击蔬菜加入购物车
+		function selectgoods(dom) {
+			var mark = $(dom).attr("rel");
+			if(mark == "uncheck") {
+				addCarsplitquick($(dom).attr("id")); //加入购物车
+				$(dom).addClass("item_active");
+				$(dom).attr("rel", "checked");
+			} else {
+				deletecars($(dom).attr("id")); //购物车取消
+				$(dom).removeClass("item_active");
+				$(dom).attr("rel", "uncheck");
+			}
+		}
+		//加入购物车 修改
+		function addCarsplitquick(Fid) {
+			var furl = '/app/addCarsplitquick';
+			var datas = {
+				Fuserid: Fsuper.getuserid(),
+				Fbmid: user.FBmid,
+				Fgoodsid: Fid
+			}
+			Fsuper.getresult(furl, datas, addcarcounts);
+		}
+
+		function addcarcounts(row, code) {
+			if(code == 0) {
+				appcan.window.publish('quickgoods', row);
+			}
+		}
+		//从购物车取消
+		function deletecars(ids) {
+			var furl = "/app/deletecar";
+			var parm = {
+				Fgoodsid: ids,
+				Fuserid: Fsuper.getuserid()
+			};
+			Fsuper.getdelete(furl, parm, deletecalls);
+		}
+
+		function deletecalls(data) {
+			appcan.window.publish('quickgoods', data);
+		}
+		//确认取消收藏
+		function ShcangCancel() {
+		    alert("rr");
+			//event.stopPropagation();
+			appcan.window.alert({
+				title: "提示",
+				content: "清空收藏夹将清除所有历史收藏商品,确定清空收藏夹？",
+				buttons: ['取消', '确定'],
+				callback: function(err, data, dataType, optId) {
+					if(data == 1) {
+						appcan.ajax({
+							url: Serverurl + "/app/ShcangCancel",
+							type: "POST",
+							dataType: 'json',
+							data: {
+								Fuserid: Fsuper.getuserid(),
+							},
+							success: function(result) {
+								if(result.code < 10000) {
+									if(result.code == 0) { //返回成功
+										$(".listgoods").empty();
+										gethasBuygoodsid();
+										getCollectGoods();
+									}
+								} else {
+									if(Fsuperdbg) {
+										alert(result.code);
+										alert(result.msg);
+										alert(result.debug);
+									}
+								}
+							}
+						});
+					}
+				}
+			});
+		}
+	</script>
+
+</html>

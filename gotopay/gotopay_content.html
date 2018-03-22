@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="gotopay_content/css/main.css" />
+	</head>
+
+	<body class="um-vp bc-bg mybg" ontouchstart>
+		<div class="ub ub-ver pay_list">
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					订单笔数
+				</div>
+				<div class="ub FNum">
+
+				</div>
+			</div>
+			<div class="ub ub-f1 ub-ac pay_item">
+				<div class="ub ub-ac pay_left">
+					应付金额
+				</div>
+				<div class="ub redcolor">
+					<span>￥</span> <span class="FlastPrice"></span>
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_num">
+			<div class="ub ub-f1 ub-ac pay_item warColor">
+				<div class="ub ub-ac pay_left ">
+					可用余额
+				</div>
+				<div class="ub Ftotalmoney">
+
+				</div>
+			</div>
+		</div>
+		<div class="ub pay_btn_zhif">
+			<div class="ub ub-ac ub-pc ub-f1 btns lijizhif">
+				立即支付
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Fpaymethod = '';
+		var Forderid = appcan.locStorage.getVal("Forderids");
+		appcan.ready(function() {
+			appcan.window.subscribe('paysuccess', function(msg) {
+				getOrderInfoForPay();
+			});
+			getOrderInfoForPay();
+		});
+		//立即支付
+		appcan.button(".pay_btn_zhif", "ani-act", function(a, b) {
+				appcan.window.alert({
+					title: "提示",
+					content: "确定支付？",
+					buttons: ['取消', '确定'],
+					callback: function(err, data, dataType, optId) {
+						if(data == 1) {
+							var Ftotalmoney = Number($(".Ftotalmoney").text());
+							var FlastPrice = Number($(".FlastPrice").text());
+							if(FlastPrice > Ftotalmoney) {
+								appcan.window.openToast('可用余额不足,请充值!', '1000');
+								return;
+							}
+							var furl = '/app/gotopay';
+							var parm = {
+								Forderid: Forderid,
+								Fpaymethod: Fpaymethod,
+								Fuserid: Fsuper.getuserid()
+							};
+							appcan.ajax({
+								url: Serverurl + furl,
+								type: "POST",
+								dataType: "json",
+								data: parm,
+								success: function(result) {
+
+									var code = result.code;
+									var msg = result.msg;
+									var debug = result.debug;
+									if(code < 10000) {
+										if(code == 0) { //返回成功
+											//alert(code);
+											gotoorder();
+										}
+									} else {
+										if(Fsuperdbg) {
+											alert(result.code);
+											alert(result.msg);
+											alert(result.debug);
+										}
+									}
+									if(callback != undefined) {
+										callback();
+									}
+								}
+							});
+						}
+					}
+				});
+			})
+			//订单跳转
+		function gotoorder() {
+			//appcan.locStorage.setVal("billindex", 0);
+			//appcan.window.open("bills", "../bills/bills.html");
+			appcan.window.publish('gotopaysuccess', '');
+			appcan.window.publish('quicksess', '');
+		}
+
+		function getOrderInfoForPay() {
+			var furl = '/app/getInfoTopay';
+			var parm = {
+				Forderid: Forderid,
+				Fuserid: Fsuper.getuserid()
+			};
+			appcan.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				dataType: "json",
+				data: parm,
+				success: function(result) {
+					var code = result.code;
+					var msg = result.msg;
+					var total = result.totalmoney;
+					$(".FlastPrice").text(Number(msg).toFixed(2));
+					$(".Ftotalmoney").text(Number(total).toFixed(2));
+					$(".FNum").text(code);
+				}
+			});
+		}
+	</script>
+
+</html>

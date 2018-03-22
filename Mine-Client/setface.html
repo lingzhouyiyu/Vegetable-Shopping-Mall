@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+	</head>
+
+	<body class="um-vp ub" style="background-color:transparent;" ontouchstart>
+		<div id="content" class="ub-f1 ub ub-ver ub-fv ub-fh">
+			<div class="clean ub-f1"></div>
+			<div class="ub ub-ver bc-bg">
+				<div class="uinn">
+					<div class="btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1 umar-a" id="takephoto"> 拍照 </div>
+					<div class="btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1 umar-a" id="localphoto"> 选择本地照片 </div>
+					<div class="clean btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1 umar-a"> 取消 </div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<script src="../js/appcan.js"></script>
+		<script type="text/javascript" src="../js/appcan.control.js" ></script>
+		
+	</body>
+	<script>
+		appcan.ready(function() {
+			uexCamera.cbOpen = cbOpen;
+			uexImage.onPickerClosed = function(info) {
+                var json = JSON.parse(info);
+                var imgurl = json.detailedImageInfo[0].localPath;
+                appcan.frame.evaluateScript({
+                    name: 'picture_info',
+                    popName: 'content',
+                    scriptContent: 'setface("' + imgurl + '")'
+                });
+                appcan.window.close(-1);
+            }
+		});
+		appcan.button("#localphoto", "btn-act", function() {
+            var data = {
+                min : 1,
+                max : 1,
+                title : "上传图片",
+                quality : 0.3,
+                //usePng:true,
+                detailedInfo : true
+            }
+            var json = JSON.stringify(data);
+            uexImage.openPicker(json);
+		});
+		appcan.button(".clean", "btn-act", function() {
+			appcan.window.close(-1);
+		});
+		appcan.button("#takephoto", "btn-act", function() {
+			uexCamera.open(); //照相
+		});
+		function cbOpen(opCode, dataType, data) {
+			uexImageBrowser.save(data); //照相成功保存照片
+		};
+
+		function cbCropImage(opId, dataType, data) { //照片截取成功
+			appcan.frame.evaluateScript({
+				name: 'picture_info',
+				popName: 'content',
+				scriptContent: 'setface("' + data + '")'
+			});
+			appcan.window.close(-1);
+		};
+		function cbSave(opId, dataType, data) {
+			uexImageBrowser.cropImage(); //照片保存成功截取照片
+		};
+		function windowclose()
+        {
+            appcan.window.close(-1);
+        }
+
+	</script>
+
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../css/ui-box.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+		<link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/appcan.icon.css">
+		<link rel="stylesheet" href="../css/appcan.control.css">
+		<link rel="stylesheet" href="distribution-content/main.css">
+	</head>
+
+	<body class="um-vp bc-bg" ontouchstart style="background-color: #f4f4f4;">
+		<div class="orderlist">
+
+		</div>
+		<div id="temp" class="temp uhide">
+			<div id="itemsorder" class="itemsorder">
+				<div class="content1 ub ub-ver">
+					<div class="ub column ub-ac">
+						<div>订单号：</div>
+						<div class="ForderNum"></div>
+					</div>
+					<div class="morechild">
+
+					</div>
+					<div class="total ub ub-ac">
+						<div>共计<span class="Fcounts"></span>件商品</div>
+						<div class="total-money">
+							合计:￥
+							<span class="FlastPrice"></span>
+						</div>
+					</div>
+				</div>
+				<div class="content2 ub ub-ver">
+					<div class="subinfo ub ub-ac">配送人员：<span class="Fname"></span></div>
+					<div class="subinfo ub ub-ac">联系电话：<span class="Fphone"></span></div>
+					<div class="order-pic  ub ub-ac ub-pc">
+						<div class="ub ub-ver ub-f1 ub-fh">
+							<div class="ub ub-ac">
+								<img class="liucheng-img tijiaodd" src="../css/images/dd1.png" />
+								<div class="line ub ub-f1"></div>
+							</div>
+							<div class="ub dbtext">
+								订单提交
+							</div>
+						</div>
+						<div class="ub ub-ver ub-f1 ub-fh">
+							<div class="ub ub-ac">
+								<img class="liucheng-img peihuo" src="../css/images/dd2.png" />
+								<div class="line ub ub-f1"></div>
+							</div>
+							<div class="ub dbtext">
+								配货中
+							</div>
+						</div>
+						<div class="ub ub-ver ub-f1 ub-fh">
+							<div class="ub ub-ac">
+								<img class="liucheng-img songhuoz" src="../css/images/dd3.png" />
+								<div class="line ub-f1"></div>
+							</div>
+							<div class="ub dbtext">
+								送货中
+							</div>
+						</div>
+						<div class="ub ub-ver ub-f1 ub-fh">
+							<div class="ub ub-ac">
+								<img class="liucheng-img songda" src="../css/images/dd5.png" />
+								<div class="line ub-f1"></div>
+							</div>
+							<div class="ub dbtext">
+								已送达
+							</div>
+						</div>
+						<div class="ub ub-ver ">
+							<div class="ub ub-ac">
+								<img class="liucheng-img wancheng" src="../css/images/dd6.png" />
+							</div>
+							<div class="ub dbtext">
+								已完成
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="orderchildtemp" class="uhide">
+			<div class="ub column ub-ac childitem">
+				<div class="ub ub-f1 ub-ac ub-fh Fgoodsname">
+
+				</div>
+				<div class="ub ub-f1 ub-pc ub-fh text">
+					<span>x</span>
+					<span class="FtotalCount"></span>
+				</div>
+				<div class="ub ub-f1 ub-pe ub-fh text">
+					<span>￥</span>
+					<span class="FlastPrice"></span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/appcan.js"></script>
+	<script src="../js/appcan.control.js"></script>
+	<script type="text/javascript" src="../js/yfkj.js"></script>
+	</body>
+	<script>
+		var Fstart = 0;
+		var pageSize = 10;
+		var Forderid = "";
+		var ids = appcan.locStorage.getVal("Lookorder");
+		appcan.ready(function() {
+			getorderwait();
+			appcan.frame.setBounce([0, 1], function(type) {
+				$("#pullstatus" + type).html(!type ? "开始下拉" : "开始上拖");
+			}, function(type) {
+				$("#pullstatus" + type).html(!type ? "下拉超过临界点,产生事件了！" : "超过临界点,产生事件了！");
+			}, function(type) {
+				if(type == 0) {
+					$('.orderlist').empty();
+					i = 0;
+					Fstart = 0;
+					getorderwait();
+				} else if(type == 1) {
+					getorderwait();
+				}
+				setTimeout(function() {
+					appcan.frame.resetBounce(type);
+				}, 1000);
+			})
+		});
+
+		function getorderwait() {
+			if(ids != null){
+				Forderid = ids;
+			}
+			var parm = {
+				Fuserid: Fsuper.getuserid(),
+				pageSize: pageSize,
+				Fstart: Fstart,
+				Forderid: Forderid
+			}
+			Fsuper.getrows('/App/Lookorder', parm, addorder, function() {
+				appcan.locStorage.remove('Lookorder'); 
+			});
+		}
+		function addorder(row, end) {
+			var list = $(".orderlist");
+			var item = $(".temp").clone();
+			var domitem = item.find(".itemsorder");
+			domitem.attr("id", row.Fgoodsid);
+			var Fstate = row.Fstate;
+			if(Fstate == "1") {
+				domitem.find(".tijiaodd").attr("src", "../css/images/dd01.png");
+			} else if(Fstate == "2") {
+				domitem.find(".peihuo").attr("src", "../css/images/dd02.png");
+			} else if(Fstate == "3") {
+				domitem.find(".songhuoz").attr("src", "../css/images/dd03.png");
+			} else if(Fstate == "4") {
+				domitem.find(".songda").attr("src", "../css/images/dd04.png");
+			} else if(Fstate == "5") {
+				domitem.find(".wancheng").attr("src", "../css/images/dd05.png");
+			}
+			domitem.find(".ForderNum").text(row.ForderNum);
+			domitem.find(".FlastPrice").text(row.FlastPrice);
+			getGoodsByCatid(list, domitem, row.Forderid);
+			getSenduser(domitem, row.FsendUserid);
+			list.append(domitem);
+			Fstart = end;
+		}
+		//订单详情
+		function getGoodsByCatid(list, domitem, id) {
+			var furl = "/app/getorderwaitmx";
+			appcan.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				dataType: "json",
+				data: {
+					Forderid: id
+				},
+				success: function(result) {
+					var rows = result.data.rows;
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					var length = rows.length;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							$(rows).each(function(i, row) {
+								additems(list, domitem, row, length);
+							});
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+
+		}
+		function additems(list, domitem, row, length) {
+			domitem.find(".Fcounts").text(length);
+			var goodslist = domitem.find(".morechild");
+			var clonedom = $("#orderchildtemp").clone();
+			var goodsdom = clonedom.find(".childitem");
+			goodsdom.find(".Fgoodsname").text(row.Fgoodsname);
+			goodsdom.find(".FtotalCount").text(row.FtotalCount);
+			goodsdom.find(".FlastPrice").text(row.FlastPrice);
+			goodslist.append(goodsdom);
+			list.append(domitem);
+		}
+		//查询配送人员信息
+		function getSenduser(dom, Fuid) {
+			var furl = "/app/getSenduser";
+			appcan.ajax({
+				url: Serverurl + furl,
+				type: "POST",
+				dataType: "json",
+				data: {
+					FsendUserid: Fuid
+				},
+				success: function(result) {
+					var rows = result.data[0];
+					var code = result.code;
+					var msg = result.msg;
+					var debug = result.debug;
+					if(code < 10000) {
+						if(code == 0) { //返回成功
+							setvalues(dom, rows);
+						}
+					} else {
+						if(Fsuperdbg) {
+							alert(result.code);
+							alert(result.msg);
+							alert(result.debug);
+						}
+					}
+				}
+			});
+		}
+
+		function setvalues(domitem, row) {
+			domitem.find(".Fname").text(row.Fname);
+			domitem.find(".Fphone").text(row.Fphone);
+		}
+	</script>
+
+</html>
